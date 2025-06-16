@@ -126,6 +126,7 @@ typedef function<void()> Event;
 #include "Objects/Algorithm/AStar.h"
 
 #include "Objects/CrazyArcade/Tile/Tile.h"
+#include "Objects/CrazyArcade/Tile/EditTile.h"
 #include "Objects/CrazyArcade/Tile/TileMap.h"
 
 

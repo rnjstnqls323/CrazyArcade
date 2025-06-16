@@ -2,6 +2,10 @@
 
 class MapEditScene :public Scene
 {
+private:
+	const int COLUMN = 20;
+	const int ROW = 18;
+	const int COL_BUTTON_NUM = 4;
 public:
 	MapEditScene();
 	~MapEditScene();
@@ -21,6 +25,8 @@ private:
 	void CreateEditTiles();
 	void DeleteEditTiles();
 
+	void CreateBackGround();
+
 	void LoadTextures();
 	void Save(string file);
 	void Load(string file);
@@ -28,9 +34,16 @@ private:
 	void SaveDialog();
 	void LoadDialog();
 
-	void MoveTiles();
+	void ResetTiles();
 
 private:
-	Quad* quad;
-	vector<Tile*> tiles;
+	 
+	Quad* backGround;
+	vector<EditTile*> tiles;
+
+	vector<Texture*> sampleTextures;
+	vector<Texture*> sampleBackground;
+	
+	Texture* selectTexture;
+
 };

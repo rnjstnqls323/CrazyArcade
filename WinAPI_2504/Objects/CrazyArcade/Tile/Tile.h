@@ -10,11 +10,11 @@ public:
 	Tile();
 	~Tile();
 
-	//void Update(); // FSM할때, 상태값따라서 충돌등 다르게 구현하자
-
+	virtual void Update() {};
+	virtual void Render() {};
+	
 	void SetTileType(TileType type) { this->type = type; }
 
-private:
-	Quad* quad;
+protected:
 	TileType type = NoneTile;
 };

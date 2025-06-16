@@ -3,39 +3,34 @@
 
 MapEditScene::MapEditScene()
 {
-	CreateEditTiles();
-	quad = new Quad(L"Resources/Textures/CrazyArcade_BG/blocks.png");
-	
-	quad->SetLocalPosition(CENTER);
-	quad->UpdateWorld();
+	//CreateEditTiles();
+
+	LoadTextures();
 }
 
 MapEditScene::~MapEditScene()
 {
-	for (Tile* tile : tiles)
-	{
-		delete tile;
-	}
-	delete quad;
+
+	delete backGround;
+
+	DeleteEditTiles();
 }
 
 void MapEditScene::Update()
 {
-	MoveTiles();
-	for (Tile* tile : tiles)
-	{
-		
-		tile->UpdateWorld();
-	}
-	
-	quad->UpdateWorld();
+	if(backGround != nullptr)
+		backGround->UpdateWorld();
+	if (ImGui::GetIO().WantCaptureMouse) return;
+
+	EditBgTiles();
 }
 
 void MapEditScene::Render()
 {
-	quad->Render();
+	if (backGround != nullptr)
+		backGround->Render();
 
-	for (Tile* tile : tiles)
+	for (EditTile* tile : tiles)
 	{
 		tile->Render();
 	}
@@ -44,33 +39,113 @@ void MapEditScene::Render()
 
 void MapEditScene::GUIRender()
 {
-	//tiles[0]->Edit();
-	quad->Edit();
+
+	ImGui::Text("Map Editor");
+	ImGui::NewLine();
+	SaveDialog();
+	ImGui::SameLine();
+	LoadDialog();
+	ImGui::NewLine();
+	if (ImGui::Button("Create Tiles"))
+	{
+		CreateEditTiles();
+	}
+
+	if (ImGui::Button("Create BackGround"))
+	{
+		CreateBackGround();
+	}
+
+	if (ImGui::Button("Reset Tiless"))
+	{
+		ResetTiles();
+	}
+
+	RenderSampleButtons();
 }
 
 void MapEditScene::EditBgTiles()
 {
+	if (Input::Get()->IsKeyPress(VK_LBUTTON) == false)
+		return;
 	
-	
+	for (EditTile* tile : tiles)
+	{
+		if (tile->IsPointCollision(mousePos))
+		{
+			tile->GetImage()->GetMaterial()->SetBaseMap(selectTexture);
+		}
+	}
 }
 
 void MapEditScene::RenderSampleButtons()
 {
+	if (ImGui::TreeNode("Block Buttons"))
+	{
+		int count = 0;
+
+		for (Texture* texture : sampleTextures)
+		{
+			string key = Utility::ToString(texture->GetFile());
+			ImTextureID imguiTextureID = (ImTextureID)texture->GetSRV();
+
+			if (ImGui::ImageButton(key.c_str(), imguiTextureID, ImVec2(50, 50)))
+			{
+				selectTexture = texture;
+			}
+
+			count++;
+
+			if (count % COL_BUTTON_NUM)
+			{
+				ImGui::SameLine();
+			}
+
+		}
+
+		ImGui::TreePop();
+	}
+
+	if (ImGui::TreeNode("Stage Buttons"))
+	{
+		int count = 0;
+
+		for (Texture* texture : sampleBackground)
+		{
+			string key = Utility::ToString(texture->GetFile());
+			ImTextureID imguiTextureID = (ImTextureID)texture->GetSRV();
+
+			if (ImGui::ImageButton(key.c_str(), imguiTextureID, ImVec2(50, 50)))
+			{
+				backGround->GetMaterial()->SetBaseMap(texture);
+			}
+
+			count++;
+
+			if (count % COL_BUTTON_NUM)
+			{
+				ImGui::SameLine();
+			}
+
+		}
+
+		ImGui::TreePop();
+	}
 }
 
 void MapEditScene::CreateEditTiles()
 {
 
-	Vector2 startPos = Vector2(TILE_SIZE.x * 0.5f, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f);
+	Vector2 startPos = Vector2(TILE_SIZE.x * 0.5f + 100, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f - 30);
 
-	for (int y = 0; y < 15; y++)
+	for (int y = 0; y < ROW; y++)
 	{
-		for (int x = 0; x < 19; x++)
+		for (int x = 0; x < COLUMN; x++)
 		{
-			Tile* tile = new Tile();
+			EditTile* tile = new EditTile();
 			Vector2 pos = startPos + Vector2(x * tile->Size().x, -y * tile->Size().y);
 			tile->SetLocalPosition(pos);
-			tile->UpdateWorld();
+			tile->Update();
 			tiles.push_back(tile);
 		}
 	}
@@ -78,10 +153,52 @@ void MapEditScene::CreateEditTiles()
 
 void MapEditScene::DeleteEditTiles()
 {
+	for (EditTile* tile : tiles)
+	{
+		delete tile;
+	}
+	tiles.clear();
+}
+
+void MapEditScene::CreateBackGround()
+{
+	backGround = new Quad(L"Resources/Textures/CrazyArcade_BG/NoneStage.png");
+
+	backGround->SetLocalPosition({ 600,480 }); //ÀÌ»Û À§Ä¡
+	backGround->UpdateWorld();
 }
 
 void MapEditScene::LoadTextures()
 {
+	WIN32_FIND_DATA findData;
+
+	HANDLE handle = FindFirstFile(L"Resources/Textures/CrazyArcade_BG_Texture/*.png", &findData);
+
+	bool result = true;
+	wstring path = L"Resources/Textures/CrazyArcade_BG_Texture/";
+
+	while (result)
+	{
+		Texture* texture = Texture::Add(path + findData.cFileName);
+		sampleTextures.push_back(texture);
+
+		result = FindNextFile(handle, &findData);
+	}
+	FindClose(handle);
+
+
+	handle = FindFirstFile(L"Resources/Textures/CrazyArcade_BG/*.png", &findData);
+	path = L"Resources/Textures/CrazyArcade_BG/";
+
+	result = true;
+	while (result)
+	{
+		Texture* texture = Texture::Add(path + findData.cFileName);
+		sampleBackground.push_back(texture);
+
+		result = FindNextFile(handle, &findData);
+	}
+	FindClose(handle);
 }
 
 void MapEditScene::Save(string file)
@@ -100,22 +217,19 @@ void MapEditScene::LoadDialog()
 {
 }
 
-void MapEditScene::MoveTiles()
+void MapEditScene::ResetTiles()
 {
-	Vector2 startPos = tiles[0]->GetLocalPosition();
-
-	int x = 0;
-	int y = 0;
-	for (Tile* tile : tiles)
+	for (Texture* texture : sampleTextures)
 	{
-		Vector2 pos = startPos + Vector2(x++ * tile->Size().x, -y * tile->Size().y);
-		if (x > 19)
+		if (texture->GetFile() == L"Resources/Textures/CrazyArcade_BG_Texture/NoneBlock.png")
 		{
-			x = 0;
-			y++;
+			selectTexture = texture;
+			break;
 		}
-		tile->SetLocalPosition(pos);
-		tile->UpdateWorld();
 	}
 
+	for (EditTile* tile : tiles)
+	{
+		tile->GetImage()->GetMaterial()->SetBaseMap(selectTexture);
+	}
 }
