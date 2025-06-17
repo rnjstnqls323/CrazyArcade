@@ -189,11 +189,13 @@
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\TileMap.h" />
+    <ClInclude Include="Objects\Factory\BlockFactory.h" />
     <ClInclude Include="Objects\Manger\DataManager.h" />
     <ClInclude Include="Objects\Manger\EventManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scenes\MapEditScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\TestScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WinAPI_2504.h" />
   </ItemGroup>
@@ -244,9 +246,11 @@
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\TileMap.cpp" />
+    <ClCompile Include="Objects\Factory\BlockFactory.cpp" />
     <ClCompile Include="Objects\Manger\DataManager.cpp" />
     <ClCompile Include="Objects\Manger\EventManager.cpp" />
     <ClCompile Include="Scenes\MapEditScene.cpp" />
+    <ClCompile Include="Scenes\TestScene.cpp" />
     <ClCompile Include="WinAPI_2504.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,9 @@
 
 #define TILE_SIZE Vector2(50,50)
 
+#define ROW 18
+#define COL 20
+
 #include <windows.h>
 #include <string>
 #include <unordered_map>
@@ -124,6 +127,8 @@ typedef function<void()> Event;
 #include "Objects/Algorithm/Node.h"
 #include "Objects/Algorithm/Heap.h"
 #include "Objects/Algorithm/AStar.h"
+
+#include "Objects/Factory/BlockFactory.h"
 
 #include "Objects/CrazyArcade/Tile/Tile.h"
 #include "Objects/CrazyArcade/Tile/EditTile.h"

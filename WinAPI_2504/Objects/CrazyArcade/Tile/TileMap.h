@@ -3,21 +3,22 @@
 class TileMap
 {
 public:
-	TileMap(wstring filePath);
+	TileMap(string filePath);
 	~TileMap();
 
 	void Update();
 	void Render();
-
-	void Save();
+	
+private:
 	void Load();
 
-	void CreateTile();
-	void ClearTile();
+	void CreateTiles();
+	void DeleteTiles();
 
-	void SetBackGroundImage(wstring filePath); //이부분은 .map받아오면 없어질 예정임
 private:
-	Quad* backGroundImage;
+
+	string loadFilePath;
+	Quad* backGround;
 	vector<Tile*> tiles;
 
 };

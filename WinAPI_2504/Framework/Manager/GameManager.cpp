@@ -1,11 +1,13 @@
 #include "Framework.h"
 
 #include "Scenes/MapEditScene.h"
+#include "Scenes/TestScene.h"
 GameManager::GameManager()
 {
 	Create();
 		
-	SCENE->AddScene("Game", new MapEditScene());
+	//SCENE->AddScene("Game", new MapEditScene());
+	SCENE->AddScene("Game", new TestScene());
 
 	SCENE->ChangeScene("Game");
 }

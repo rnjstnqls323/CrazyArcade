@@ -3,10 +3,10 @@
 class MapEditScene :public Scene
 {
 private:
-	const int COLUMN = 20;
-	const int ROW = 18;
 	const int COL_BUTTON_NUM = 4;
-public:
+
+public: 
+
 	MapEditScene();
 	~MapEditScene();
 
@@ -36,10 +36,13 @@ private:
 
 	void ResetTiles();
 
-private:
-	 
+private: 
+	int tag = 0;
+
 	Quad* backGround;
-	vector<EditTile*> tiles;
+
+	vector<EditTile*> tiles; 
+	
 
 	vector<Texture*> sampleTextures;
 	vector<Texture*> sampleBackground;

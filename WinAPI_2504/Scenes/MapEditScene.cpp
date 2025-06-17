@@ -10,9 +10,7 @@ MapEditScene::MapEditScene()
 
 MapEditScene::~MapEditScene()
 {
-
 	delete backGround;
-
 	DeleteEditTiles();
 }
 
@@ -66,7 +64,7 @@ void MapEditScene::GUIRender()
 
 void MapEditScene::EditBgTiles()
 {
-	if (Input::Get()->IsKeyPress(VK_LBUTTON) == false)
+	if (Input::Get()->IsKeyDown(VK_LBUTTON) == false && Input::Get()->IsKeyPress(VK_RBUTTON)==false)
 		return;
 	
 	for (EditTile* tile : tiles)
@@ -74,6 +72,21 @@ void MapEditScene::EditBgTiles()
 		if (tile->IsPointCollision(mousePos))
 		{
 			tile->GetImage()->GetMaterial()->SetBaseMap(selectTexture);
+			
+			wstring file = selectTexture->GetFile();
+
+			if (file.find(L"Monster") != wstring::npos)
+			{
+				tile->SetEditTileType(EditTileType::MonsterTilePos);
+				tile->SetEditTag(tag);
+			}
+			else if (file.find(L"EndNode") != wstring::npos)
+			{
+				tile->SetEditTileType(EditTileType::EndNodeTilePos);
+				tile->SetEditTag(tag++);
+			}
+			else
+				tile->SetEditTileType(EditTileType:: NormalTile);
 		}
 	}
 }
@@ -105,7 +118,7 @@ void MapEditScene::RenderSampleButtons()
 
 		ImGui::TreePop();
 	}
-
+	ImGui::NewLine();
 	if (ImGui::TreeNode("Stage Buttons"))
 	{
 		int count = 0;
@@ -117,7 +130,7 @@ void MapEditScene::RenderSampleButtons()
 
 			if (ImGui::ImageButton(key.c_str(), imguiTextureID, ImVec2(50, 50)))
 			{
-				backGround->GetMaterial()->SetBaseMap(texture);
+				backGround->GetMaterial()->SetBaseMap(texture->GetFile());
 			}
 
 			count++;
@@ -142,7 +155,7 @@ void MapEditScene::CreateEditTiles()
 
 	for (int y = 0; y < ROW; y++)
 	{
-		for (int x = 0; x < COLUMN; x++)
+		for (int x = 0; x < COL; x++)
 		{
 			EditTile* tile = new EditTile();
 			Vector2 pos = startPos + Vector2(x * tile->Size().x, -y * tile->Size().y);
@@ -155,6 +168,7 @@ void MapEditScene::CreateEditTiles()
 
 void MapEditScene::DeleteEditTiles()
 {
+
 	for (EditTile* tile : tiles)
 	{
 		delete tile;
@@ -164,6 +178,8 @@ void MapEditScene::DeleteEditTiles()
 
 void MapEditScene::CreateBackGround()
 {
+	delete backGround;
+
 	backGround = new Quad(L"Resources/Textures/CrazyArcade_BG/NoneStage.png");
 
 	backGround->SetLocalPosition({ 600,480 }); //ÀÌ»Û À§Ä¡
@@ -205,18 +221,102 @@ void MapEditScene::LoadTextures()
 
 void MapEditScene::Save(string file)
 {
+	BinaryWriter* writer = new BinaryWriter(file);
+	writer->UInt(tag);
+	writer->UInt(tiles.size());
+
+	writer->WString(backGround->GetMaterial()->GetBaseMap()->GetFile());
+
+	for (EditTile* tile : tiles)
+	{
+		writer->WString(tile->GetImage()->GetMaterial()->GetBaseMap()->GetFile());
+		writer->Int((int)tile->GetEditTileType());
+		writer->Int(tile->GetEditTag());
+	}
+
+	delete writer;
 }
 
 void MapEditScene::Load(string file)
 {
+	BinaryReader* reader = new BinaryReader(file);
+	if (reader->IsFailed())
+	{
+		delete reader;
+		return;
+	}
+	this->tag = reader->UInt();
+	UINT tileCount = reader->UInt();
+	wstring filePath = reader->WString();
+
+	CreateBackGround();
+	backGround->GetMaterial()->SetBaseMap(filePath);
+
+	CreateEditTiles();
+
+	for (EditTile* tile : tiles)
+	{
+		filePath = reader->WString();
+		int type = reader->Int();
+		int tileTag = reader->Int();
+
+		tile->GetImage()->GetMaterial()->SetBaseMap(filePath); //
+
+		tile->SetEditTileType((EditTileType)type);
+
+		tile->SetEditTag(tileTag);
+	}
 }
 
 void MapEditScene::SaveDialog()
 {
+	string key = "Save";
+
+	if (ImGui::Button(key.c_str()))
+	{
+		DIALOG->OpenDialog(key, key, ".map");
+	}
+
+	if (DIALOG->Display(key))
+	{
+		if (DIALOG->IsOk())
+		{
+			char temp[256] = {};
+			GetCurrentDirectoryA(256, temp);
+			string path = temp;
+			string file = DIALOG->GetFilePathName();
+			file = file.substr(path.size() + 1);
+			Save(file);
+		}
+
+		DIALOG->Close();
+	}
+
 }
 
 void MapEditScene::LoadDialog()
 {
+	string key = "Load";
+
+	if (ImGui::Button(key.c_str()))
+	{
+		DIALOG->OpenDialog(key, key, ".map");
+	}
+
+	if (DIALOG->Display(key))
+	{
+		if (DIALOG->IsOk())
+		{
+			char temp[256] = {};
+			GetCurrentDirectoryA(256, temp);
+			string path = temp;
+			string file = DIALOG->GetFilePathName();
+			file = file.substr(path.size() + 1);
+			Load(file);
+		}
+
+		DIALOG->Close();
+	}
 }
 
 void MapEditScene::ResetTiles()
