@@ -78,12 +78,12 @@ void MapEditScene::EditBgTiles()
 			if (file.find(L"Monster") != wstring::npos)
 			{
 				tile->SetEditTileType(EditTileType::MonsterTilePos);
-				tile->SetEditTag(tag);
+				tile->SetTileTag(tag++);
 			}
 			else if (file.find(L"EndNode") != wstring::npos)
 			{
 				tile->SetEditTileType(EditTileType::EndNodeTilePos);
-				tile->SetEditTag(tag++);
+				tile->SetTileTag(tag);
 			}
 			else
 				tile->SetEditTileType(EditTileType:: NormalTile);
@@ -231,7 +231,7 @@ void MapEditScene::Save(string file)
 	{
 		writer->WString(tile->GetImage()->GetMaterial()->GetBaseMap()->GetFile());
 		writer->Int((int)tile->GetEditTileType());
-		writer->Int(tile->GetEditTag());
+		writer->Int(tile->GetTileTag());
 	}
 
 	delete writer;
@@ -260,11 +260,11 @@ void MapEditScene::Load(string file)
 		int type = reader->Int();
 		int tileTag = reader->Int();
 
-		tile->GetImage()->GetMaterial()->SetBaseMap(filePath); //
+		tile->GetImage()->GetMaterial()->SetBaseMap(filePath); 
 
 		tile->SetEditTileType((EditTileType)type);
 
-		tile->SetEditTag(tileTag);
+		tile->SetTileTag(tileTag);
 	}
 }
 

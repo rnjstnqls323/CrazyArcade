@@ -3,7 +3,7 @@
 struct BlockData
 {
 	Quad* image;
-	vector<Matrix> world;
+	vector<Matrix> blockWorld;
 	VertexBuffer* instanceBuffer;
 };
 enum BlockCategory
@@ -25,11 +25,11 @@ public:
 	void Render();
 
 private:
-	void Update();
-
 	void CreateBlockInstances();
+	void CreateMap();
 
 private:
+
 	unordered_map<BlockCategory, BlockData*> blockInstances;
 	//파일경로에 있는 png로 알아서 만들어버리게 할까
 };

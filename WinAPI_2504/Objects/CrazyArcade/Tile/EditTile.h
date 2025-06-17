@@ -18,13 +18,12 @@ public:
 	Quad* GetImage() { return image; }
 
 	void SetEditTileType(EditTileType editType) { this->editType = editType; }
-	void SetEditTag(int num) { tag = num; }
 
 	EditTileType GetEditTileType() { return editType; }
-	int GetEditTag() { return tag; }
+
 
 private:
-	int tag = -1;
+
 
 	EditTileType editType = EditTileType::NormalTile;
 	Quad* image;

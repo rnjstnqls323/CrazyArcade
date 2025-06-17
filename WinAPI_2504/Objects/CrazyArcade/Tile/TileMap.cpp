@@ -46,8 +46,13 @@ void TileMap::Load()
 	for (Tile* tile : tiles)
 	{
 		filePath = reader->WString();
-		int type = reader->Int();
+		int type = reader->Int(); // 노드인지 몬스터 스폰위치인지 봐주는거
 		int tileTag = reader->Int();
+
+		tile->SetTileTag(tileTag);
+
+		SettingTile(tile, filePath);
+
 		
 
 	}
@@ -76,4 +81,48 @@ void TileMap::DeleteTiles()
 	for (Tile* tile : tiles)
 		delete tile;
 	tiles.clear();
+}
+
+void TileMap::SettingTile(Tile* tile, const wstring& filePath)
+{
+	if (filePath.find(L"Monster") != wstring::npos)
+	{
+		tile->SetTileType(MonsterSpawnTile);
+		return;
+	}
+	else if (filePath.find(L"None") != wstring::npos)
+	{
+		tile->SetTileType(BlockTile);
+		return;
+	}
+	else if (filePath.find(L"End") != wstring::npos)
+	{
+		tile->SetTileType(EndNodeTile);
+		return;
+	}
+	else if (filePath.find(L"Pass") != wstring::npos)
+	{
+		tile->SetTileType(PassTile);
+		return;
+	}
+
+	unordered_map<wstring, BlockCategory> fileCategoryMap = {
+	{L"Block1",  BlockCategory::Block1},
+	{L"Block2",  BlockCategory::Block2},
+	{L"Flower1", BlockCategory::Flower1},
+	{L"Flower2", BlockCategory::Flower2},
+	{L"Shell1",  BlockCategory::Shell1},
+	{L"Shell2",  BlockCategory::Shell2}
+	};
+
+	for (const auto& map : fileCategoryMap)
+	{
+		if (filePath.find(map.first) != wstring::npos)
+		{
+			tile->SetTileType(CrushTile);
+			BlockFactory::Get()->AddBlock(map.second, tile->GetLocalPosition());
+			return;
+		}
+	}
+	
 }

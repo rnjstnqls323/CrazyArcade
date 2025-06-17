@@ -2,7 +2,7 @@
 
 enum TileType
 {
-	NoneTile, BlockTile, CrushTile //물풍선 충돌등 구현하려면 바깥이 맞는듯?
+	PassTile, BlockTile, CrushTile, MonsterSpawnTile, EndNodeTile //물풍선 충돌등 구현하려면 바깥이 맞는듯?
 };
 class Tile : public RectCollider
 {
@@ -15,6 +15,11 @@ public:
 	
 	void SetTileType(TileType type) { this->type = type; }
 
+	int GetTileTag() { return tag; }
+	void SetTileTag(int num) { tag = num; }
+
 protected:
-	TileType type = NoneTile;
+	int tag = -1;
+
+	TileType type = PassTile;
 };

@@ -15,6 +15,7 @@ private:
 	void CreateTiles();
 	void DeleteTiles();
 
+	void SettingTile(Tile* tile, const wstring& filePath);
 private:
 
 	string loadFilePath;

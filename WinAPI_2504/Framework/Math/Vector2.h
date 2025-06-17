@@ -28,7 +28,14 @@ struct Vector2 : public Float2
 	{
 		return Vector2(x * scala, y * scala);
 	}
-
+	bool operator==(const Vector2& other)const
+	{
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
 	void operator+=(const Vector2& other)
 	{
 		x += other.x;
