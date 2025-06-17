@@ -136,6 +136,8 @@ void MapEditScene::RenderSampleButtons()
 void MapEditScene::CreateEditTiles()
 {
 
+	DeleteEditTiles();
+
 	Vector2 startPos = Vector2(TILE_SIZE.x * 0.5f + 100, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f - 30);
 
 	for (int y = 0; y < ROW; y++)
