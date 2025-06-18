@@ -1,10 +1,10 @@
 #include "Framework.h"
 
-CharacterAnimation::CharacterAnimation()
+Animation::Animation()
 {
 }
 
-CharacterAnimation::~CharacterAnimation()
+Animation::~Animation()
 {
 	for (Clip* clip : clips)
 	{
@@ -12,22 +12,22 @@ CharacterAnimation::~CharacterAnimation()
 	}
 }
 
-void CharacterAnimation::Render(size_t index)
+void Animation::Render(size_t index)
 {
 	clips[index]->Render();
 }
 
-void CharacterAnimation::Update(size_t index)
+void Animation::Update(size_t index)
 {
 	clips[index]->Update();
 }
 
-void CharacterAnimation::Play(size_t index)
+void Animation::Play(size_t index)
 {
 	clips[index]->Play();
 }
 
-void CharacterAnimation::LoadClip(const string& path, const string& file, const bool& isLoop, const float& speed)
+void Animation::LoadClip(const string& path, const string& file, const bool& isLoop, const float& speed)
 {
 	tinyxml2::XMLDocument* document = new tinyxml2::XMLDocument();
 	document->LoadFile((path + file).c_str());

@@ -25,6 +25,6 @@ protected:
 
 	Transform* animationTransform;
 	CharacterStatus curStatus = Idle;
-	CharacterAnimation* animation;
+	Animation* animation;
 
 };

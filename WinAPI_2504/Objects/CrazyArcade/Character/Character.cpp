@@ -2,7 +2,7 @@
 
 Character::Character():RectCollider(Vector2(35,30))
 {
-	animation = new CharacterAnimation;
+	animation = new Animation;
 	LoadAnimation();
 
 	animationTransform = new Transform;

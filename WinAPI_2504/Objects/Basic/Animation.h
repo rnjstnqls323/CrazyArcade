@@ -1,10 +1,10 @@
 #pragma once
 
-class CharacterAnimation
+class Animation
 {
 public:
-	CharacterAnimation();
-	~CharacterAnimation();
+	Animation();
+	~Animation();
 
 	void Render(size_t index);
 	void Update(size_t index);
