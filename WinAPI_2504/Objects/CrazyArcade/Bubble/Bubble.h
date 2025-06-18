@@ -6,7 +6,7 @@ enum WaterJet
 };
 enum BubbleStatus
 {
-	Idle, Exploding, Dead
+	BubbleIdle, Exploding, Dead
 };
 class Bubble
 {
