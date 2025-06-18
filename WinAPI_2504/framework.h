@@ -130,6 +130,9 @@ typedef function<void()> Event;
 
 #include "Objects/Factory/BlockFactory.h"
 
+#include "Objects/CrazyArcade/Character/CharacterAnimation.h"
+#include "Objects/CrazyArcade/Character/Character.h"
+
 #include "Objects/CrazyArcade/Tile/Tile.h"
 #include "Objects/CrazyArcade/Tile/EditTile.h"
 #include "Objects/CrazyArcade/Tile/TileMap.h"

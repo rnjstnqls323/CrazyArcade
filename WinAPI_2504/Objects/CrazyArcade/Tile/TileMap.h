@@ -8,6 +8,8 @@ public:
 
 	void Update();
 	void Render();
+
+	const vector<Tile*>& GetTiles() { return tiles; }
 	
 private:
 	void Load();

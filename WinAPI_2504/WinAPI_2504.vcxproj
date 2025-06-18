@@ -186,6 +186,8 @@
     <ClInclude Include="Objects\Collider\Collider.h" />
     <ClInclude Include="Objects\Collider\LineCollider.h" />
     <ClInclude Include="Objects\Collider\RectCollider.h" />
+    <ClInclude Include="Objects\CrazyArcade\Character\Character.h" />
+    <ClInclude Include="Objects\CrazyArcade\Character\CharacterAnimation.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\TileMap.h" />
@@ -243,6 +245,8 @@
     <ClCompile Include="Objects\Collider\Collider.cpp" />
     <ClCompile Include="Objects\Collider\LineCollider.cpp" />
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Character\Character.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Character\CharacterAnimation.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\TileMap.cpp" />

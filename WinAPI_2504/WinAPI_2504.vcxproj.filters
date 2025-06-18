@@ -186,6 +186,12 @@
     <ClInclude Include="Objects\Factory\BlockFactory.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\Character\Character.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\Character\CharacterAnimation.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI_2504.cpp">
@@ -330,6 +336,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Factory\BlockFactory.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\Character\CharacterAnimation.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\Character\Character.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

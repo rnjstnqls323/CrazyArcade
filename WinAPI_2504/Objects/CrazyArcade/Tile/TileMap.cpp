@@ -53,8 +53,6 @@ void TileMap::Load()
 
 		SettingTile(tile, filePath);
 
-		
-
 	}
 }
 

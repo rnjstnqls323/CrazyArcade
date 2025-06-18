@@ -8,12 +8,14 @@ struct BlockData
 };
 enum BlockCategory
 {
-	Block1, Block2, Flower1, Flower2, Shell1, Shell2
+	Block1, Block2, Flower1, Flower2, Shell1, Shell2, BlockCatecoryEnd
 };
 class BlockFactory :public Singleton<BlockFactory>
 {
 	friend class Singleton;
 
+private:
+	const int MAX_BLOCK_NUM = 100;
 private:
 	BlockFactory();
 	~BlockFactory();

@@ -14,6 +14,7 @@ public:
 	virtual void Render() {};
 	
 	void SetTileType(TileType type) { this->type = type; }
+	TileType GetTileType() { return type; }
 
 	int GetTileTag() { return tag; }
 	void SetTileTag(int num) { tag = num; }

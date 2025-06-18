@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:6428d8603171bda60a61dc500489e0dd:5de7d5dc66265e89c8f101959b6ba14f:f2c9c5b1906fa4f52dc9349ebe527a47$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="bazzi_die.png" width="90" height="1460">
+    <sprite n="frame_1.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_2.png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_3.png" x="1" y="585" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_4.png" x="1" y="731" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_5.png" x="1" y="877" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_6.png" x="1" y="1023" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_7.png" x="1" y="1169" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_8.png" x="1" y="1315" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_10.png" x="1" y="147" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_12.png" x="1" y="293" w="88" h="144" pX="0.5" pY="0.5"/>
+</TextureAtlas>

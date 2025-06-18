@@ -8,12 +8,13 @@ BlockFactory::BlockFactory()
 
 BlockFactory::~BlockFactory()
 {
-	delete quad;
 
 	for (auto& pair : blockInstances)
 	{
 		delete pair.second->image;
 		delete pair.second->instanceBuffer;
+		pair.second->blockWorld.clear();
+
 		delete pair.second;
 	}
 }
@@ -30,7 +31,7 @@ void BlockFactory::AddBlock(BlockCategory key, Vector2 pos)
 
 	if (data->instanceBuffer == nullptr)
 	{
-		data->instanceBuffer = new VertexBuffer(data->blockWorld.data(), sizeof(Matrix), data->blockWorld.size());
+		data->instanceBuffer = new VertexBuffer(data->blockWorld.data(), sizeof(Matrix), MAX_BLOCK_NUM);
 	}
 	else
 	{
@@ -95,10 +96,8 @@ void BlockFactory::CreateBlockInstances()
 
 void BlockFactory::CreateMap()
 {
-	blockInstances[Block1] = new  BlockData();
-	blockInstances[Block2] = new  BlockData();
-	blockInstances[Flower1] = new BlockData();
-	blockInstances[Flower2] = new BlockData();
-	blockInstances[Shell1] = new  BlockData();
-	blockInstances[Shell2] = new  BlockData();
+	for (int i = 0;i < (int)BlockCatecoryEnd;i++)
+	{
+		blockInstances[(BlockCategory)i] = new BlockData();
+	}
 }
