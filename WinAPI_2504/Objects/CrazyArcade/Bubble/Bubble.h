@@ -3,11 +3,15 @@
 enum WaterJet
 {
 	LeftWater, RightWater, UpWater, DownWater
-}; //이거배열로할거라 이제 굳이 필요할까?
-
+}; 
 enum BubbleStatus
 {
 	BubbleIdle, Exploding, Dead
+};
+struct JetSegment
+{
+	Animation* jetAnimation; // 이건 복사  
+	Transform* jetTransform;// 이건 할당
 };
 class Bubble : public GameObject
 {
@@ -33,7 +37,10 @@ private:
 
 	Transform* bubbleTransform;
 	Animation* animation;
-	unordered_map<WaterJet, RectCollider*> waterJets;
+	unordered_map<WaterJet, Animation*> middleWaterJetAnimation;
+	unordered_map<WaterJet, Animation*> endWaterJetAnimation;
+	unordered_map<WaterJet, vector<Transform*>> waterJets; //물줄기 위치마다 셋팅해주자 풀링으로만들어놓고
+
 	BubbleStatus curStatus = Dead;
 
 	MatrixBuffer* worldBuffer;
