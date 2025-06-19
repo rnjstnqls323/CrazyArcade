@@ -27,4 +27,6 @@ protected:
 	CharacterStatus curStatus = Idle;
 	Animation* animation;
 
+	//플레이어구현할때, statusstatic으로 아예 빼버리고 캐릭터 고른거 출력할 수 있게 아 그럼 map이용해야될듯
+
 };

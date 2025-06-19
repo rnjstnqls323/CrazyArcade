@@ -73,6 +73,7 @@ typedef XMFLOAT2 Float2;
 typedef XMMATRIX Matrix;
 typedef XMVECTOR Vector4;
 typedef XMFLOAT4X4 Float4x4;
+typedef XMUINT2 UINT2;
 
 typedef function<void()> Event;
 
@@ -86,6 +87,7 @@ typedef function<void()> Event;
 #include "Framework/Utilities/Audio.h"
 
 #include "Framework/Math/Vector2.h"
+#include "Framework/Math/Index2.h"
 #include "Framework/Math/Transform.h"
 #include "Framework/Math/GameMath.h"
 
@@ -131,13 +133,16 @@ typedef function<void()> Event;
 
 #include "Objects/Factory/BlockFactory.h"
 
-#include "Objects/CrazyArcade/Character/Character.h"
-
-#include "Objects/CrazyArcade/Bubble/Bubble.h"
-
 #include "Objects/CrazyArcade/Tile/Tile.h"
 #include "Objects/CrazyArcade/Tile/EditTile.h"
 #include "Objects/CrazyArcade/Tile/TileMap.h"
+
+#include "Objects/CrazyArcade/Bubble/Bubble.h"
+#include "Objects/CrazyArcade/Bubble/BubbleManager.h"
+
+#include "Objects/CrazyArcade/Character/Character.h"
+
+
 
 
 #include "Scenes/Scene.h"

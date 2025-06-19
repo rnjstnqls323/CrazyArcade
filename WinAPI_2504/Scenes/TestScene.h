@@ -6,9 +6,6 @@ public :
 	TestScene();
 	~TestScene();
 
-
-
-	// Scene을(를) 통해 상속됨
 	void Update() override;
 
 	void Render() override;
@@ -16,7 +13,15 @@ public :
 private:
 	void CheckCollision();
 	void PushPlayer(const Vector2& overlap, Tile& tile);
+
+	void SpawnBubble();
 private:
+	bool isSpawn = false;
+
+
 	TileMap* map;
 	Character* player;
+	Index2 playerIndex;
+	Index2 preIndex;
+
 };

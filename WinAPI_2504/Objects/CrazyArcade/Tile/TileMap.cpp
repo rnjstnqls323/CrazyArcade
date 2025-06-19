@@ -21,8 +21,29 @@ void TileMap::Render()
 {
 	backGround->Render();
 
-	for (Tile* tile : tiles)
-		tile->RectCollider::Render();
+	for(int y=0;y<ROW;y++)
+		for (int x = 0;x < COL;x++)
+		{
+			tiles[y][x]->RectCollider::Render();
+		}
+		
+}
+
+vector<Tile*> TileMap::GetAroundTile(Index2 index)
+{
+	vector<Tile*> aroundTile;
+	
+	if (index.y - 1 >= 0)
+		aroundTile.push_back(tiles[index.y - 1][index.x]);
+	if (index.y + 1 < ROW)				 
+		aroundTile.push_back(tiles[index.y + 1][index.x]);
+	if (index.x - 1 >= 0)				 
+		aroundTile.push_back(tiles[index.y][index.x - 1]);
+	if (index.x < COL)					 
+		aroundTile.push_back(tiles[index.y][index.x + 1]);
+
+
+	return aroundTile;
 }
 
 void TileMap::Load()
@@ -43,43 +64,49 @@ void TileMap::Load()
 
 	CreateTiles();
 
-	for (Tile* tile : tiles)
-	{
-		filePath = reader->WString();
-		int type = reader->Int(); // 노드인지 몬스터 스폰위치인지 봐주는거
-		int tileTag = reader->Int();
+	for (int y = 0;y < ROW;y++)
+		for (int x = 0;x < COL;x++)
+		{
+			filePath = reader->WString();
+			int type = reader->Int(); // 노드인지 몬스터 스폰위치인지 봐주는거
+			int tileTag = reader->Int();
 
-		tile->SetTileTag(tileTag);
+			tiles[y][x]->SetTileTag(tileTag);
 
-		SettingTile(tile, filePath);
-
-	}
+			SettingTile(tiles[y][x], filePath);
+		}
 
 	BlockFactory::Get()->CreateInstanceBuffer();
 }
 
 void TileMap::CreateTiles()
 {
+	tiles.resize(ROW);
+	for (int y = 0;y < ROW;y++)
+		tiles[y].resize(COL);
 
-	Vector2 startPos = Vector2(TILE_SIZE.x * 0.5f + 100, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f - 30);
+	tileStartPos = Vector2(TILE_SIZE.x * 0.5f + 100, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f - 30);
 
 	for (int y = 0; y < ROW; y++)
 	{
 		for (int x = 0; x < COL; x++)
 		{
 			Tile* tile = new Tile();
-			Vector2 pos = startPos + Vector2(x * tile->Size().x, -y * tile->Size().y);
+			Vector2 pos = tileStartPos + Vector2(x * tile->Size().x, -y * tile->Size().y);
 			tile->SetLocalPosition(pos);
 			tile->UpdateWorld();
-			tiles.push_back(tile);
+			tiles[y][x] = tile;
 		}
 	}
 }
 
 void TileMap::DeleteTiles()
 {
-	for (Tile* tile : tiles)
-		delete tile;
+	for(int y=0;y<ROW;y++)
+		for (int x = 0;x < COL;x++)
+		{
+			delete tiles[y][x];
+		}
 	tiles.clear();
 }
 

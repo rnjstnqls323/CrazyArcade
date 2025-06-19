@@ -153,6 +153,7 @@
     <ClInclude Include="Framework\Manager\GameManager.h" />
     <ClInclude Include="Framework\Manager\SceneManager.h" />
     <ClInclude Include="Framework\Math\GameMath.h" />
+    <ClInclude Include="Framework\Math\Index2.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\Clip.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Objects\Collider\LineCollider.h" />
     <ClInclude Include="Objects\Collider\RectCollider.h" />
     <ClInclude Include="Objects\CrazyArcade\Bubble\Bubble.h" />
+    <ClInclude Include="Objects\CrazyArcade\Bubble\BubbleManager.h" />
     <ClInclude Include="Objects\CrazyArcade\Character\Character.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
@@ -248,6 +250,7 @@
     <ClCompile Include="Objects\Collider\LineCollider.cpp" />
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Bubble\Bubble.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Bubble\BubbleManager.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Character\Character.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />

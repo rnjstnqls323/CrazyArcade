@@ -4,6 +4,7 @@
 TestScene::TestScene()
 {
 	BlockFactory::Get();
+	BubbleManager::Get();
 	map = new TileMap("Resources/TextData/TestStage1.map");
 
 	player = new Character();
@@ -13,55 +14,53 @@ TestScene::TestScene()
 TestScene::~TestScene()
 {
 	BlockFactory::Delete();
+	BubbleManager::Delete();
 	delete map;
 	delete player;
 }
 
 void TestScene::Update()
 {
+	SpawnBubble();
+
 	CheckCollision();
 	player->Update();
 
+	BubbleManager::Get()->Update();
 }
 
 void TestScene::Render()
 {
 	map->Render();
 	BlockFactory::Get()->Render();
+
+
+	BubbleManager::Get()->Render();
 	player->Render();
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자
 {
 	Vector2 overlap;
-
-	vector<Tile*> tiles = map->GetTiles();
-	int count = 0;
-
-	for (Tile* tile : tiles)
-	{	
-		Vector2 tilePos = tile->GetLocalPosition();
-		Vector2 playerPos = player->GetLocalPosition();
-		float halfSize = TILE_SIZE.x * 0.5f;
-		if (tilePos.x - halfSize<playerPos.x && tilePos.x + halfSize>playerPos.x 
-			&& tilePos.y - halfSize<playerPos.y && tilePos.y + halfSize>playerPos.y)
-			break;
-		count++;
-	}
-
-	int offset[] = { -1,1,-COL,COL };
-	for (int off : offset)
-	{
-		int index = count + off;
-		if (index <= 0 || index > (int)tiles.size())
-			continue;
-		if (tiles[index]->GetTileType() != BlockTile && tiles[index]->GetTileType() != CrushTile)
-			continue;
-
-		if (tiles[index]->IsRectCollision(player, &overlap))
-			PushPlayer(overlap, *tiles[index]);
-	}
 	
+	Vector2 tileStartPos = map->GetStartPos();
+	Vector2 playerPos = player->GetLocalPosition();
+	float halfTileSize = TILE_SIZE.x * 0.5f;
+	int x = (int)(playerPos.x - tileStartPos.x) / TILE_SIZE.x + 0.5f;
+	int y = (int)(tileStartPos.y- playerPos.y) / TILE_SIZE.y + 0.5f;
+
+	playerIndex = { y,x };
+	vector<Tile*> aroundTiles = map->GetAroundTile(playerIndex);
+
+	for (Tile* tile : aroundTiles)
+	{
+		if (tile->GetTileType() != BlockTile && tile->GetTileType() != CrushTile 
+			&& tile->GetTileType() != BubbleTile)
+			continue;
+
+		if (tile->IsRectCollision(player, &overlap))
+			PushPlayer(overlap, *tile);
+	}
 }
 
 void TestScene::PushPlayer(const Vector2& overlap, Tile& tile)
@@ -89,5 +88,16 @@ void TestScene::PushPlayer(const Vector2& overlap, Tile& tile)
 
 	player->SetLocalPosition(pos);
 	player->UpdateWorld();
+}
+
+void TestScene::SpawnBubble()
+{
+	if (!Input::Get()->IsKeyDown(VK_SPACE) || map->GetTileType(playerIndex) == BubbleTile) 
+		return;
+	
+	isSpawn = BubbleManager::Get()->SpawnBubble(map->GetTilePos(playerIndex));
+	if (!isSpawn)
+		return;
+	map->ChangeTileType(BubbleTile, playerIndex);
 }
 

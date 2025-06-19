@@ -9,12 +9,17 @@ public:
 	void Update();
 	void Render();
 
-	const vector<Tile*>& GetTiles() { return tiles; }
-	Tile* GetTile(int row, int col)
+	
+	Vector2 GetStartPos() { return tileStartPos; }
+
+	Vector2 GetTilePos(Index2 index) { return tiles[index.y][index.x]->GetLocalPosition(); }
+	TileType GetTileType(Index2 index) { return tiles[index.y][index.x]->GetTileType(); }
+
+	vector<Tile*> GetAroundTile(Index2 index);
+
+	void ChangeTileType(TileType type, Index2 index)
 	{
-		if (row < 0 || row >= ROW || col < 0 || col >= COL)
-			return nullptr;
-		return tiles[row * COL + col]; // Áß¿ä!
+		tiles[index.y][index.x]->SetTileType(type);
 	}
 	
 private:
@@ -28,6 +33,6 @@ private:
 
 	string loadFilePath;
 	Quad* backGround;
-	vector<Tile*> tiles;
-
+	vector<vector<Tile*>> tiles;
+	Vector2 tileStartPos;
 };

@@ -2,7 +2,8 @@
 
 enum TileType
 {
-	PassTile, BlockTile, CrushTile, MonsterSpawnTile, EndNodeTile //물풍선 충돌등 구현하려면 바깥이 맞는듯?
+	PassTile, BlockTile, CrushTile, BubbleTile, WaterTile , MonsterSpawnTile, EndNodeTile 
+	//물풍선 충돌등 구현하려면 바깥이 맞는듯?  End랑monster 걍 빼자 이거 너무 길어진다.
 };
 class Tile : public RectCollider
 {
