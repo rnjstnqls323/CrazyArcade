@@ -12,9 +12,10 @@ BlockFactory::~BlockFactory()
 	for (auto& pair : blockInstances)
 	{
 		delete pair.second->image;
-		delete pair.second->instanceBuffer;
 		pair.second->blockWorld.clear();
 
+		if(pair.second->instanceBuffer != nullptr)
+			delete pair.second->instanceBuffer;
 		delete pair.second;
 	}
 }
@@ -28,6 +29,7 @@ void BlockFactory::AddBlock(BlockCategory key, Vector2 pos)
 
 	data->blockWorld.push_back(world);
 	
+	//data->instanceBuffer->Update(data->blockWorld.data(), data->blockWorld.size());
 
 	if (data->instanceBuffer == nullptr)
 	{
