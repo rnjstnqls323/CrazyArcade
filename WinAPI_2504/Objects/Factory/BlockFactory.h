@@ -26,6 +26,8 @@ public:
 
 	void Render();
 
+	void CreateInstanceBuffer();
+
 private:
 	void CreateBlockInstances();
 	void CreateMap();

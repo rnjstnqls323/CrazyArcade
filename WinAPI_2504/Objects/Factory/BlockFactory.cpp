@@ -25,20 +25,22 @@ void BlockFactory::AddBlock(BlockCategory key, Vector2 pos)
 	Matrix world = XMMatrixTranslation(pos.x, pos.y, 0.0f);
 	world = XMMatrixTranspose(world);
 
-	BlockData* data = blockInstances[key];
+	//BlockData* data = blockInstances[key];
+	//
+	//data->blockWorld.push_back(world);
 
-	data->blockWorld.push_back(world);
+	blockInstances[key]->blockWorld.push_back(world); //이거는 그냥 바로 넣어버리자
 	
 	//data->instanceBuffer->Update(data->blockWorld.data(), data->blockWorld.size());
 
-	if (data->instanceBuffer == nullptr)
-	{
-		data->instanceBuffer = new VertexBuffer(data->blockWorld.data(), sizeof(Matrix), MAX_BLOCK_NUM);
-	}
-	else
-	{
-		data->instanceBuffer->Update(data->blockWorld.data(), data->blockWorld.size());
-	}
+	//if (data->instanceBuffer == nullptr)
+	//{
+	//	data->instanceBuffer = new VertexBuffer(data->blockWorld.data(), sizeof(Matrix), MAX_BLOCK_NUM);
+	//}
+	//else
+	//{
+	//	data->instanceBuffer->Update(data->blockWorld.data(), data->blockWorld.size());
+	//}
 }
 
 void BlockFactory::PopBlock(BlockCategory key, Vector2 pos)
@@ -75,6 +77,20 @@ void BlockFactory::Render()
 		
 		data.second->image->GetMaterial()->Set();
 		data.second->image->GetMesh()->DrawInstanced(data.second->blockWorld.size());
+	}
+}
+
+void BlockFactory::CreateInstanceBuffer()
+{
+	for (auto& data : blockInstances)
+	{
+		if (data.second->blockWorld.size() <= 0)
+			continue;
+
+		if (data.second->instanceBuffer == nullptr)
+		{
+			data.second->instanceBuffer = new VertexBuffer(data.second->blockWorld.data(), sizeof(Matrix), MAX_BLOCK_NUM);
+		}		
 	}
 }
 

@@ -54,6 +54,8 @@ void TileMap::Load()
 		SettingTile(tile, filePath);
 
 	}
+
+	BlockFactory::Get()->CreateInstanceBuffer();
 }
 
 void TileMap::CreateTiles()
@@ -122,5 +124,4 @@ void TileMap::SettingTile(Tile* tile, const wstring& filePath)
 			return;
 		}
 	}
-	
 }
