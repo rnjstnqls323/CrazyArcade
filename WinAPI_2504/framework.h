@@ -137,6 +137,7 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/Tile/EditTile.h"
 #include "Objects/CrazyArcade/Tile/TileMap.h"
 
+#include "Objects/CrazyArcade/Bubble/WaterJet.h"
 #include "Objects/CrazyArcade/Bubble/Bubble.h"
 #include "Objects/CrazyArcade/Bubble/BubbleManager.h"
 

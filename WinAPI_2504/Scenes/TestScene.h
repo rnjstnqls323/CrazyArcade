@@ -15,6 +15,7 @@ private:
 	void PushPlayer(const Vector2& overlap, Tile& tile);
 
 	void SpawnBubble();
+
 private:
 	bool isSpawn = false;
 

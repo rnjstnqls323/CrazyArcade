@@ -46,6 +46,11 @@ vector<Tile*> TileMap::GetAroundTile(Index2 index)
 	return aroundTile;
 }
 
+void TileMap::ChangeTileTypeToBubble(Index2 index)
+{
+	tiles[index.y][index.x]->SetTileType(BubbleTile);
+}
+
 void TileMap::Load()
 {
 	BinaryReader* reader = new BinaryReader(loadFilePath);

@@ -21,6 +21,7 @@ public:
 	{
 		tiles[index.y][index.x]->SetTileType(type);
 	}
+	void ChangeTileTypeToBubble(Index2 index);
 	
 private:
 	void Load();
@@ -30,7 +31,6 @@ private:
 
 	void SettingTile(Tile* tile, const wstring& filePath);
 private:
-
 	string loadFilePath;
 	Quad* backGround;
 	vector<vector<Tile*>> tiles;

@@ -201,6 +201,9 @@
     <ClInclude Include="Objects\CrazyArcade\Bubble\BubbleManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\Bubble\WaterJet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI_2504.cpp">

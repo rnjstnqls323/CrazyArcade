@@ -14,8 +14,14 @@ public:
 	virtual void Update() {};
 	virtual void Render() {};
 	
-	void SetTileType(TileType type) { this->type = type; }
+	void SetTileType(TileType type) 
+	{ 
+		preType = this->type;
+		this->type = type;
+	}
 	TileType GetTileType() { return type; }
+	TileType GetPreTileType() { return preType; }
+
 
 	int GetTileTag() { return tag; }
 	void SetTileTag(int num) { tag = num; }
@@ -24,4 +30,5 @@ protected:
 	int tag = -1;
 
 	TileType type = PassTile;
+	TileType preType = PassTile;
 };

@@ -11,6 +11,12 @@ VertexBuffer::VertexBuffer(void* data, UINT stride, UINT count)
     D3D11_SUBRESOURCE_DATA subData = {};
     subData.pSysMem = data;
 
+   // void* testCopy = malloc(bufferDesc.ByteWidth);
+   // memcpy(testCopy, subData.pSysMem, bufferDesc.ByteWidth); // 여기서 터지면 범위 문제
+   // free(testCopy);
+   // 생성할때, 크기는 크게 잡아서 생성했는데 worldBuffer의 크기가 훨씬 작아서 안맞아서 터졌던거다.
+   // resize다시 해주니 안터진다.
+
     DEVICE->CreateBuffer(&bufferDesc, &subData, &buffer);
 }
 

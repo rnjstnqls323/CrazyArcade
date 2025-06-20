@@ -26,7 +26,7 @@ void TestScene::Update()
 	CheckCollision();
 	player->Update();
 
-	BubbleManager::Get()->Update();
+	BubbleManager::Get()->Update(map);
 }
 
 void TestScene::Render()
@@ -88,16 +88,17 @@ void TestScene::PushPlayer(const Vector2& overlap, Tile& tile)
 
 	player->SetLocalPosition(pos);
 	player->UpdateWorld();
-}
+} //이부분은 TileMap으로 빼자
 
 void TestScene::SpawnBubble()
 {
-	if (!Input::Get()->IsKeyDown(VK_SPACE) || map->GetTileType(playerIndex) == BubbleTile) 
+ 	if (!Input::Get()->IsKeyDown(VK_SPACE) 
+		|| map->GetTileType(playerIndex) == BubbleTile || map->GetTileType(playerIndex) == WaterTile)
 		return;
 	
-	isSpawn = BubbleManager::Get()->SpawnBubble(map->GetTilePos(playerIndex));
+	isSpawn = BubbleManager::Get()->SpawnBubble(map->GetTilePos(playerIndex),playerIndex);
 	if (!isSpawn)
 		return;
-	map->ChangeTileType(BubbleTile, playerIndex);
+	map->ChangeTileTypeToBubble(playerIndex); 
 }
 

@@ -73,7 +73,7 @@ void BlockFactory::CreateInstanceBuffer()
 
 		if (data.second->instanceBuffer == nullptr)
 		{
-			data.second->instanceBuffer = new VertexBuffer(data.second->blockWorld.data(), sizeof(Matrix), MAX_BLOCK_NUM);
+			data.second->instanceBuffer = new VertexBuffer(data.second->blockWorld.data(), sizeof(Matrix), data.second->blockWorld.size());
 		}		
 	}
 }
@@ -101,5 +101,6 @@ void BlockFactory::CreateMap()
 	for (int i = 0;i < (int)BlockCatecoryEnd;i++)
 	{
 		blockInstances[(BlockCategory)i] = new BlockData();
+		//blockInstances[(BlockCategory)i]->blockWorld.resize(MAX_BLOCK_NUM);
 	}
 }
