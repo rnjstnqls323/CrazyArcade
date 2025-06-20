@@ -23,13 +23,11 @@ Bubble::~Bubble()
 
 	for (int i = 0;i <= DownWater;i++)
 	{
-		for (JetSegment* jet : waterJets[(WaterJet)i])
+		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
 		{
-			delete jet->jetTransform;
-			delete jet->jetWorldBuffer;
 			delete jet;
 		}
-		waterJets[(WaterJet)i].clear();
+		waterJets[(WaterJetStatus)i].clear();
 	}
 
 }
@@ -43,6 +41,7 @@ void Bubble::Render()
 	animation->Render(curStatus);
  
 	RenderJet();
+
 }
 void Bubble::Update()
 {
@@ -55,7 +54,7 @@ void Bubble::Update()
 	UpdateJet();
 }
 
-void Bubble::Spawn(Vector2 spawnPos)
+void Bubble::Spawn(Vector2 spawnPos, Index2 index)
 {
 	SetLocalPosition(spawnPos);
 	UpdateWorld();
@@ -63,7 +62,9 @@ void Bubble::Spawn(Vector2 spawnPos)
 	curStatus = BubbleIdle;
 
 	isActive = true;
+	SetIndexJet(index);
 }
+
 void Bubble::Reset()
 {
 
@@ -79,7 +80,7 @@ void Bubble::LoadWaterJetAnimation()
 	for (int i = 0;i <= DownWater;i++)
 	{
 		string fileName;
-		switch ((WaterJet)i)
+		switch ((WaterJetStatus)i)
 		{
 		case LeftWater:
 			fileName = "Left";
@@ -94,8 +95,8 @@ void Bubble::LoadWaterJetAnimation()
 			fileName = "Down";
 			break;
 		}
-		waterJetAnimation[(WaterJet)i] = new Animation;
-		waterJetAnimation[(WaterJet)i]->LoadClip("Resources/Textures/CrazyArcade_Bubble/", 
+		waterJetAnimation[(WaterJetStatus)i] = new Animation;
+		waterJetAnimation[(WaterJetStatus)i]->LoadClip("Resources/Textures/CrazyArcade_Bubble/",
 			"Create_Jet_"+ fileName +".xml", false, 0.2f);
 	}
 	
@@ -116,9 +117,9 @@ void Bubble::UpdateStatus()
 			animation->Play(curStatus);
 			for (int i = 0;i <= DownWater;i++)
 			{
-				for (JetSegment* jet : waterJets[(WaterJet)i])
+				for (WaterJet* jet : waterJets[(WaterJetStatus)i])
 				{
-					jet->jetAnimation->Play(0);
+					jet->PlayAnimation();
 				}
 			}
 		}
@@ -133,6 +134,18 @@ void Bubble::UpdateStatus()
 		}
 	}
 		break;
+
+	case Dead:
+	{
+		for (int i = 0; i <= DownWater; i++)
+		{
+			for (WaterJet* jet : waterJets[(WaterJetStatus)i])
+			{
+				jet->SetActive(false);
+			}
+		}
+		break;
+	}
 	}
 }
 
@@ -140,26 +153,25 @@ void Bubble::CreateJet()
 {
 	vector<Vector2> offset =
 	{
-		{-1,0},{1,0},{0,1},{0,-1}
+		{-1,0},{1,0},{0,1},{0,-1} //¿Þ¿ÀÀ§¾Æ·¡
 	};
 
 	for (int i = 0;i <= DownWater;i++)
 	{
-		waterJets[(WaterJet)i].resize(MAX_JET_LENGTH);
+		waterJets[(WaterJetStatus)i].resize(MAX_JET_LENGTH);
 	}
 	for (int i = 0;i <= DownWater;i++)
 	{
 		int count = 1;
-		for (JetSegment*& jet : waterJets[(WaterJet)i])
+		for (WaterJet*& jet : waterJets[(WaterJetStatus)i])
 		{
-			jet = new JetSegment;
-			jet->jetAnimation = waterJetAnimation[(WaterJet)i];
-			jet->jetTransform = new Transform;
-			jet->jetTransform->SetParent(this);
-			jet->jetTransform->SetLocalPosition(GetLocalPosition().x + (TILE_SIZE.x * count * offset[i].x),
+			jet = new WaterJet(waterJetAnimation[(WaterJetStatus)i]);
+
+			Transform* temp = jet->GetTransform();
+			temp->SetParent(this);
+			temp->SetLocalPosition(GetLocalPosition().x + (TILE_SIZE.x * count * offset[i].x),
 				GetLocalPosition().y + (TILE_SIZE.y * count * offset[i].y));
-			jet->jetTransform->UpdateWorld();
-			jet->jetWorldBuffer = new MatrixBuffer;
+			temp->UpdateWorld();
 
 			count++;
 		}
@@ -171,34 +183,54 @@ void Bubble::RenderJet()
 {
 	if (curStatus != Exploding) return;
 
-	for (int i = 0;i <= DownWater;i++)
+	for (int i = 0; i <= DownWater; i++)
 	{
-		for (JetSegment* jet : waterJets[(WaterJet)i])
+		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
 		{
-			jet->jetWorldBuffer->Set(jet->jetTransform->GetWorld());
-			jet->jetWorldBuffer->SetVS(0);
-			jet->jetAnimation->Render(0);
+			if (!jet->IsActive())
+				continue;
+			jet->Render();
 		}
 	}
 }
 
 void Bubble::UpdateJet()
 {
-	if (curStatus == Exploding)
-	{
-		for (int i = 0;i <= DownWater;i++)
-		{
-			int count = 0;
-			for (JetSegment* jet : waterJets[(WaterJet)i])
-			{
-				if (count++ < curLength)
-				{
-					jet->isJetActive=true;
-					jet->jetTransform->UpdateWorld();
-					jet->jetAnimation->Update(0);
-				}
+	if (curStatus != Exploding)
+		return;
 
+	for (int i = 0; i <= DownWater; i++)
+	{
+		int count = 0;
+		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
+		{
+			if (count++ < curLength)
+			{
+				jet->Update();
 			}
+
+		}
+	}
+}
+
+void Bubble::SetIndexJet(Index2 index)
+{
+	vector<Index2> offset =
+	{
+		{0,-1},{0,1},{-1,0},{1,0} //¿Þ¿ÀÀ§¾Æ·¡ ÀÎµ¦½º´Â y,x¼ø
+	};
+
+	for (int i = 0; i <= DownWater; i++)
+	{
+		int count = 1;
+		for (WaterJet*& jet : waterJets[(WaterJetStatus)i])
+		{
+			jet->SetIndex({
+				index.y + offset[i].y * count,
+				index.x + offset[i].x * count
+				});
+			Index2 jetindex = jet->GetIndex();
+			count++;  
 		}
 	}
 }

@@ -252,6 +252,7 @@
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Bubble\Bubble.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Bubble\BubbleManager.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Bubble\WaterJet.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Character\Character.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />

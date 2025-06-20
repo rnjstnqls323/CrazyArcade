@@ -8,14 +8,25 @@ enum WaterJetStatus
 class WaterJet :public GameObject
 {
 public:
-	WaterJet();
+	WaterJet(Animation* animation);
 	~WaterJet();
 
+	void Render() override;
 	void Update();
-	void Render();
 
+	Transform* GetTransform() { return transform; }
+
+	void PlayAnimation() { animation->Play(0); }
+	
+	void SetIndex(Index2 index) { this->index = index; }
+	Index2 GetIndex() { return index; }
 private:
+	void MakeMesh() override {}
+private:
+
+	Index2 index;
 	Animation* animation; // 복사해서 써줄거임
-	Transform* jetTransform;
-	//이거 객체하나를 아예 상하좌우로 빼자 ㅇㅇ 이게 관리하기 쉬울듯
+	Transform* transform;
+	MatrixBuffer* worldBuffer;
+
 };

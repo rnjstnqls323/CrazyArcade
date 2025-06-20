@@ -362,6 +362,9 @@
     <ClCompile Include="Objects\CrazyArcade\Bubble\BubbleManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\Bubble\WaterJet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WinAPI_2504.rc">

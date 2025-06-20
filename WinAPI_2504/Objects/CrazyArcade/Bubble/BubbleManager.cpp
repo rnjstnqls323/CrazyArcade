@@ -54,8 +54,8 @@ bool BubbleManager::SpawnBubble(Vector2 pos, Index2 index)
 	{
 		if (bubble->IsActive())
 			continue;
-		bubble->Spawn(pos);
-		bubbleIndex[bubble->GetTag()]=index;
+		bubble->Spawn(pos,index);
+		bubbleIndex[bubble->GetTag()]=index;  // 이렇게 할 필요가 있을까? 고민 다시 ㄱㄱ
 		return true;
 	}
 	return false;

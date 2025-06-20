@@ -18,7 +18,7 @@ public:
 	bool SpawnBubble(Vector2 pos,Index2 index);
 
 private:
-	vector<Bubble*>  bubbles;
+	vector<Bubble*> bubbles;
 	vector<Index2> bubbleIndex;
 		//버블마다 타이머설정해둬야겠는디  
 };
