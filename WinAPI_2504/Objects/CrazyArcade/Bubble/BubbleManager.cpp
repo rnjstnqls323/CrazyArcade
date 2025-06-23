@@ -3,7 +3,6 @@
 BubbleManager::BubbleManager()
 {
 	bubbles.resize(BUBBLE_POOL_SIZE);
-	bubbleIndex.resize(BUBBLE_POOL_SIZE);
 	int num = 0;
 	for (Bubble*& bubble : bubbles)
 	{
@@ -29,35 +28,51 @@ void BubbleManager::Render()
 	}
 }
 
-void BubbleManager::Update(TileMap* map)
+void BubbleManager::Update()
 {
+
 	for (Bubble* bubble : bubbles)
 	{
 		if (!bubble->IsActive())
 			continue;
-		bubble->Update(map);
+		bubble->Update();
 		if (bubble->GetStatus() == Exploding)
 		{
- 			map->ChangeTileType(WaterTile, bubbleIndex[bubble->GetTag()]);
+			map->SetTileType(WaterTile, bubble->GetBubbleIndex());
 		}
 		else if (bubble->GetStatus() == Dead)
 		{
-			bubble->SetActive(false);
-			map->ChangeTileType(PassTile, bubbleIndex[bubble->GetTag()]);
+ 			bubble->SetActive(false);
+			map->SetTileType(PassTile, bubble->GetBubbleIndex());
 		}
 	}
 }
 
-bool BubbleManager::SpawnBubble(Vector2 pos, Index2 index)
+bool BubbleManager::SpawnBubble(Vector2 pos, Index2 index,TileMap* map)
 {
+		this->map = map;
 	for (Bubble* bubble : bubbles)
 	{
 		if (bubble->IsActive())
 			continue;
-		bubble->Spawn(pos,index);
-		bubbleIndex[bubble->GetTag()]=index;  // 이렇게 할 필요가 있을까? 고민 다시 ㄱㄱ
+		bubble->Spawn(pos,index,map);
+
 		return true;
 	}
 	return false;
+}
+
+void BubbleManager::BombBubble(Index2 index)
+{
+	
+	for (Bubble* bubble : bubbles)
+	{
+		if (!bubble->IsActive())
+			continue;
+		if (bubble->GetBubbleIndex() != index)
+			continue;
+		map->SetTileType(PassTile, index);
+		bubble->SetBombTime();
+	}
 }
 

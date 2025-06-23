@@ -14,14 +14,24 @@ public:
 
 	Vector2 GetTilePos(Index2 index) { return tiles[index.y][index.x]->GetLocalPosition(); }
 	TileType GetTileType(Index2 index) { return tiles[index.y][index.x]->GetTileType(); }
-
+	TileType GetPreTileType(Index2 index) { return tiles[index.y][index.x]->GetPreTileType(); }
 	vector<Tile*> GetAroundTile(Index2 index);
 
-	void ChangeTileType(TileType type, Index2 index)
+	void SetTileType(TileType type, Index2 index)
 	{
 		tiles[index.y][index.x]->SetTileType(type);
 	}
 	void ChangeTileTypeToBubble(Index2 index);
+
+	bool IsIndexInBound(Index2 index)
+	{
+		if(index.x < 0 || index.y < 0|| index.x > COL-1 || index.y > ROW-1)
+			return false;
+		return true;
+	}
+
+	void CrushBlock(Index2 index);
+
 	
 private:
 	void Load();

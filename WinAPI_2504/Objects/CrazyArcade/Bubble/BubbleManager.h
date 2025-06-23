@@ -13,12 +13,14 @@ private:
 
 public:
 	void Render();
-	void Update(TileMap* map);
+	void Update();
 
-	bool SpawnBubble(Vector2 pos,Index2 index);
+	bool SpawnBubble(Vector2 pos,Index2 index,TileMap* map);
+	void BombBubble(Index2 index);
 
 private:
+	TileMap* map;
+
 	vector<Bubble*> bubbles;
-	vector<Index2> bubbleIndex;
 		//버블마다 타이머설정해둬야겠는디  
 };

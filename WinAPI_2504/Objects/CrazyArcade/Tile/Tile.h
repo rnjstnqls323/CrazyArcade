@@ -19,9 +19,12 @@ public:
 		preType = this->type;
 		this->type = type;
 	}
+
+	BlockCategory GetCategory() { return category; }
+	void SetCategory(BlockCategory category) { this->category = category; }
+
 	TileType GetTileType() { return type; }
 	TileType GetPreTileType() { return preType; }
-
 
 	int GetTileTag() { return tag; }
 	void SetTileTag(int num) { tag = num; }
@@ -29,6 +32,7 @@ public:
 protected:
 	int tag = -1;
 
+	BlockCategory category;
 	TileType type = PassTile;
-	TileType preType = PassTile;
+	TileType preType = PassTile; //ÀÌ°Å ¿Ö ³Àµ×´õ¶ó
 };

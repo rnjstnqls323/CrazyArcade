@@ -7,7 +7,7 @@ TestScene::TestScene()
 	BubbleManager::Get();
 	map = new TileMap("Resources/TextData/TestStage1.map");
 
-	player = new Character();
+	player = new Player();
 	player->SetLocalPosition(700, 500);
 }
 
@@ -26,7 +26,7 @@ void TestScene::Update()
 	CheckCollision();
 	player->Update();
 
-	BubbleManager::Get()->Update(map);
+	BubbleManager::Get()->Update();
 }
 
 void TestScene::Render()
@@ -96,7 +96,7 @@ void TestScene::SpawnBubble()
 		|| map->GetTileType(playerIndex) == BubbleTile || map->GetTileType(playerIndex) == WaterTile)
 		return;
 	
-	isSpawn = BubbleManager::Get()->SpawnBubble(map->GetTilePos(playerIndex),playerIndex);
+	isSpawn = BubbleManager::Get()->SpawnBubble(map->GetTilePos(playerIndex),playerIndex,map);
 	if (!isSpawn)
 		return;
 	map->ChangeTileTypeToBubble(playerIndex); 

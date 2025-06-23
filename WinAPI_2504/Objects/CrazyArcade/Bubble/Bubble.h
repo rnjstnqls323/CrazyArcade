@@ -22,13 +22,18 @@ public:
 	~Bubble();
 
 	void Render();
-	void Update(TileMap* map);
-	void Spawn(Vector2 spawnPos,Index2 index);
+	void Update();
+	void Spawn(Vector2 spawnPos,Index2 index, TileMap* map);
 
 	BubbleStatus GetStatus() { return curStatus; }
 	int GetTag() { return tag; }
+	Index2 GetBubbleIndex() { return index; }
 
 	void SetTag(int num) { tag = num; }
+	void SetBombTime() 
+	{  
+		timer = BOMB_TIME;
+	}
 
 	void Reset();
 	void AddLength() 
@@ -36,6 +41,8 @@ public:
 		if (curLength < MAX_JET_LENGTH)
 			curLength++;
 	} //이거보다 매니저가 한번에 관리하는게 훨씬 간단하겠는데?
+
+
 private:
 	void MakeMesh() override {}; 
 
@@ -46,21 +53,25 @@ private:
 	
 	void CreateJet();
 	void RenderJet();
-	void UpdateJet(TileMap* map);
+	void UpdateJet();
 	void SetIndexJet(Index2 index);
+
+	bool IsBlockingTile(Index2 index);
+	void CrushOrBomb();
 
 private:
 	int tag = 0;
 	int curLength = 7;
 	double timer = 0.0f;
 
+	TileMap* map;
+	Index2 index;
 	Transform* bubbleTransform;
 	Animation* animation;
 
-	unordered_map<WaterJetStatus, Animation*> waterJetAnimation; //이거 걍 클립으로받을까
+	unordered_map<WaterJetStatus, Animation*> waterJetAnimation; //클립으로 뺄까
 	unordered_map<WaterJetStatus, vector<WaterJet*>> waterJets; 
-	//물줄기 위치마다 셋팅해주자 풀링으로만들어놓고 노노 물줄기 걍 객체로 빼자
-
+	
 	BubbleStatus curStatus = Dead;
 
 	MatrixBuffer* worldBuffer;

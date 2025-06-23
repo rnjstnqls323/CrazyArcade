@@ -35,9 +35,9 @@ void BlockFactory::PopBlock(BlockCategory key, Vector2 pos)
 	for (size_t i = 0; i < world.size(); ++i)
 	{
 		XMFLOAT4X4 mat;
-		XMStoreFloat4x4(&mat, world[i]);
+		XMStoreFloat4x4(&mat, world[i]); 
 
-		Vector2 matrixPos(mat._41, mat._42);
+		Vector2 matrixPos(mat._14, mat._24); // 전치행렬로 변환한것때문에 14,24에 x,y있다.
 
 		if (matrixPos == pos)
 		{

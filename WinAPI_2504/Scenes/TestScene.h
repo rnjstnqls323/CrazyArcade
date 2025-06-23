@@ -21,7 +21,7 @@ private:
 
 
 	TileMap* map;
-	Character* player;
+	Player* player;
 	Index2 playerIndex;
 	Index2 preIndex;
 

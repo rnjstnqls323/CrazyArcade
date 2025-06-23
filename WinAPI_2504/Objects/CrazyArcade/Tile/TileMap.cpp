@@ -51,6 +51,13 @@ void TileMap::ChangeTileTypeToBubble(Index2 index)
 	tiles[index.y][index.x]->SetTileType(BubbleTile);
 }
 
+void TileMap::CrushBlock(Index2 index)
+{
+	Tile* tile = tiles[index.y][index.x];
+	tile->SetTileType(PassTile);
+	BlockFactory::Get()->PopBlock(tile->GetCategory(), tile->GetLocalPosition());
+}
+
 void TileMap::Load()
 {
 	BinaryReader* reader = new BinaryReader(loadFilePath);
@@ -152,6 +159,7 @@ void TileMap::SettingTile(Tile* tile, const wstring& filePath)
 		if (filePath.find(map.first) != wstring::npos)
 		{
 			tile->SetTileType(CrushTile);
+			tile->SetCategory(map.second);
 			BlockFactory::Get()->AddBlock(map.second, tile->GetLocalPosition());
 			return;
 		}

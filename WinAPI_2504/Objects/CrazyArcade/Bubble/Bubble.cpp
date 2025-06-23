@@ -43,19 +43,21 @@ void Bubble::Render()
 	RenderJet();
 
 }
-void Bubble::Update(TileMap* map)
+void Bubble::Update()
 {
 	if (isActive == false || curStatus == Dead)
 		return;									
 
 	animation->Update(curStatus);
 	UpdateStatus();
+	UpdateJet();
 
-	UpdateJet(map);
 }
 
-void Bubble::Spawn(Vector2 spawnPos, Index2 index)
+void Bubble::Spawn(Vector2 spawnPos, Index2 index, TileMap* map)
 {
+	this->map = map;
+	this->index = index;
 	SetLocalPosition(spawnPos);
 	UpdateWorld();
 
@@ -69,6 +71,7 @@ void Bubble::Reset()
 {
 
 }
+
 void Bubble::LoadAnimation()
 {
 	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Idle.xml", true,0.4f);
@@ -115,13 +118,7 @@ void Bubble::UpdateStatus()
 		{
 			curStatus = Exploding;
 			animation->Play(curStatus);
-			for (int i = 0;i <= DownWater;i++)
-			{
-				for (WaterJet* jet : waterJets[(WaterJetStatus)i])
-				{
-					jet->PlayAnimation();
-				}
-			}
+			CrushOrBomb();
 		}
 	}
 		break;
@@ -135,9 +132,11 @@ void Bubble::UpdateStatus()
 			{
 				for (WaterJet* jet : waterJets[(WaterJetStatus)i])
 				{
-					if (!jet->IsActive())
+					if (!jet->IsRender())
 						continue;
-					jet->SetActive(false);
+					jet->SetIsRender(false);
+					if (map->GetPreTileType(jet->GetIndex()) == CrushTile)
+						map->SetTileType(PassTile, jet->GetIndex()); //타일 타입바꾸면 현타일이 pre타일로 미뤄지니까
 				}
 			}
 		}
@@ -184,14 +183,14 @@ void Bubble::RenderJet()
 	{
 		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
 		{
-			if (!jet->IsActive())
+			if (!jet->IsActive() || !jet->IsRender())
 				continue;
 			jet->Render();
 		}
 	}
 }
 
-void Bubble::UpdateJet(TileMap* map)
+void Bubble::UpdateJet()
 {
 	if (curStatus != Exploding)
 		return;
@@ -199,16 +198,33 @@ void Bubble::UpdateJet(TileMap* map)
 	for (int i = 0; i <= DownWater; i++)
 	{
 		int count = 0;
+		bool isBlocked = false;
+
 		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
 		{
-			if (count++ < curLength)
-			{
-				if (map->GetTileType(jet->GetIndex()) == BlockTile
-					|| map->GetTileType(jet->GetIndex()) == CrushTile)
-					break;
-				jet->Update();
-			}
+			if (count++ >= curLength)
+				break;
 
+			jet->Update();
+
+			Index2 index = jet->GetIndex();
+			if (!map->IsIndexInBound(index) || isBlocked)
+				continue;
+
+			if (IsBlockingTile(index))
+			{
+				isBlocked = true;
+				jet->SetIsRender(false);
+			}
+			else if (map->GetPreTileType(index) == CrushTile)
+			{
+				isBlocked = true;
+				jet->SetIsRender(true);
+			}
+			else
+			{
+				jet->SetIsRender(true);
+			}
 		}
 	}
 }
@@ -234,6 +250,49 @@ void Bubble::SetIndexJet(Index2 index)
 		}
 	}
 }
+
+bool Bubble::IsBlockingTile(Index2 index)
+{
+	if(map->GetTileType(index)==CrushTile || map->GetTileType(index)==BlockTile )
+		return true;
+	return false;
+}
+
+void Bubble::CrushOrBomb()
+{
+	for (int i = 0; i <= DownWater; i++)
+	{
+		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
+		{
+			Index2 index = jet->GetIndex();
+
+			if (!map->IsIndexInBound(index))
+				continue;
+
+			jet->PlayAnimation();
+
+			TileType tile = map->GetTileType(index);
+
+			switch (tile)
+			{
+			case BubbleTile:
+				BubbleManager::Get()->BombBubble(index);
+				break;
+
+			case CrushTile:
+				map->CrushBlock(index);
+				break;
+
+			case BlockTile:
+				break;
+			}
+
+			if (tile == BlockTile || tile == CrushTile)
+				break;
+		}
+	}
+}
+
 
 
 

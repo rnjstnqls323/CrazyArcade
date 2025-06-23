@@ -6,7 +6,7 @@ WaterJet::WaterJet(Animation* animation)
 	transform = new Transform;
 	worldBuffer = new MatrixBuffer;
 
-	isActive = false;
+	isActive = true;
 }
 
 WaterJet::~WaterJet()
@@ -24,7 +24,7 @@ void WaterJet::Render()
 }
 void WaterJet::Update()
 {
-	isActive = true;
+
 	transform->UpdateWorld();
 	animation->Update(0);
 }

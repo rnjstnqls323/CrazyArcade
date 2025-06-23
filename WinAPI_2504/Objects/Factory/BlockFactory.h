@@ -21,7 +21,7 @@ private:
 	~BlockFactory();
 
 public:
-	void AddBlock(BlockCategory key, Vector2 pos); // 이거 실행하면 무조건 instanceBuffer 업데이트해야됨
+	void AddBlock(BlockCategory key, Vector2 pos);
 	void PopBlock(BlockCategory key, Vector2 pos); // 이거 실행하면 무조건 instanceBuffer 업데이트해야됨
 
 	void Render();

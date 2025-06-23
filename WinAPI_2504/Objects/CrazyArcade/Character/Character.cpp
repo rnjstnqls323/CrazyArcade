@@ -3,57 +3,19 @@
 Character::Character():RectCollider(Vector2(35,30))
 {
 	animation = new Animation;
-	LoadAnimation();
+	//LoadAnimation(); 이거 상속받는 애들에서 하자
 
 	animationTransform = new Transform;
 	animationTransform->SetParent(this);
-	animationTransform->SetLocalPosition(this->GetLocalPosition().x , this->GetLocalPosition().y+17);
-	animationTransform->UpdateWorld();
+
 }
 
 Character::~Character()
 {
 	delete animation;
 	delete animationTransform;
-
 }
 
-void Character::Update()
-{
-	Move();
-
-	animation->Update(curStatus);
-
-	UpdateWorld();
-	animationTransform->UpdateWorld();
-
-}
-
-void Character::Render()
-{
-	RectCollider::Render();
-	if (curStatus == Die)//일케하면안될듯 재생안되고있으면 isdie트루로주자
-		return;
-	
-	worldBuffer->Set(animationTransform->GetWorld());
-	worldBuffer->SetVS(0);
-	animation->Render(curStatus);
-
-}
-
-void Character::LoadAnimation()
-{
-	string path = "Resources/Textures/CrazyArcade_Player/Bazzi/";
-
-	animation->LoadClip(path, "bazzi_idle.xml", true);
-	animation->LoadClip(path, "bazzi_up.xml", true);
-	animation->LoadClip(path, "bazzi_down.xml", true);
-	animation->LoadClip(path, "bazzi_left.xml", true);
-	animation->LoadClip(path, "bazzi_right.xml", true);
-	animation->LoadClip(path, "bazzi_trap.xml", true);
-	animation->LoadClip(path, "bazzi_live.xml", false);
-	animation->LoadClip(path, "bazzi_die.xml", false);
-}
 
 void Character::Move()
 {

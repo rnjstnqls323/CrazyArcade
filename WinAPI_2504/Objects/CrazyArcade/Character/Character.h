@@ -10,13 +10,13 @@ public:
 	Character();
 	~Character();
 
-	virtual void Update();
-	void Render();
+	virtual void Update() {}
+	virtual void Render() {}
 	
 protected:
-	virtual void LoadAnimation();
+	virtual void LoadAnimation() {}
 
-	virtual void Move();
+	virtual void Move(); //이것도 빼주자
 
 protected:
 
@@ -26,7 +26,5 @@ protected:
 	Transform* animationTransform;
 	CharacterStatus curStatus = Idle;
 	Animation* animation;
-
-	//플레이어구현할때, statusstatic으로 아예 빼버리고 캐릭터 고른거 출력할 수 있게 아 그럼 map이용해야될듯
 
 };

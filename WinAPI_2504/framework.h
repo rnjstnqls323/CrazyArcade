@@ -142,7 +142,7 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/Bubble/BubbleManager.h"
 
 #include "Objects/CrazyArcade/Character/Character.h"
-
+#include "Objects/CrazyArcade/Player/Player.h"
 
 
 
