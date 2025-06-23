@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:968045239ef3d197b7aa0838608b2844:ae83a22adb11c9aad39a335bcec39fce:afefd86381ef750084b8e07726080712$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="down.png" width="330" height="72">
+    <sprite n="down0.png" x="1" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="down1.png" x="67" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="down2.png" x="133" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="down3.png" x="67" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="down4.png" x="1" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="down5.png" x="199" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="down6.png" x="265" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="down7.png" x="199" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+</TextureAtlas>

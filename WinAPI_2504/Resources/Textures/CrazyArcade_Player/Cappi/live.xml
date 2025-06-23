@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:130a88e020869c217b16cde0f9c04a20:40a8450bc5ef506a4627c2e10f770e41:6b9d39d3bd5364656018611d63501fed$ -->
+<!-- $TexturePacker:SmartUpdate:15ca6d177855ffa6f83f8ee4acc50143:77ee0edd3a5914080d635dde31964a36:6b9d39d3bd5364656018611d63501fed$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -19,9 +19,9 @@ vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
 verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
-<TextureAtlas imagePath="live.png" width="71" height="213">
-    <sprite n="Revival (0).png" x="1" y="145" w="67" h="67" pX="0.5" pY="0.5"/>
-    <sprite n="Revival (1).png" x="1" y="1" w="69" h="70" pX="0.5" pY="0.5"/>
-    <sprite n="Revival (2).png" x="1" y="73" w="69" h="70" pX="0.5" pY="0.5"/>
-    <sprite n="Revival (3).png" x="1" y="73" w="69" h="70" pX="0.5" pY="0.5"/>
+<TextureAtlas imagePath="live.png" width="216" height="72">
+    <sprite n="Revival (0).png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="Revival (1).png" x="73" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="Revival (2).png" x="145" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="Revival (3).png" x="145" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
 </TextureAtlas>

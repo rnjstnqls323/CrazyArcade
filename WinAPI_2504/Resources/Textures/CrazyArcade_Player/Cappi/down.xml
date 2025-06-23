@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:f1017ecdbe75001db78ae214397c63ea:50c47151cd9ddc7c57f60114bfa25bd0:afefd86381ef750084b8e07726080712$ -->
+<!-- $TexturePacker:SmartUpdate:ee8e33591c1d9a4e8737ab175983ad3b:001c6a6a841c63b21efa3cbec4cd4237:afefd86381ef750084b8e07726080712$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -19,13 +19,13 @@ vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
 verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
-<TextureAtlas imagePath="down.png" width="284" height="60">
-    <sprite n="0.png" x="227" y="1" w="56" h="56" pX="0.5" pY="0.5"/>
-    <sprite n="1.png" x="113" y="1" w="55" h="57" pX="0.5" pY="0.5"/>
-    <sprite n="2.png" x="1" y="1" w="54" h="58" pX="0.5" pY="0.5"/>
-    <sprite n="3.png" x="113" y="1" w="55" h="57" pX="0.5" pY="0.5"/>
-    <sprite n="4.png" x="227" y="1" w="56" h="56" pX="0.5" pY="0.5"/>
-    <sprite n="5.png" x="170" y="1" w="55" h="57" pX="0.5" pY="0.5"/>
-    <sprite n="6.png" x="57" y="1" w="54" h="58" pX="0.5" pY="0.5"/>
-    <sprite n="7 (2).png" x="170" y="1" w="55" h="57" pX="0.5" pY="0.5"/>
+<TextureAtlas imagePath="down.png" width="360" height="72">
+    <sprite n="0.png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="1.png" x="73" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="2.png" x="145" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="3.png" x="73" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="4.png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="5.png" x="217" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="6.png" x="289" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="7 (2).png" x="217" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
 </TextureAtlas>

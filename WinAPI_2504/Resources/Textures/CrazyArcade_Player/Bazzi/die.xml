@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:6428d8603171bda60a61dc500489e0dd:5de7d5dc66265e89c8f101959b6ba14f:f2c9c5b1906fa4f52dc9349ebe527a47$ -->
+<!-- $TexturePacker:SmartUpdate:c23fdb3085a440c0402dae231bde1050:bdec65012d12deef4ad94433738c7996:f6f810aaeb808df4d1249e1d457af297$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -20,7 +20,11 @@ verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
 <TextureAtlas imagePath="die.png" width="90" height="1460">
+    <sprite n="frame_1 - 복사본 - 복사본.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_1 - 복사본.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
     <sprite n="frame_1.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_2 - 복사본 (2).png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_2 - 복사본.png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
     <sprite n="frame_2.png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
     <sprite n="frame_3.png" x="1" y="585" w="88" h="144" pX="0.5" pY="0.5"/>
     <sprite n="frame_4.png" x="1" y="731" w="88" h="144" pX="0.5" pY="0.5"/>

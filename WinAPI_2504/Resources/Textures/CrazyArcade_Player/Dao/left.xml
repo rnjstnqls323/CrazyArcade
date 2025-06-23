@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:99bae0cef2abc0c3c3588f71c25c1cab:ef01d0da6c5b3a4a990590b393927979:1fa71d865856624848d41e104ad6c3e3$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="left.png" width="330" height="72">
+    <sprite n="right0_mirror.png" x="1" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="right1_mirror.png" x="67" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="right2_mirror.png" x="133" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="right3_mirror.png" x="67" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="right4_mirror.png" x="1" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="right5_mirror.png" x="199" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="right6_mirror.png" x="265" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="right7_mirror.png" x="199" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+</TextureAtlas>

@@ -2,7 +2,7 @@
 
 enum CharacterStatus
 {
-	Idle, MoveUp, MoveDown, MoveLeft, MoveRight, BubbleTrapped,Live, Die // 플레시를 넣을까말까 생성될때
+	Idle, MoveUp, MoveDown, MoveLeft, MoveRight, BubbleTrapped,CharacterLive, CharacterDie //right,left,up idle어케 구분할지 고민
 };
 class Character :public RectCollider
 {

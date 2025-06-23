@@ -5,7 +5,7 @@ class Player :public Character
 {
 private:
 	enum CharacterName {
-		Bazzi, Cappi, Dao, Uni, Marid, Dizni
+		Bazzi, Cappi, Dao, Hook, Marid , EndCharacter// 우니 고민하기
 	};
 public:
 	Player();

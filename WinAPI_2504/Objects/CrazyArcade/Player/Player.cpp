@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-Player::CharacterName Player::character = Player::Cappi;
+Player::CharacterName Player::character = Player::Bazzi;
 Player::Player()
 {
 	CreateAnimation();
@@ -18,7 +18,8 @@ void Player::Update()
 {
 	Move();
 
-	animation[character]->Update(curStatus);
+	if(isKeyPress)
+		animation[character]->Update(curStatus);
 
 	UpdateWorld();
 	animationTransform->UpdateWorld();
@@ -27,8 +28,8 @@ void Player::Update()
 void Player::Render()
 {
 	RectCollider::Render();
-	if (curStatus == Die)//일케하면안될듯 재생안되고있으면 isdie트루로주자
-		return;
+	//if (curStatus == CharacterDie)//일케하면안될듯 재생안되고있으면 isdie트루로주자
+	//	return;
 
 	worldBuffer->Set(animationTransform->GetWorld());
 	worldBuffer->SetVS(0);
@@ -44,14 +45,12 @@ string Player::CharacterNameToString(CharacterName name)
 		return "Bazzi";
 	case Player::Dao:
 		return "Dao";
-	case Player::Uni:
-		return "Uni";
 	case Player::Cappi:
 		return "Cappi";
 	case Player::Marid:
 		return "Marid";
-	case Player::Dizni:
-		return "Dizni";
+	case Player::Hook:
+		return "Hook";
 	}
 }
 
@@ -60,7 +59,7 @@ void Player::LoadAnimation()
 	string path = "Resources/Textures/CrazyArcade_Player/";
 
 
-	for (int i = 0;i <= (int)Cappi;i++)
+	for (int i = 0;i < (int)EndCharacter;i++)
 	{
 		string file = CharacterNameToString((CharacterName)i)+"/";
 		
@@ -69,9 +68,9 @@ void Player::LoadAnimation()
 		animation[(CharacterName)i]->LoadClip(path + file, "down.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "left.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "right.xml", true);
-		animation[(CharacterName)i]->LoadClip(path + file, "trap.xml", true);
-		animation[(CharacterName)i]->LoadClip(path + file, "live.xml", false);
-		animation[(CharacterName)i]->LoadClip(path + file, "die.xml", false);
+		animation[(CharacterName)i]->LoadClip(path + file, "trap.xml", false,0.5f);
+		animation[(CharacterName)i]->LoadClip(path + file, "live.xml", false,0.4f);
+		animation[(CharacterName)i]->LoadClip(path + file, "die.xml", false,0.6f);
 		
 	}
 	
@@ -79,7 +78,7 @@ void Player::LoadAnimation()
 
 void Player::CreateAnimation()
 {
-	for (int i = 0;i <= (int)Cappi;i++)
+	for (int i = 0;i < (int)EndCharacter;i++)
 	{
 		animation[(CharacterName)i] = new Animation;
 	}
@@ -87,7 +86,7 @@ void Player::CreateAnimation()
 
 void Player::DeleteAnimation()
 {
-	for (int i = 0;i <= (int)Cappi;i++)
+	for (int i = 0;i < (int)EndCharacter;i++)
 	{
 		delete animation[(CharacterName)i];
 	}

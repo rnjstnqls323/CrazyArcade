@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:25c9248cc9413753ce6860341e1ea28c:e606a003a0c73a8a036b5e50ab80f4e7:f6f810aaeb808df4d1249e1d457af297$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="die.png" width="486" height="72">
+    <sprite n="die0 - 복사본.png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="die0.png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="die3.png" x="73" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="die3_1.png" x="145" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die4.png" x="202" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die5.png" x="259" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die6.png" x="316" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die7.png" x="373" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die8.png" x="430" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
+</TextureAtlas>

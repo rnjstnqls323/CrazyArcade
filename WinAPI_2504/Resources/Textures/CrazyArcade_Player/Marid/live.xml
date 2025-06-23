@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:8f52bfcf7c31fc1e6b05b18287d42d05:01794284b76b933a6932650658185f05:6b9d39d3bd5364656018611d63501fed$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="live.png" width="270" height="72">
+    <sprite n="live0 (2).png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="live0_1ng.png" x="73" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="live1.png" x="139" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="live2.png" x="205" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="live3.png" x="139" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="live4.png" x="205" y="1" w="64" h="70" pX="0.5" pY="0.5"/>
+</TextureAtlas>

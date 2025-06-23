@@ -24,21 +24,25 @@ void Character::Move()
 
 	if (Input::Get()->IsKeyPress(VK_UP))
 	{
+		isKeyPress = true;
 		Translate(Vector2::Up() * speed * DELTA);
 		curStatus = MoveUp;
 	}
 	else if (Input::Get()->IsKeyPress(VK_DOWN))
 	{
+		isKeyPress = true;
 		Translate(Vector2::Down() * speed * DELTA);
 		curStatus = MoveDown;
 	}
 	else if (Input::Get()->IsKeyPress(VK_LEFT))
 	{
+		isKeyPress = true;
 		Translate(Vector2::Left() * speed * DELTA);
 		curStatus = MoveLeft;
 	}
 	else if (Input::Get()->IsKeyPress(VK_RIGHT))
 	{
+		isKeyPress = true;
 		Translate(Vector2::Right() * speed * DELTA);
 		curStatus = MoveRight;
 	}
