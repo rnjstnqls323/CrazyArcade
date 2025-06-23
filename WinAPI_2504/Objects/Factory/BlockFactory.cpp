@@ -73,7 +73,8 @@ void BlockFactory::CreateInstanceBuffer()
 
 		if (data.second->instanceBuffer == nullptr)
 		{
-			data.second->instanceBuffer = new VertexBuffer(data.second->blockWorld.data(), sizeof(Matrix), data.second->blockWorld.size());
+			data.second->instanceBuffer = new VertexBuffer(data.second->blockWorld.data(), sizeof(Matrix)
+				, data.second->blockWorld.size());
 		}		
 	}
 }

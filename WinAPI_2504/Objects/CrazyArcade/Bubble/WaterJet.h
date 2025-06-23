@@ -1,10 +1,5 @@
 #pragma once
 
-enum WaterJetStatus
-{
-	LeftWater, RightWater, UpWater, DownWater
-};
-
 class WaterJet :public GameObject
 {
 public:

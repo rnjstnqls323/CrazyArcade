@@ -1,16 +1,15 @@
 #pragma once
 
+enum WaterJetStatus
+{
+	LeftWater, RightWater, UpWater, DownWater
+};
+
 enum BubbleStatus
 {
 	BubbleIdle, Exploding, Dead
 };
-struct JetSegment
-{
-	Animation* jetAnimation; //이건 복사
-	Transform* jetTransform; //이건 할당
-	MatrixBuffer* jetWorldBuffer; //이건 고민 좀 해보자 프레임수보고 고민 ㄱㄱ
-	bool isJetActive = false;
-};
+
 class Bubble : public GameObject
 {
 private:
