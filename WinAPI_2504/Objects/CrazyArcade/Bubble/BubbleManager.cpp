@@ -35,7 +35,7 @@ void BubbleManager::Update(TileMap* map)
 	{
 		if (!bubble->IsActive())
 			continue;
-		bubble->Update();
+		bubble->Update(map);
 		if (bubble->GetStatus() == Exploding)
 		{
  			map->ChangeTileType(WaterTile, bubbleIndex[bubble->GetTag()]);

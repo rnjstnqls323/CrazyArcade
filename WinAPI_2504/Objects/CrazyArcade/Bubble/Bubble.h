@@ -22,7 +22,7 @@ public:
 	~Bubble();
 
 	void Render();
-	void Update();
+	void Update(TileMap* map);
 	void Spawn(Vector2 spawnPos,Index2 index);
 
 	BubbleStatus GetStatus() { return curStatus; }
@@ -46,7 +46,7 @@ private:
 	
 	void CreateJet();
 	void RenderJet();
-	void UpdateJet();
+	void UpdateJet(TileMap* map);
 	void SetIndexJet(Index2 index);
 
 private:

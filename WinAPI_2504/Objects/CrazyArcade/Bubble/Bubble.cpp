@@ -43,7 +43,7 @@ void Bubble::Render()
 	RenderJet();
 
 }
-void Bubble::Update()
+void Bubble::Update(TileMap* map)
 {
 	if (isActive == false || curStatus == Dead)
 		return;									
@@ -51,7 +51,7 @@ void Bubble::Update()
 	animation->Update(curStatus);
 	UpdateStatus();
 
-	UpdateJet();
+	UpdateJet(map);
 }
 
 void Bubble::Spawn(Vector2 spawnPos, Index2 index)
@@ -131,21 +131,18 @@ void Bubble::UpdateStatus()
 		{
 			curStatus = Dead;
 			timer = 0.0;
-		}
-	}
-		break;
-
-	case Dead:
-	{
-		for (int i = 0; i <= DownWater; i++)
-		{
-			for (WaterJet* jet : waterJets[(WaterJetStatus)i])
+			for (int i = 0; i <= DownWater; i++)
 			{
-				jet->SetActive(false);
+				for (WaterJet* jet : waterJets[(WaterJetStatus)i])
+				{
+					if (!jet->IsActive())
+						continue;
+					jet->SetActive(false);
+				}
 			}
 		}
-		break;
 	}
+		break;
 	}
 }
 
@@ -194,7 +191,7 @@ void Bubble::RenderJet()
 	}
 }
 
-void Bubble::UpdateJet()
+void Bubble::UpdateJet(TileMap* map)
 {
 	if (curStatus != Exploding)
 		return;
@@ -206,6 +203,9 @@ void Bubble::UpdateJet()
 		{
 			if (count++ < curLength)
 			{
+				if (map->GetTileType(jet->GetIndex()) == BlockTile
+					|| map->GetTileType(jet->GetIndex()) == CrushTile)
+					break;
 				jet->Update();
 			}
 
