@@ -5,6 +5,18 @@ enum MonsterStatus
 	MonsterIdle, MonsterUp, MonsterDown, MonsterLeft, MonsterRight,MonsterDie, MonsterTrap, 
 	MonsterTrapMove, MonsterTrapDie
 };
+enum class MonsterType
+{
+	PinkStar, PurpleStar, TuttleKing
+};
+struct MonsterPos
+{
+	Vector2 startPos;
+	Vector2 endPos;
+	MonsterType type;
+	bool isLive = false;
+};
+
 class Monster :public RectCollider
 {
 public:

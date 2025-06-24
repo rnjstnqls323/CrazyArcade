@@ -66,7 +66,7 @@ void TileMap::Load()
 		delete reader;
 		return;
 	}
-	UINT tag = reader->UInt(); // 이걸 받을필요가있나? 아근데 무조건 받긴해야되네 안써도 ㅇㅇ
+	UINT tag = reader->UInt(); 
 	UINT tileCount = reader->UInt();
 	wstring filePath = reader->WString();
 
@@ -80,7 +80,7 @@ void TileMap::Load()
 		for (int x = 0;x < COL;x++)
 		{
 			filePath = reader->WString();
-			int type = reader->Int(); // 노드인지 몬스터 스폰위치인지 봐주는거
+			int type = reader->Int(); // 노드인지 몬스터 스폰위치인지 봐주는거 이걸읽을필요가있나?
 			int tileTag = reader->Int();
 
 			tiles[y][x]->SetTileTag(tileTag);
@@ -124,9 +124,18 @@ void TileMap::DeleteTiles()
 
 void TileMap::SettingTile(Tile* tile, const wstring& filePath)
 {
-	if (filePath.find(L"Monster") != wstring::npos)
+	if (filePath.find(L"Monster1") != wstring::npos)
 	{
 		tile->SetTileType(MonsterSpawnTile);
+		monsterPos[tile->GetTileTag()].startPos = tile->GetLocalPosition();
+		monsterPos[tile->GetTileTag()].type = MonsterType::PinkStar;
+		return;
+	}
+	else if (filePath.find(L"Monster2") != wstring::npos)
+	{
+		tile->SetTileType(MonsterSpawnTile);
+		monsterPos[tile->GetTileTag()].startPos = tile->GetLocalPosition();
+		monsterPos[tile->GetTileTag()].type = MonsterType::PurpleStar;
 		return;
 	}
 	else if (filePath.find(L"None") != wstring::npos)
@@ -137,6 +146,7 @@ void TileMap::SettingTile(Tile* tile, const wstring& filePath)
 	else if (filePath.find(L"End") != wstring::npos)
 	{
 		tile->SetTileType(EndNodeTile);
+		monsterPos[tile->GetTileTag()].endPos = tile->GetLocalPosition();
 		return;
 	}
 	else if (filePath.find(L"Pass") != wstring::npos)

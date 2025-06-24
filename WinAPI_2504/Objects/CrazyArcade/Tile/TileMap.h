@@ -32,6 +32,7 @@ public:
 
 	void CrushBlock(Index2 index);
 
+	const unordered_map<int, MonsterPos>& GetMonsterPos() { return monsterPos; }
 	
 private:
 	void Load();
@@ -40,9 +41,12 @@ private:
 	void DeleteTiles();
 
 	void SettingTile(Tile* tile, const wstring& filePath);
+
+
 private:
 	string loadFilePath;
 	Quad* backGround;
 	vector<vector<Tile*>> tiles;
 	Vector2 tileStartPos;
+	unordered_map<int, MonsterPos> monsterPos;
 };

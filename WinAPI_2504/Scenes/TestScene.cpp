@@ -5,7 +5,11 @@ TestScene::TestScene()
 {
 	BlockFactory::Get();
 	BubbleManager::Get();
+	MonsterManager::Get();
+
 	map = new TileMap("Resources/TextData/TestStage1.map");
+	MonsterManager::Get()->AddNode(map->GetMonsterPos());
+
 
 	player = new Player();
 	player->SetLocalPosition(700, 500);
