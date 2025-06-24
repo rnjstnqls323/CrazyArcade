@@ -191,7 +191,11 @@
     <ClInclude Include="Objects\CrazyArcade\Bubble\Bubble.h" />
     <ClInclude Include="Objects\CrazyArcade\Bubble\BubbleManager.h" />
     <ClInclude Include="Objects\CrazyArcade\Bubble\WaterJet.h" />
-    <ClInclude Include="Objects\CrazyArcade\Character\Character.h" />
+    <ClInclude Include="Objects\CrazyArcade\Monster\Monster.h" />
+    <ClInclude Include="Objects\CrazyArcade\Monster\MonsterManager.h" />
+    <ClInclude Include="Objects\CrazyArcade\Monster\PinkStar.h" />
+    <ClInclude Include="Objects\CrazyArcade\Monster\PurpleStar.h" />
+    <ClInclude Include="Objects\CrazyArcade\Monster\TuttleKing.h" />
     <ClInclude Include="Objects\CrazyArcade\Player\Player.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
@@ -254,7 +258,11 @@
     <ClCompile Include="Objects\CrazyArcade\Bubble\Bubble.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Bubble\BubbleManager.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Bubble\WaterJet.cpp" />
-    <ClCompile Include="Objects\CrazyArcade\Character\Character.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Monster\Monster.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Monster\MonsterManager.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Monster\PinkStar.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Monster\PurpleStar.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Monster\TuttleKing.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Player\Player.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />

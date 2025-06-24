@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:cedd001ad9eed2a575b81b1dd636a747:f9d52c21a23dce1ffa9cb13b0b3b8cf3:3b707593cb7279385654e93e1825e871$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="trapdie.png" width="204" height="74">
+    <sprite n="Crush0.png" x="1" y="1" w="52" h="51" pX="0.5" pY="0.5"/>
+    <sprite n="crush1.png" x="55" y="1" w="77" h="69" pX="0.5" pY="0.5"/>
+    <sprite n="crush2.png" x="134" y="1" w="69" h="72" pX="0.5" pY="0.5"/>
+</TextureAtlas>

@@ -133,17 +133,23 @@ typedef function<void()> Event;
 
 #include "Objects/Factory/BlockFactory.h"
 
+#include "Objects/CrazyArcade/Monster/Monster.h"
+#include "Objects/CrazyArcade/Monster/PinkStar.h"
+#include "Objects/CrazyArcade/Monster/PurpleStar.h"
+#include "Objects/CrazyArcade/Monster/TuttleKing.h"
+
 #include "Objects/CrazyArcade/Tile/Tile.h"
 #include "Objects/CrazyArcade/Tile/EditTile.h"
 #include "Objects/CrazyArcade/Tile/TileMap.h"
 
 #include "Objects/CrazyArcade/Bubble/WaterJet.h"
 #include "Objects/CrazyArcade/Bubble/Bubble.h"
+
 #include "Objects/CrazyArcade/Bubble/BubbleManager.h"
+#include "Objects/CrazyArcade/Monster/MonsterManager.h"
 
-#include "Objects/CrazyArcade/Character/Character.h"
+
 #include "Objects/CrazyArcade/Player/Player.h"
-
 
 
 #include "Scenes/Scene.h"

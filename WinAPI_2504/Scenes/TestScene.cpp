@@ -9,14 +9,26 @@ TestScene::TestScene()
 
 	player = new Player();
 	player->SetLocalPosition(700, 500);
+
+	star = new PinkStar();
+	star->SetLocalPosition(700, 500);
+
+	star2 = new PurpleStar();
+	star2->SetLocalPosition(600, 500);
+
+	king = new TuttleKing();
+	king->SetLocalPosition(800, 500);
 }
 
 TestScene::~TestScene()
 {
 	BlockFactory::Delete();
 	BubbleManager::Delete();
+	delete king;
 	delete map;
 	delete player;
+	delete star;
+	delete star2;
 }
 
 void TestScene::Update()
@@ -25,7 +37,9 @@ void TestScene::Update()
 
 	CheckCollision();
 	player->Update();
-
+	star->Update();
+	star2->Update();
+	king->Update();
 	BubbleManager::Get()->Update();
 }
 
@@ -37,6 +51,9 @@ void TestScene::Render()
 
 	BubbleManager::Get()->Render();
 	player->Render();
+	king->Render();
+	star->Render();
+	star2->Render();
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자

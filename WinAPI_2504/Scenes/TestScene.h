@@ -19,7 +19,9 @@ private:
 private:
 	bool isSpawn = false;
 
-
+	TuttleKing* king;
+	PurpleStar* star2;
+	PinkStar* star;
 	TileMap* map;
 	Player* player;
 	Index2 playerIndex;

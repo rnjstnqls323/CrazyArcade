@@ -1,10 +1,12 @@
 #include "Framework.h"
 
 Player::CharacterName Player::character = Player::Marid;
-Player::Player()
+Player::Player():RectCollider(Vector2(35, 30))
 {
 	CreateAnimation();
 	LoadAnimation();
+	animationTransform = new Transform;
+	animationTransform->SetParent(this);
 	animationTransform->SetLocalPosition(this->GetLocalPosition().x, this->GetLocalPosition().y + 17);
 	animationTransform->UpdateWorld();
 }
@@ -12,14 +14,15 @@ Player::Player()
 Player::~Player()
 {
 	DeleteAnimation();
+	delete animationTransform;
 }
 
 void Player::Update()
 {
 	Move();
 
-	if(isKeyPress)
-		animation[character]->Update(curStatus);
+	IdleChange();
+	animation[character]->Update(curStatus);
 
 	UpdateWorld();
 	animationTransform->UpdateWorld();
@@ -36,6 +39,38 @@ void Player::Render()
 	animation[character]->Render(curStatus);
 }
 
+
+void Player::Move()
+{
+	Vector2 curPos = GetLocalPosition();
+	isKeyPress = false;
+
+	if (Input::Get()->IsKeyPress(VK_UP))
+	{
+		isKeyPress = true;
+		Translate(Vector2::Up() * speed * DELTA);
+		curStatus = MoveUp;
+	}
+	else if (Input::Get()->IsKeyPress(VK_DOWN))
+	{
+		isKeyPress = true;
+		Translate(Vector2::Down() * speed * DELTA);
+		curStatus = MoveDown;
+	}
+	else if (Input::Get()->IsKeyPress(VK_LEFT))
+	{
+		isKeyPress = true;
+		Translate(Vector2::Left() * speed * DELTA);
+		curStatus = MoveLeft;
+	}
+	else if (Input::Get()->IsKeyPress(VK_RIGHT))
+	{
+		isKeyPress = true;
+		Translate(Vector2::Right() * speed * DELTA);
+		curStatus = MoveRight;
+	}
+
+}
 
 string Player::CharacterNameToString(CharacterName name)
 {
@@ -63,7 +98,10 @@ void Player::LoadAnimation()
 	{
 		string file = CharacterNameToString((CharacterName)i)+"/";
 		
-		animation[(CharacterName)i]->LoadClip(path + file, "idle.xml", true);
+		animation[(CharacterName)i]->LoadClip(path + file, "upidle.xml", false);
+		animation[(CharacterName)i]->LoadClip(path + file, "downidle.xml", false);
+		animation[(CharacterName)i]->LoadClip(path + file, "leftidle.xml", false);
+		animation[(CharacterName)i]->LoadClip(path + file, "rightidle.xml", false);
 		animation[(CharacterName)i]->LoadClip(path + file, "up.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "down.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "left.xml", true);
@@ -91,4 +129,24 @@ void Player::DeleteAnimation()
 		delete animation[(CharacterName)i];
 	}
 	animation.clear();
+}
+
+void Player::IdleChange()
+{
+	if (isKeyPress) return;
+	switch (curStatus)
+	{
+	case MoveUp:
+		curStatus = UpIdle;
+		break;
+	case MoveDown:
+		curStatus = DownIdle;
+		break;
+	case MoveLeft:
+		curStatus = LeftIdle;
+		break;
+	case MoveRight:
+		curStatus = RightIdle;
+		break;
+	}
 }
