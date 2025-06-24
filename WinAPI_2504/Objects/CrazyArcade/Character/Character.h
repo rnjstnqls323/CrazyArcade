@@ -2,7 +2,7 @@
 
 enum CharacterStatus
 {
-	Idle, MoveUp, MoveDown, MoveLeft, MoveRight, BubbleTrapped,CharacterLive, CharacterDie //right,left,up idle어케 구분할지 고민
+	Idle, MoveUp, MoveDown, MoveLeft, MoveRight, BubbleTrapped,CharacterDie, CharacterLive //right,left,up idle어케 구분할지 고민
 };
 class Character :public RectCollider
 {

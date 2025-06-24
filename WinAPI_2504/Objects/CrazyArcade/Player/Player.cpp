@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-Player::CharacterName Player::character = Player::Bazzi;
+Player::CharacterName Player::character = Player::Marid;
 Player::Player()
 {
 	CreateAnimation();
@@ -69,8 +69,8 @@ void Player::LoadAnimation()
 		animation[(CharacterName)i]->LoadClip(path + file, "left.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "right.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "trap.xml", false,0.5f);
-		animation[(CharacterName)i]->LoadClip(path + file, "live.xml", false,0.4f);
-		animation[(CharacterName)i]->LoadClip(path + file, "die.xml", false,0.6f);
+		animation[(CharacterName)i]->LoadClip(path + file, "die.xml", false, 0.6f);
+		animation[(CharacterName)i]->LoadClip(path + file, "live.xml", false, 0.4f);
 		
 	}
 	
