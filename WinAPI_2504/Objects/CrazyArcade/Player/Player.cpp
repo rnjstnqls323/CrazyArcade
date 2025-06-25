@@ -39,6 +39,11 @@ void Player::Render()
 	animation[character]->Render(curStatus);
 }
 
+void Player::Die()
+{
+	curStatus = CharacterDie;
+}
+
 
 void Player::Move()
 {

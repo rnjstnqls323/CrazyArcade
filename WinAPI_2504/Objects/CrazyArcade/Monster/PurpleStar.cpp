@@ -3,6 +3,8 @@
 PurpleStar::PurpleStar()
 {
 	LoadAnimation();
+	int randSpeed = rand() % 5 + 1;
+	speed = randSpeed * 0.1f;
 }
 
 PurpleStar::~PurpleStar()

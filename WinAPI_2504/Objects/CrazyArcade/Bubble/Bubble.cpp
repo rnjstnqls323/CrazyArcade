@@ -119,6 +119,7 @@ void Bubble::UpdateStatus()
 			curStatus = Exploding;
 			animation->Play(curStatus);
 			CrushOrBomb();
+
 		}
 	}
 		break;
@@ -135,8 +136,7 @@ void Bubble::UpdateStatus()
 					if (!jet->IsRender())
 						continue;
 					jet->SetIsRender(false);
-					if (map->GetPreTileType(jet->GetIndex()) == CrushTile)
-						map->SetTileType(PassTile, jet->GetIndex()); //타일 타입바꾸면 현타일이 pre타일로 미뤄지니까
+					map->SetTileType(PassTile, jet->GetIndex());
 				}
 			}
 		}
@@ -224,6 +224,7 @@ void Bubble::UpdateJet()
 			else
 			{
 				jet->SetIsRender(true);
+				map->SetTileType(WaterTile, index);
 			}
 		}
 	}
@@ -289,6 +290,7 @@ void Bubble::CrushOrBomb()
 
 			if (tile == BlockTile || tile == CrushTile)
 				break;
+
 		}
 	}
 }

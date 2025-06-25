@@ -17,6 +17,7 @@ public:
 	void Update();
 	void Render();
 
+	void Die();
 private:
 	void Move();
 	string CharacterNameToString(CharacterName name);

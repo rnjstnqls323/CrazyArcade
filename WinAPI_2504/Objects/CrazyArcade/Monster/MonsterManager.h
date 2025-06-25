@@ -5,7 +5,7 @@ class MonsterManager :public Singleton<MonsterManager>
 	friend class Singleton;
 
 private:
-	const int STAR_POOL_SIZE = 25;
+	const int STAR_POOL_SIZE = 30;
 
 private:
 	MonsterManager();
@@ -15,13 +15,23 @@ public:
 	void Update();
 	void Render();
 
-	void AddNode(unordered_map<int, MonsterPos> pos);
+	void ResetManager();
 
-	//여기서 주위 블럭 체크하는거 만들자. 
+	void AddNode(TileMap* map, unordered_map<int, MonsterPos> pos);
+	void MonsterSpawn();
+
+	bool MonsterCollisionPlayer(Player* player);
+
+	
 private:
+	void MonsterCollisionMonster(Monster* monster);
+	void MonsterCheckDie(Monster* mon);
+
+	void SpawnMonster(MonsterPos pos);
 	void ClearNode();
 	template<typename T>
-	void CreateMonsters(MonsterType key)
+	void CreateMonsters(MonsterType key) 
+	{
 		for (int i = 0; i < STAR_POOL_SIZE; i++)
 		{
 			T* monster = new T;
@@ -39,7 +49,9 @@ private:
 	
 
 private:
+
+	TileMap* map;
 	unordered_map<MonsterType, vector<Monster*>> monsters; 
 	unordered_map<MonsterType, vector<MonsterPos>> monsterPos;
-
+	unordered_set<Monster*> trapMoveMonster;
 };

@@ -12,7 +12,7 @@ public :
 
 private:
 	void CheckCollision();
-	void PushPlayer(const Vector2& overlap, Tile& tile);
+
 
 	void SpawnBubble();
 
@@ -20,8 +20,8 @@ private:
 	bool isSpawn = false;
 
 	TuttleKing* king;
-	PurpleStar* star2;
-	PinkStar* star;
+
+	AStar* astar;
 	TileMap* map;
 	Player* player;
 	Index2 playerIndex;

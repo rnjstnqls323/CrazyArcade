@@ -46,6 +46,22 @@ vector<Tile*> TileMap::GetAroundTile(Index2 index)
 	return aroundTile;
 }
 
+void TileMap::MakeNodes(vector<Node*>& nodes)
+{
+	for (int y = 0;y < ROW;y++)
+		for (int x = 0;x < COL;x++)
+		{
+			Tile* tile = tiles[y][x];
+			Node* node = new Node(tile->GetLocalPosition(), nodes.size());
+
+			if (tile->GetTileType() == BlockTile)
+				node->SetState(Node::Obstacle);
+			//물풍선 있으면 업데이트로 막아주는것도 계속해야됨
+
+			nodes.push_back(node);
+		}
+}
+
 void TileMap::ChangeTileTypeToBubble(Index2 index)
 {
 	tiles[index.y][index.x]->SetTileType(BubbleTile);
@@ -56,6 +72,65 @@ void TileMap::CrushBlock(Index2 index)
 	Tile* tile = tiles[index.y][index.x];
 	tile->SetTileType(PassTile);
 	BlockFactory::Get()->PopBlock(tile->GetCategory(), tile->GetLocalPosition());
+}
+
+Index2 TileMap::CheckCollision(RectCollider* collider)
+{
+	Vector2 overlap;
+
+	Index2 colliderIndex = GetTileIndex(collider);
+	vector<Tile*> aroundTiles =GetAroundTile(colliderIndex);
+
+	for (Tile* tile : aroundTiles)
+	{
+		if (tile->GetTileType() != BlockTile && tile->GetTileType() != CrushTile
+			&& tile->GetTileType() != BubbleTile)
+			continue;
+
+		if (tile->IsRectCollision(collider, &overlap))
+			PushCollider(overlap, *tile, collider);
+	}
+	return colliderIndex;
+}
+
+Index2 TileMap::GetTileIndex(RectCollider* collider)
+{
+
+	Vector2 tileStartPos = GetStartPos();
+	Vector2 colliderPos = collider->GetLocalPosition();
+	float halfTileSize = TILE_SIZE.x * 0.5f;
+	int x = (int)(colliderPos.x - tileStartPos.x) / TILE_SIZE.x + 0.5f;
+	int y = (int)(tileStartPos.y - colliderPos.y) / TILE_SIZE.y + 0.5f;
+
+	Index2 colliderIndex = { y,x };
+	return colliderIndex;
+}
+
+void TileMap::PushCollider(Vector2 overlap, Tile& tile, RectCollider* collider)
+{
+	Vector2 pos = collider->GetLocalPosition();
+	Vector2 tilePos = tile.GetLocalPosition();
+
+	float diffX = pos.x - tilePos.x;
+	float diffY = pos.y - tilePos.y;
+
+	if (overlap.x < overlap.y)
+	{
+		if (diffX > 0)
+			pos.x += overlap.x;
+		else
+			pos.x -= overlap.x;
+	}
+	else
+	{
+		if (diffY > 0)
+			pos.y += overlap.y;
+		else
+			pos.y -= overlap.y;
+	}
+
+	collider->SetLocalPosition(pos);
+	collider->UpdateWorld();
 }
 
 void TileMap::Load()

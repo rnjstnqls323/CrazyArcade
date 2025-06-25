@@ -32,6 +32,7 @@
 #include <string>
 #include <unordered_map>
 #include <map>
+#include <unordered_set>
 #include <vector>
 #include <functional>
 #include <fstream>
@@ -145,11 +146,11 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/Bubble/WaterJet.h"
 #include "Objects/CrazyArcade/Bubble/Bubble.h"
 
-#include "Objects/CrazyArcade/Bubble/BubbleManager.h"
-#include "Objects/CrazyArcade/Monster/MonsterManager.h"
-
 
 #include "Objects/CrazyArcade/Player/Player.h"
+
+#include "Objects/CrazyArcade/Bubble/BubbleManager.h"
+#include "Objects/CrazyArcade/Monster/MonsterManager.h"
 
 
 #include "Scenes/Scene.h"

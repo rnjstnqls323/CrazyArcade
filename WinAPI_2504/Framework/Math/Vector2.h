@@ -36,6 +36,14 @@ struct Vector2 : public Float2
 			return false;
 		return true;
 	}
+	bool operator!=(const Vector2& other)const
+	{
+		if (x == other.x)
+			return true;
+		if (y == other.y)
+			return true;
+		return false;
+	}
 	void operator+=(const Vector2& other)
 	{
 		x += other.x;
@@ -114,5 +122,10 @@ struct Vector2 : public Float2
 	static float Dot(const Vector2& v1, const Vector2& v2)
 	{
 		return v1.x * v2.x + v1.y * v2.y;
+	}
+
+	static Vector2 Lerp(const Vector2& a, const Vector2& b, float t)
+	{
+		return a + (b - a) * t;
 	}
 };

@@ -2,10 +2,10 @@
 
 AStar::AStar(TileMap* map)
 {
-    //map->MakeNodes(nodes);
-    //
-	//tileSize = map->GetTileSize();
-    //cols = map->GetCols(); => 이거 내 타일맵에 맞는 형식으로 바꾸자 내가 짠 코드 참고
+    map->MakeNodes(nodes);
+    
+	tileSize = TILE_SIZE;
+    cols = COL;
 
     SetEdge();
 

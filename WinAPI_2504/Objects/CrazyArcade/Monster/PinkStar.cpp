@@ -3,6 +3,7 @@
 PinkStar::PinkStar()
 {
 	LoadAnimation();
+	speed = 0.5f;
 }
 
 PinkStar::~PinkStar()

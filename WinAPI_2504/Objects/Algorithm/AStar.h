@@ -1,6 +1,6 @@
 #pragma once
 
-class AStar
+class AStar //°ÅºÏ¿ÕÇÑÅ×¸¸ ¾²ÀÚ
 {
 public:
     AStar(class TileMap* map);
@@ -28,7 +28,6 @@ private:
 
 private:
     vector<Node*> nodes;
-    //vector<int> openNodes;
     Heap* heap;
 
     Vector2 tileSize;

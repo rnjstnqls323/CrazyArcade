@@ -8,43 +8,36 @@ TestScene::TestScene()
 	MonsterManager::Get();
 
 	map = new TileMap("Resources/TextData/TestStage1.map");
-	MonsterManager::Get()->AddNode(map->GetMonsterPos());
+	MonsterManager::Get()->AddNode(map, map->GetMonsterPos());
 
+	astar = new AStar(map); // 거북왕전용으로쓸거임
 
 	player = new Player();
 	player->SetLocalPosition(700, 500);
 
-	star = new PinkStar();
-	star->SetLocalPosition(700, 500);
-
-	star2 = new PurpleStar();
-	star2->SetLocalPosition(600, 500);
-
-	king = new TuttleKing();
-	king->SetLocalPosition(800, 500);
+	MonsterManager::Get()->MonsterSpawn();
 }
 
 TestScene::~TestScene()
 {
 	BlockFactory::Delete();
 	BubbleManager::Delete();
-	delete king;
+
 	delete map;
 	delete player;
-	delete star;
-	delete star2;
+	delete astar;
 }
 
 void TestScene::Update()
 {
 	SpawnBubble();
 
+	MonsterManager::Get()->Update();
 	CheckCollision();
 	player->Update();
-	star->Update();
-	star2->Update();
-	king->Update();
+
 	BubbleManager::Get()->Update();
+
 }
 
 void TestScene::Render()
@@ -55,61 +48,15 @@ void TestScene::Render()
 
 	BubbleManager::Get()->Render();
 	player->Render();
-	king->Render();
-	star->Render();
-	star2->Render();
+	MonsterManager::Get()->Render();
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자
 {
-	Vector2 overlap;
-	
-	Vector2 tileStartPos = map->GetStartPos();
-	Vector2 playerPos = player->GetLocalPosition();
-	float halfTileSize = TILE_SIZE.x * 0.5f;
-	int x = (int)(playerPos.x - tileStartPos.x) / TILE_SIZE.x + 0.5f;
-	int y = (int)(tileStartPos.y- playerPos.y) / TILE_SIZE.y + 0.5f;
+	MonsterManager::Get()->MonsterCollisionPlayer(player);
+	playerIndex = map->CheckCollision(player);
 
-	playerIndex = { y,x };
-	vector<Tile*> aroundTiles = map->GetAroundTile(playerIndex);
-
-	for (Tile* tile : aroundTiles)
-	{
-		if (tile->GetTileType() != BlockTile && tile->GetTileType() != CrushTile 
-			&& tile->GetTileType() != BubbleTile)
-			continue;
-
-		if (tile->IsRectCollision(player, &overlap))
-			PushPlayer(overlap, *tile);
-	}
 }
-
-void TestScene::PushPlayer(const Vector2& overlap, Tile& tile)
-{
-	Vector2 pos = player->GetLocalPosition();
-	Vector2 tilePos = tile.GetLocalPosition();
-
-	float diffX = pos.x - tilePos.x;
-	float diffY = pos.y - tilePos.y;
-
-	if (overlap.x < overlap.y)
-	{
-		if (diffX > 0)
-			pos.x += overlap.x;
-		else
-			pos.x -= overlap.x;
-	}
-	else
-	{
-		if (diffY > 0)
-			pos.y += overlap.y;
-		else
-			pos.y -= overlap.y;
-	}
-
-	player->SetLocalPosition(pos);
-	player->UpdateWorld();
-} //이부분은 TileMap으로 빼자
 
 void TestScene::SpawnBubble()
 {

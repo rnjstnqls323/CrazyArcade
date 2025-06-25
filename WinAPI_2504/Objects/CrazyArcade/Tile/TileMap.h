@@ -17,6 +17,8 @@ public:
 	TileType GetPreTileType(Index2 index) { return tiles[index.y][index.x]->GetPreTileType(); }
 	vector<Tile*> GetAroundTile(Index2 index);
 
+	void MakeNodes(vector<Node*>& nodes);
+
 	void SetTileType(TileType type, Index2 index)
 	{
 		tiles[index.y][index.x]->SetTileType(type);
@@ -33,8 +35,12 @@ public:
 	void CrushBlock(Index2 index);
 
 	const unordered_map<int, MonsterPos>& GetMonsterPos() { return monsterPos; }
+
+	Index2 CheckCollision(RectCollider* collider);
+	Index2 GetTileIndex(RectCollider* collider);
 	
 private:
+	void PushCollider(Vector2 overlap, Tile& tile, RectCollider* collider);
 	void Load();
 
 	void CreateTiles();
