@@ -30,11 +30,14 @@ Monster::~Monster()
 
 void Monster::Update()
 {
-	
-	Move();
+	StatusUpdate();
+
+	if(timer > SPAWN_TIME)
+		Move();
+	MonsterCrush();
+
 
 	animation->Update(curStatus);
-
 	UpdateWorld();
 	animationTransform->UpdateWorld();
 }
@@ -53,8 +56,8 @@ void Monster::ResetMonster()
 	forward = true;
 	lerpT = 0.0f;
 	isActive = false;
-	isTrap = false;
 	hitDir = Vector2{ 0,0 };
+	timer = 0.0f;
 }
 
 void Monster::SetHitDir(Vector2 overlap, Vector2 playerPos)
@@ -64,15 +67,12 @@ void Monster::SetHitDir(Vector2 overlap, Vector2 playerPos)
 	float diffX = monsterPos.x - playerPos.x;
 	float diffY = monsterPos.y - playerPos.y;
 
-	// 겹침 깊이 중 더 작은 축으로 튕길 방향 결정
 	if (overlap.x < overlap.y)
 	{
-		// 좌우 중 하나로 튕기기
 		hitDir = (diffX > 0) ? Vector2(1, 0) : Vector2(-1, 0);
 	}
 	else
 	{
-		// 상하 중 하나로 튕기기
 		hitDir = (diffY > 0) ? Vector2(0, 1) : Vector2(0, -1);
 	}
 }
@@ -83,6 +83,25 @@ bool Monster::IsDeadOrTrap()
 		|| curStatus == MonsterDie)
 		return true;
 	return false;
+}
+
+void Monster::StatusUpdate()
+{
+	switch (curStatus)
+	{
+	case MonsterIdle:
+		timer += DELTA;
+		break;
+	case MonsterTrap:
+		timer += DELTA;
+		break;
+	case MonsterDie:
+		Dead();
+		break;
+	case MonsterTrapDie:
+		Dead();
+		break;
+	}
 }
 
 void Monster::Move()
@@ -96,7 +115,11 @@ void Monster::Move()
 		return;
 	}
 
-	//endnode까지갔다가~ start위치바꾸고 오고 이렇게  선형보간법 사용하자
+	LinearMove();
+}
+
+void Monster::LinearMove()
+{
 	Vector2 prePos = GetLocalPosition();
 	float speedDelta = speed * DELTA;
 	if (forward)
@@ -114,7 +137,7 @@ void Monster::Move()
 		lerpT = 0.0f;
 		forward = true;
 	}
-	
+
 	SetLocalPosition(Vector2::Lerp(startPos, endPos, lerpT));
 
 	Vector2 moveDir = GetLocalPosition() - prePos;
@@ -133,6 +156,24 @@ void Monster::Move()
 void Monster::HitMove()
 {
 	Translate(hitDir * HIT_SPEED * DELTA);
+}
+
+void Monster::Dead()
+{
+	if (animation->IsPlay(curStatus))
+		return;
+	isActive = false;
+	MonsterManager::Get()->DeadMonster(this);
+	ResetMonster();
+}
+
+void Monster::MonsterCrush()
+{
+	if (timer < CRUSH_TIME)return;
+
+	timer = 0.0f;
+	curStatus = MonsterTrapDie;
+	animation->Play(MonsterTrapDie);
 }
 
 

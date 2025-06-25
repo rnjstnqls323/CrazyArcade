@@ -39,6 +39,15 @@ void MonsterManager::Update()
 			mon->Update();
 		}
 	}
+	if (isDead)
+	{
+		MonsterSpawn();
+		isDead = false;
+	}
+	if (monsterPos[MonsterType::PurpleStar].size() == 0)
+	{
+		isDead = false; // 이거 지우고 씬 넘어가는거 구현하면됨
+	}
 }
 
 void MonsterManager::Render()
@@ -127,7 +136,6 @@ bool MonsterManager::MonsterCollisionPlayer(Player* player)
 			if (mon->GetMonsterStatus() == MonsterTrap && isCollision)
 			{
 				mon->SetMonsterStatus(MonsterTrapMove);
-				mon->SetTrap(true);
 				mon->SetHitDir(overlap,player->GetLocalPosition());
 				trapMoveMonster.insert(mon);
 			}
@@ -136,6 +144,33 @@ bool MonsterManager::MonsterCollisionPlayer(Player* player)
 		}
 	}
 	return false;
+}
+
+void MonsterManager::DeadMonster(Monster* monster)
+{
+	if (monster->GetMonsterType() == MonsterType::PinkStar)
+	{
+		for (MonsterPos& pos : monsterPos[MonsterType::PinkStar])
+		{
+			if (pos.startPos == monster->GetStartPos())
+			{
+				pos.isLive = false;
+				isDead = true;
+			}
+		}
+	}
+	else if (monster->GetMonsterType() == MonsterType::PurpleStar)
+	{
+		auto& mon = monsterPos[MonsterType::PurpleStar];
+		for (auto it = mon.begin(); it != mon.end(); ) {
+			if (it->startPos == monster->GetStartPos()) {
+				it = mon.erase(it); 
+			}
+			else {
+				++it;
+			}
+		}
+	}
 }
 
 
@@ -148,20 +183,16 @@ void MonsterManager::MonsterCollisionMonster(Monster* monster)
 	}
 }
 
-void MonsterManager::MonsterCheckDie(Monster* mon)
+void MonsterManager::MonsterCheckDie(Monster* monster)
 {
-	Index2 monIndex = map->GetTileIndex(mon);
-	if (map->GetTileType(monIndex) == WaterTile && !mon->IsDeadOrTrap())
-		mon->SetMonsterStatus(MonsterTrap);
-	else if (mon->GetMonsterStatus() == MonsterTrapMove)
+	Index2 monIndex = map->GetTileIndex(monster);
+	if (map->GetTileType(monIndex) == WaterTile && !monster->IsDeadOrTrap())
+		monster->SetMonsterStatus(MonsterTrap);
+	else if (monster->GetMonsterStatus() == MonsterTrapMove)
 		if (map->GetTileType(monIndex) == BlockTile || map->GetTileType(monIndex) == CrushTile)
 		{
-			mon->SetMonsterStatus(MonsterTrapDie);
-			if (mon->GetMonsterType() == MonsterType::PinkStar)
-			{
-				//같은 생성위치인거 찾아서 false로끄던지 아니면 새로 생성하고 끝내던지
-			}
-			trapMoveMonster.erase(mon);
+			monster->SetMonsterStatus(MonsterTrapDie);
+			trapMoveMonster.erase(monster);
 		}
 }
 
@@ -172,6 +203,8 @@ void MonsterManager::SpawnMonster(MonsterPos pos)
 		if (monster->IsActive())
 			continue;
 		monster->SetActive(true);
+		//monster->ResetMonster();
+		monster->SetMonsterStatus(MonsterIdle);
 		monster->SetStartPos(pos.startPos);
 		monster->SetEndPos(pos.endPos);
 		monster->SetLocalPosition(pos.startPos);

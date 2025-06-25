@@ -14,6 +14,7 @@ public:
 
     void Play();
     void Stop() { isPlay = false; }
+    bool IsPlay() { return isPlay; }
 
     void SetShader(wstring shaderFile);    
 	void SetEvent(Event event, int frameNum = -1);

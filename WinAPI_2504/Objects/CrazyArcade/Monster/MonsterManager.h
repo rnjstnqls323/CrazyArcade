@@ -22,10 +22,11 @@ public:
 
 	bool MonsterCollisionPlayer(Player* player);
 
+	void DeadMonster( Monster* monster);
 	
 private:
 	void MonsterCollisionMonster(Monster* monster);
-	void MonsterCheckDie(Monster* mon);
+	void MonsterCheckDie(Monster* monster);
 
 	void SpawnMonster(MonsterPos pos);
 	void ClearNode();
@@ -49,6 +50,7 @@ private:
 	
 
 private:
+	bool isDead = false;
 
 	TileMap* map;
 	unordered_map<MonsterType, vector<Monster*>> monsters; 

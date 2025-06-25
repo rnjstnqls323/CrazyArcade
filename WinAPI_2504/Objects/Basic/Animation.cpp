@@ -27,6 +27,11 @@ void Animation::Play(size_t index)
 	clips[index]->Play();
 }
 
+bool Animation::IsPlay(size_t index)
+{
+	return clips[index]->IsPlay();
+}
+
 void Animation::LoadClip(const string& path, const string& file, const bool& isLoop, const float& speed)
 {
 	tinyxml2::XMLDocument* document = new tinyxml2::XMLDocument();

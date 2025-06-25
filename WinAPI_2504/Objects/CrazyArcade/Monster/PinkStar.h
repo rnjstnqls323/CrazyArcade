@@ -9,7 +9,7 @@ public:
 	//void Update() override;
 
 
-	MonsterType GetMonsterType() override { return MonsterType::PurpleStar; }
+	MonsterType GetMonsterType() override { return MonsterType::PinkStar; }
 
 private:
 
