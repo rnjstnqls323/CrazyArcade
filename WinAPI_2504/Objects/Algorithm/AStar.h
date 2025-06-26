@@ -28,6 +28,7 @@ private:
     void SetEdge();
 
 private:
+    vector<int> candidateIndices;
     vector<Node*> nodes;
     Heap* heap;
 

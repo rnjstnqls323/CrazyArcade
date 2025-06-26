@@ -134,16 +134,17 @@ vector<Vector2> AStar::GetPath(const int& start, const int& end)
     return path;
 }
 
-int AStar::FindRandomEndNode()
+int AStar::FindRandomEndNode() // 코드 수정하자 미리 뽑아놓게
 {
-    vector<int> candidateIndices;
-
-    for (int i = 0; i < nodes.size(); ++i)
+    if (candidateIndices.empty())
     {
-        if (nodes[i]->GetState() != Node::Obstacle)
-            candidateIndices.push_back(i);
-    }
+        for (int i = 0; i < nodes.size(); ++i)
+        {
+            if (nodes[i]->GetState() != Node::Obstacle)
+                candidateIndices.push_back(i);
+        }
 
+    }
     int randIndex = rand() % candidateIndices.size();
     return candidateIndices[randIndex];
 }
