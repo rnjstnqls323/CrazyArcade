@@ -16,6 +16,8 @@ public:
 	TileType GetTileType(Index2 index) { return tiles[index.y][index.x]->GetTileType(); }
 	TileType GetPreTileType(Index2 index) { return tiles[index.y][index.x]->GetPreTileType(); }
 	vector<Tile*> GetAroundTile(Index2 index);
+	vector<Tile*> GetAroundEightTile(Index2 index);
+	int GetTileTag(Index2 index) { return tiles[index.y][index.x]->GetTileTag(); }
 
 	void MakeNodes(vector<Node*>& nodes);
 
@@ -23,6 +25,8 @@ public:
 	{
 		tiles[index.y][index.x]->SetTileType(type);
 	}
+	void SetTileTag(int num, Index2 index) { tiles[index.y][index.x]->SetTileTag(num); }
+
 	void ChangeTileTypeToBubble(Index2 index);
 
 	bool IsIndexInBound(Index2 index)

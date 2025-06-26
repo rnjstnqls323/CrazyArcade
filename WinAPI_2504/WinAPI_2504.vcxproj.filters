@@ -219,6 +219,9 @@
     <ClInclude Include="Objects\CrazyArcade\Monster\PurpleStar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\Monster\HealthPointBar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI_2504.cpp">
@@ -393,6 +396,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\CrazyArcade\Monster\PurpleStar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\Monster\HealthPointBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

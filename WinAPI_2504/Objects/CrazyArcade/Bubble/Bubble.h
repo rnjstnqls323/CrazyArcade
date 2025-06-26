@@ -23,7 +23,7 @@ public:
 
 	void Render();
 	void Update();
-	void Spawn(Vector2 spawnPos,Index2 index, TileMap* map);
+	void Spawn(Vector2 spawnPos,Index2 index, TileMap* map, int tag);
 
 	BubbleStatus GetStatus() { return curStatus; }
 	int GetTag() { return tag; }

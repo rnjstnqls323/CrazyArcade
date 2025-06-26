@@ -20,10 +20,11 @@ struct MonsterPos
 class Monster :public RectCollider 
 {
 	//죽으면 애니 다 끝나고 die처리해야됨 핑크는 die다시 스폰해야됨
-private:
+protected:
 	const int HIT_SPEED = 500;
 	const float SPAWN_TIME = 1.0f;
 	const float CRUSH_TIME = 6.0f;
+	const int MOVE_SPEED = 50;
 public:
 	Monster();
 	Monster(Vector2 size);
@@ -50,7 +51,7 @@ public:
 	virtual MonsterType GetMonsterType() { return MonsterType::TuttleKing; }
 	
 protected:
-	void StatusUpdate();
+	virtual void StatusUpdate();
 	virtual void Move();
 	void LinearMove();
 	void HitMove();

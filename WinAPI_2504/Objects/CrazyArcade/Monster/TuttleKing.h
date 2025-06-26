@@ -7,19 +7,54 @@ enum KingStatus
 };
 class TuttleKing : public Monster
 {
+private:
+	const float ATTACK_TIME = 10.0f;
+	const float TRAP_TIME = 5.0f;
+	const float MOVE_TIME = 5.0f;
+	const int DAMAGE = 10;
+	const int ATTACK_SPEED = 110;
 public:
 	TuttleKing();
 	~TuttleKing();
 
-public:
 	void Update() override;
 	void Render() override;
 
-	void SetKingStatus(KingStatus status) { kingStatus = status; }
+	void SetKingStatus(const KingStatus& status)
+	{
+		kingStatus = status;
+		animation->Play(kingStatus);
+	}
 	KingStatus GetKingStatus() { return kingStatus; }
+	void Damage();
+	void SetDamageTag(const int& num) { damageTag = num; }
+
+	int GetDamageTag() { return damageTag; }
+
+	void SetPath(const vector<Vector2>& path) { this->path=path; }
+
+	bool IsPathEmpty() { return path.empty(); }
+	
 private:
+	void Move() override;
+	void StatusUpdate() override;
+
+	void AttackTime();
+	void TrapDeadTime();
 	void LoadAnimation() override;
 
 private:
+
+	int damageTag = -1;
+	int healthPoint = 30;
+	double timer = 0.0f;
+	double attackTimer = 0.0f;
+	double moveTimer = 0.0f;
+	double trapTimer = 0.0f;
+	bool isAttack = false;
+	bool isTrap = false;
+
 	KingStatus kingStatus = KingTrap;
+	vector<Vector2> path;
+	Vector2 velocity;
 };

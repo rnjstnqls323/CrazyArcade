@@ -29,9 +29,13 @@ public:
 	int GetTileTag() { return tag; }
 	void SetTileTag(int num) { tag = num; }
 
+	Index2 GetTileIndex() { return index; }
+	void SetTileIndex(Index2 index) { this->index = index; }
+
 protected:
 	int tag = -1;
 
+	Index2 index;
 	BlockCategory category;
 	TileType type = PassTile;
 	TileType preType = PassTile; //ÀÌ°Å ¿Ö ³Àµ×´õ¶ó

@@ -134,6 +134,8 @@ typedef function<void()> Event;
 
 #include "Objects/Factory/BlockFactory.h"
 
+#include "Objects/CrazyArcade/Monster/HealthPointBar.h"
+
 #include "Objects/CrazyArcade/Monster/Monster.h"
 #include "Objects/CrazyArcade/Monster/PinkStar.h"
 #include "Objects/CrazyArcade/Monster/PurpleStar.h"

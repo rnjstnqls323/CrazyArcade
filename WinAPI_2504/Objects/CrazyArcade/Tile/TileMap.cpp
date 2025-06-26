@@ -46,6 +46,26 @@ vector<Tile*> TileMap::GetAroundTile(Index2 index)
 	return aroundTile;
 }
 
+vector<Tile*> TileMap::GetAroundEightTile(Index2 index)
+{
+	vector<Tile*> aroundTile;
+
+	vector<pair<int, int>> directions = {
+		{-1, 0}, {1, 0}, {0, -1}, {0, 1},    // »ó, ÇÏ, ÁÂ, ¿ì
+		{-1, -1}, {1, -1}, {1, 1}, {-1, 1}   // ÁÂ»ó, ÁÂÇÏ, ¿ìÇÏ, ¿ì»ó
+	};
+
+	for (const auto& dir : directions) {
+		int ny = index.y + dir.first;
+		int nx = index.x + dir.second;
+
+		if (ny >= 0 && ny < ROW && nx >= 0 && nx < COL) {
+			aroundTile.push_back(tiles[ny][nx]);
+		}
+	}
+	return aroundTile;
+}
+
 void TileMap::MakeNodes(vector<Node*>& nodes)
 {
 	for (int y = 0;y < ROW;y++)
@@ -181,6 +201,7 @@ void TileMap::CreateTiles()
 			Tile* tile = new Tile();
 			Vector2 pos = tileStartPos + Vector2(x * tile->Size().x, -y * tile->Size().y);
 			tile->SetLocalPosition(pos);
+			tile->SetTileIndex(Index2(y, x));
 			tile->UpdateWorld();
 			tiles[y][x] = tile;
 		}

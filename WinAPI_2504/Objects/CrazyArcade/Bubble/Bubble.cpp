@@ -54,8 +54,9 @@ void Bubble::Update()
 
 }
 
-void Bubble::Spawn(Vector2 spawnPos, Index2 index, TileMap* map)
+void Bubble::Spawn(Vector2 spawnPos, Index2 index, TileMap* map, int tag)
 {
+	this->tag = tag;
 	this->map = map;
 	this->index = index;
 	SetLocalPosition(spawnPos);
@@ -225,6 +226,7 @@ void Bubble::UpdateJet()
 			{
 				jet->SetIsRender(true);
 				map->SetTileType(WaterTile, index);
+				map->SetTileTag(jet->GetJetTag(),index);
 			}
 		}
 	}
@@ -247,6 +249,7 @@ void Bubble::SetIndexJet(Index2 index)
 				index.x + offset[i].x * count
 				});
 			Index2 jetindex = jet->GetIndex();
+			jet->SetJetTag(tag);
 			count++;  
 		}
 	}

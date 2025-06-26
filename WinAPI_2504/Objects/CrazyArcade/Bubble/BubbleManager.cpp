@@ -55,8 +55,8 @@ bool BubbleManager::SpawnBubble(Vector2 pos, Index2 index,TileMap* map)
 	{
 		if (bubble->IsActive())
 			continue;
-		bubble->Spawn(pos,index,map);
-
+		bubble->Spawn(pos,index,map,tag);
+		tag++;
 		return true;
 	}
 	return false;

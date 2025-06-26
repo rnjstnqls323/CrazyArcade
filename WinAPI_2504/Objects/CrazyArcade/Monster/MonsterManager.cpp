@@ -4,7 +4,8 @@ MonsterManager::MonsterManager()
 {
 	CreateMonsters<PinkStar>(MonsterType::PinkStar);
 	CreateMonsters<PurpleStar>(MonsterType::PurpleStar);
-	CreateMonster<TuttleKing>(MonsterType::TuttleKing);
+	CreateMonsters<TuttleKing>(MonsterType::TuttleKing);
+
 }
 
 MonsterManager::~MonsterManager()
@@ -23,9 +24,10 @@ MonsterManager::~MonsterManager()
 		monPos.second.clear();
 	}
 	monsterPos.clear();
+	delete astar;
 }
 
-void MonsterManager::Update()
+void MonsterManager::Update(Player* player)
 {
 	for (auto& monster : monsters)
 	{
@@ -34,8 +36,11 @@ void MonsterManager::Update()
 			if (!mon->IsActive())
 				continue;
 			MonsterCheckDie(mon);
+			MonsterCollisionPlayer(mon, player);
 			if (mon->GetMonsterStatus() != MonsterTrapMove)
 				MonsterCollisionMonster(mon);
+			if (mon->GetMonsterType() == MonsterType::TuttleKing)
+				GeneratePathTuttleKing(mon, player);
 			mon->Update();
 		}
 	}
@@ -44,10 +49,12 @@ void MonsterManager::Update()
 		MonsterSpawn();
 		isDead = false;
 	}
+
 	if (monsterPos[MonsterType::PurpleStar].size() == 0)
 	{
 		isDead = false; // 이거 지우고 씬 넘어가는거 구현하면됨
 	}
+
 }
 
 void MonsterManager::Render()
@@ -61,6 +68,9 @@ void MonsterManager::Render()
 			mon->Render();
 		}
 	}
+	//if (astar != nullptr)
+	//	astar->Render();
+
 }
 
 void MonsterManager::ResetManager()
@@ -78,10 +88,11 @@ void MonsterManager::ResetManager()
 	}
 }
 
-void MonsterManager::AddNode(TileMap* map,unordered_map<int, MonsterPos> pos)
+void MonsterManager::AddMonsterPos(TileMap* map, unordered_map<int, MonsterPos> pos)
 {
 	this->map = map;
-	ClearNode();
+	astar = new AStar(map);
+	ClearMonsterPos();
 
 	for (auto& position : pos)
 	{
@@ -123,27 +134,37 @@ void MonsterManager::MonsterSpawn()
 	}
 }
 
-bool MonsterManager::MonsterCollisionPlayer(Player* player)
+void MonsterManager::MonsterCollisionPlayer(Monster* monster, Player* player)
 {
-	for (auto& monster : monsters)
+	if (monster->GetMonsterStatus() == MonsterIdle)
+		return;
+	Vector2 overlap;
+	bool isCollision = monster->IsRectCollision(player, &overlap);
+	if (monster->GetMonsterType() == MonsterType::TuttleKing && isCollision)
 	{
-		for (Monster* mon : monster.second)
+		TuttleKing* king = (TuttleKing*)monster;
+		if (king->GetKingStatus() == KingTrap)
 		{
-			if (!mon->IsActive())
-				continue;
-			Vector2 overlap;
-			bool isCollision = mon->IsRectCollision(player, &overlap);
-			if (mon->GetMonsterStatus() == MonsterTrap && isCollision)
-			{
-				mon->SetMonsterStatus(MonsterTrapMove);
-				mon->SetHitDir(overlap,player->GetLocalPosition());
-				trapMoveMonster.insert(mon);
-			}
-			else if (isCollision && !mon->IsDeadOrTrap())
-				player->Die();
+			king->SetKingStatus(KingDie);
+			return;
 		}
+		else if (king->GetKingStatus() == KingDie)
+			return;
+		else if(isCollision)
+			player->Die();
 	}
-	return false;
+	else
+	{
+		if (monster->GetMonsterStatus() == MonsterTrap && isCollision)
+		{
+			monster->SetMonsterStatus(MonsterTrapMove);
+			monster->SetHitDir(overlap, player->GetLocalPosition());
+			trapMoveMonster.insert(monster);
+		}
+		else if (isCollision && !monster->IsDeadOrTrap())
+			player->Die();
+	}
+	
 }
 
 void MonsterManager::DeadMonster(Monster* monster)
@@ -173,27 +194,74 @@ void MonsterManager::DeadMonster(Monster* monster)
 	}
 }
 
+void MonsterManager::SpawnTuttleKing()
+{
+	TuttleKing* king = (TuttleKing*)monsters[MonsterType::TuttleKing][0];
+	king->SetActive(true);
+	king->SetKingStatus(KingIdle);
+	king->SetLocalPosition(500, 500);
+}
+
 
 void MonsterManager::MonsterCollisionMonster(Monster* monster)
 {
-	for (Monster* mon : trapMoveMonster)
+	if (monster->GetMonsterType() == MonsterType::TuttleKing)
 	{
-		if (mon->IsRectCollision(monster, nullptr))
-			monster->SetMonsterStatus(MonsterDie);
+		TuttleKing* king = (TuttleKing*) monster;
+		if (king->GetKingStatus() == KingTrap || king->GetKingStatus() == KingDie) return;
+		for (Monster* mon : trapMoveMonster)
+		{
+			if (!mon->IsRectCollision(monster, nullptr)) return;
+			king->Damage();
+			monster->SetMonsterStatus(MonsterTrapDie);
+			trapMoveMonster.erase(mon);
+			return;
+		}
+	}
+	else
+	{
+		for (Monster* mon : trapMoveMonster)
+		{
+			if (mon->IsRectCollision(monster, nullptr))
+				monster->SetMonsterStatus(MonsterDie);
+		}
 	}
 }
 
 void MonsterManager::MonsterCheckDie(Monster* monster)
 {
 	Index2 monIndex = map->GetTileIndex(monster);
-	if (map->GetTileType(monIndex) == WaterTile && !monster->IsDeadOrTrap())
-		monster->SetMonsterStatus(MonsterTrap);
-	else if (monster->GetMonsterStatus() == MonsterTrapMove)
-		if (map->GetTileType(monIndex) == BlockTile || map->GetTileType(monIndex) == CrushTile)
+	if (monster->GetMonsterType() == MonsterType::TuttleKing)
+	{
+		TuttleKing* king = (TuttleKing*)monster;
+		vector<Tile*> tiles = map->GetAroundEightTile(monIndex);
+		if (king->GetKingStatus() == KingTrap || king->GetKingStatus() == KingDie) return;
+		for (Tile* tile : tiles)
 		{
-			monster->SetMonsterStatus(MonsterTrapDie);
-			trapMoveMonster.erase(monster);
+			if (tile->GetTileType() == WaterTile && king->GetDamageTag() < tile->GetTileTag())
+			{
+				king->SetDamageTag(tile->GetTileTag());
+				king->Damage();
+			}
+			if (tile->GetTileType() == BubbleTile)
+			{
+				BubbleManager::Get()->BombBubble(tile->GetTileIndex());
+			}
 		}
+	}
+
+	else
+	{
+		if (map->GetTileType(monIndex) == WaterTile && !monster->IsDeadOrTrap())
+			monster->SetMonsterStatus(MonsterTrap);
+		else if (monster->GetMonsterStatus() == MonsterTrapMove)
+			if (map->GetTileType(monIndex) == BlockTile || map->GetTileType(monIndex) == CrushTile)
+			{
+				monster->SetMonsterStatus(MonsterTrapDie);
+				trapMoveMonster.erase(monster);
+			}
+	}
+	
 }
 
 void MonsterManager::SpawnMonster(MonsterPos pos)
@@ -212,11 +280,32 @@ void MonsterManager::SpawnMonster(MonsterPos pos)
 	}
 }
 
-void MonsterManager::ClearNode()
+void MonsterManager::ClearMonsterPos()
 {
 	for (pair<const MonsterType, vector<MonsterPos>>& monPos : monsterPos)
 	{
 		monPos.second.clear();
 	}
 	monsterPos.clear();
+}
+
+void MonsterManager::GeneratePathTuttleKing(Monster* monster, Player* player)
+{
+	if (astar == nullptr) return;
+	TuttleKing* king = (TuttleKing*)monster;
+	if (king->GetKingStatus() == KingAttack)
+	{
+		int start = astar->FindCloseNode(king->GetLocalPosition());
+		int end = astar->FindCloseNode(player->GetLocalPosition());
+		king->SetPath(astar->GetPath(start, end));
+	}
+	
+	else if(king->IsPathEmpty())
+	{
+		if (astar == nullptr)
+			return;
+		int start = astar->FindCloseNode(king->GetLocalPosition());
+		int end = astar->FindRandomEndNode();
+		king->SetPath(astar->GetPath(start, end));
+	}
 }

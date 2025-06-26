@@ -36,6 +36,7 @@ public:
     void AddEdge(Node* node);
 
     void SetState(State state) { this->state = state; }
+    State GetState() { return state; }
     float GetCost() { return f; }
 
 private:

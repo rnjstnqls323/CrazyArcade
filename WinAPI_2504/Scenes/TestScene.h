@@ -21,7 +21,6 @@ private:
 
 	TuttleKing* king;
 
-	AStar* astar;
 	TileMap* map;
 	Player* player;
 	Index2 playerIndex;

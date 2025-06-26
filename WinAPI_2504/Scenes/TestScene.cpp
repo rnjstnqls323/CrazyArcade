@@ -8,14 +8,13 @@ TestScene::TestScene()
 	MonsterManager::Get();
 
 	map = new TileMap("Resources/TextData/TestStage1.map");
-	MonsterManager::Get()->AddNode(map, map->GetMonsterPos());
-
-	astar = new AStar(map); // 거북왕전용으로쓸거임
+	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
 
 	player = new Player();
 	player->SetLocalPosition(700, 500);
 
 	MonsterManager::Get()->MonsterSpawn();
+	MonsterManager::Get()->SpawnTuttleKing();
 }
 
 TestScene::~TestScene()
@@ -25,14 +24,13 @@ TestScene::~TestScene()
 
 	delete map;
 	delete player;
-	delete astar;
 }
 
 void TestScene::Update()
 {
 	SpawnBubble();
 
-	MonsterManager::Get()->Update();
+	MonsterManager::Get()->Update(player);
 	CheckCollision();
 	player->Update();
 
@@ -47,13 +45,15 @@ void TestScene::Render()
 
 
 	BubbleManager::Get()->Render();
-	player->Render();
+
 	MonsterManager::Get()->Render();
+
+	player->Render();
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자
 {
-	MonsterManager::Get()->MonsterCollisionPlayer(player);
+	//MonsterManager::Get()->MonsterCollisionPlayer(player); // 매니저업데이트로빼자
 	playerIndex = map->CheckCollision(player);
 
 }

@@ -12,24 +12,29 @@ private:
 	~MonsterManager();
 
 public:
-	void Update();
+	void Update(Player* player);
 	void Render();
 
 	void ResetManager();
 
-	void AddNode(TileMap* map, unordered_map<int, MonsterPos> pos);
+	void AddMonsterPos(TileMap* map, unordered_map<int, MonsterPos> pos);
 	void MonsterSpawn();
 
-	bool MonsterCollisionPlayer(Player* player);
+
 
 	void DeadMonster( Monster* monster);
 	
+	void SpawnTuttleKing();
+
 private:
 	void MonsterCollisionMonster(Monster* monster);
 	void MonsterCheckDie(Monster* monster);
 
+	void MonsterCollisionPlayer(Monster* monster, Player* player);
+
 	void SpawnMonster(MonsterPos pos);
-	void ClearNode();
+	void ClearMonsterPos();
+	void GeneratePathTuttleKing(Monster* monster, Player* player);
 	template<typename T>
 	void CreateMonsters(MonsterType key) 
 	{
@@ -52,6 +57,8 @@ private:
 private:
 	bool isDead = false;
 
+	
+	AStar* astar;
 	TileMap* map;
 	unordered_map<MonsterType, vector<Monster*>> monsters; 
 	unordered_map<MonsterType, vector<MonsterPos>> monsterPos;

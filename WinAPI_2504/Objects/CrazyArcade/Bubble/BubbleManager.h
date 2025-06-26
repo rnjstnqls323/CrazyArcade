@@ -19,6 +19,7 @@ public:
 	void BombBubble(Index2 index);
 
 private:
+	int tag = 0;
 	TileMap* map;
 
 	vector<Bubble*> bubbles;
