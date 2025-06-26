@@ -5,7 +5,6 @@ MonsterManager::MonsterManager()
 	CreateMonsters<PinkStar>(MonsterType::PinkStar);
 	CreateMonsters<PurpleStar>(MonsterType::PurpleStar);
 	CreateMonsters<TuttleKing>(MonsterType::TuttleKing);
-
 }
 
 MonsterManager::~MonsterManager()
@@ -213,7 +212,7 @@ void MonsterManager::MonsterCollisionMonster(Monster* monster)
 		{
 			if (!mon->IsRectCollision(monster, nullptr)) return;
 			king->Damage();
-			monster->SetMonsterStatus(MonsterTrapDie);
+			mon->SetMonsterStatus(MonsterTrapDie);
 			trapMoveMonster.erase(mon);
 			return;
 		}

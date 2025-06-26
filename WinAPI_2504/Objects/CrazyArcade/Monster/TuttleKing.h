@@ -20,6 +20,7 @@ public:
 	void Update() override;
 	void Render() override;
 
+
 	void SetKingStatus(const KingStatus& status)
 	{
 		kingStatus = status;
@@ -46,7 +47,7 @@ private:
 private:
 
 	int damageTag = -1;
-	int healthPoint = 30;
+	int healthPoint = 10;
 	double timer = 0.0f;
 	double attackTimer = 0.0f;
 	double moveTimer = 0.0f;
@@ -57,4 +58,5 @@ private:
 	KingStatus kingStatus = KingTrap;
 	vector<Vector2> path;
 	Vector2 velocity;
+	HealthPointBar* healthPointBar;
 };

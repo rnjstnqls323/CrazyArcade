@@ -117,6 +117,7 @@ typedef function<void()> Event;
 #include "Objects/Basic/GameObject.h"
 #include "Objects/Basic/Quad.h"
 #include "Objects/Basic/Animation.h"
+#include "Objects/Basic/HealthPointBar.h"
 
 #include "Objects/Collider/Collider.h"
 #include "Objects/Collider/CircleCollider.h"
@@ -133,8 +134,6 @@ typedef function<void()> Event;
 #include "Objects/Algorithm/AStar.h"
 
 #include "Objects/Factory/BlockFactory.h"
-
-#include "Objects/CrazyArcade/Monster/HealthPointBar.h"
 
 #include "Objects/CrazyArcade/Monster/Monster.h"
 #include "Objects/CrazyArcade/Monster/PinkStar.h"

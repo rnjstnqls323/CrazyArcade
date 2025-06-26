@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:c23fdb3085a440c0402dae231bde1050:bdec65012d12deef4ad94433738c7996:f6f810aaeb808df4d1249e1d457af297$ -->
+<!-- $TexturePacker:SmartUpdate:8ee22d4ad7b7eecf91722f6103397173:1406fd4f289689ee37e4ee0ace5e8605:f6f810aaeb808df4d1249e1d457af297$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -19,19 +19,13 @@ vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
 verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
-<TextureAtlas imagePath="die.png" width="90" height="1460">
-    <sprite n="frame_1 - 복사본 - 복사본.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_1 - 복사본.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_1.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_2 - 복사본 (2).png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_2 - 복사본.png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_2.png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_3.png" x="1" y="585" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_4.png" x="1" y="731" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_5.png" x="1" y="877" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_6.png" x="1" y="1023" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_7.png" x="1" y="1169" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_8.png" x="1" y="1315" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_10.png" x="1" y="147" w="88" h="144" pX="0.5" pY="0.5"/>
-    <sprite n="frame_12.png" x="1" y="293" w="88" h="144" pX="0.5" pY="0.5"/>
+<TextureAtlas imagePath="die.png" width="90" height="1168">
+    <sprite n="frame_3.png" x="1" y="293" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_4.png" x="1" y="439" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_5.png" x="1" y="585" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_6.png" x="1" y="731" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_7.png" x="1" y="877" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_8.png" x="1" y="1023" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_10.png" x="1" y="1" w="88" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="frame_12.png" x="1" y="147" w="88" h="144" pX="0.5" pY="0.5"/>
 </TextureAtlas>

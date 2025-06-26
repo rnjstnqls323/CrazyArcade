@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:ab48615a3283ad932cdc7fd41259c689:a7871afae56f6ceb13e29409954a82a2:f6f810aaeb808df4d1249e1d457af297$ -->
+<!-- $TexturePacker:SmartUpdate:af4579588003fbd5ae20cd6cc87dd7f3:474c6024066c3b3dd200b2b4ba26bdac:f6f810aaeb808df4d1249e1d457af297$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -19,15 +19,14 @@ vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
 verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
-<TextureAtlas imagePath="die.png" width="129" height="206">
-    <sprite n="die0.png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
-    <sprite n="die3.png" x="1" y="73" w="70" h="70" pX="0.5" pY="0.5"/>
-    <sprite n="die3_0 - 복사본.png" x="1" y="145" w="55" h="60" pX="0.5" pY="0.5"/>
-    <sprite n="die3_0.png" x="1" y="145" w="55" h="60" pX="0.5" pY="0.5"/>
-    <sprite n="die3_1 - 복사본.png" x="58" y="145" w="55" h="60" pX="0.5" pY="0.5"/>
-    <sprite n="die3_1.png" x="58" y="145" w="55" h="60" pX="0.5" pY="0.5"/>
-    <sprite n="die4 - 복사본.png" x="73" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
-    <sprite n="die4.png" x="73" y="1" w="55" h="60" pX="0.5" pY="0.5"/>
-    <sprite n="die7 - 복사본 - 복사본.png" x="73" y="63" w="55" h="60" pX="0.5" pY="0.5"/>
-    <sprite n="die7 - 복사본.png" x="73" y="63" w="55" h="60" pX="0.5" pY="0.5"/>
+<TextureAtlas imagePath="die.png" width="114" height="196">
+    <sprite n="die3.png" x="1" y="1" w="70" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="die3_0 - 복사본.png" x="1" y="73" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die3_0.png" x="1" y="73" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die3_1 - 복사본.png" x="58" y="73" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die3_1.png" x="58" y="73" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die4 - 복사본.png" x="1" y="135" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die4.png" x="1" y="135" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die7 - 복사본 - 복사본.png" x="58" y="135" w="55" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="die7 - 복사본.png" x="58" y="135" w="55" h="60" pX="0.5" pY="0.5"/>
 </TextureAtlas>

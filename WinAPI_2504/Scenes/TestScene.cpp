@@ -15,6 +15,7 @@ TestScene::TestScene()
 
 	MonsterManager::Get()->MonsterSpawn();
 	MonsterManager::Get()->SpawnTuttleKing();
+
 }
 
 TestScene::~TestScene()
@@ -24,6 +25,7 @@ TestScene::~TestScene()
 
 	delete map;
 	delete player;
+
 }
 
 void TestScene::Update()
@@ -49,13 +51,18 @@ void TestScene::Render()
 	MonsterManager::Get()->Render();
 
 	player->Render();
+
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자
 {
 	//MonsterManager::Get()->MonsterCollisionPlayer(player); // 매니저업데이트로빼자
 	playerIndex = map->CheckCollision(player);
-
+	//if (player->IsDieOrTrap()) return;
+	//if (map->GetTileType(playerIndex) == WaterTile && !player->GetIsTrap())
+	//{
+	//	player->Trap();
+	//}
 }
 
 void TestScene::SpawnBubble()

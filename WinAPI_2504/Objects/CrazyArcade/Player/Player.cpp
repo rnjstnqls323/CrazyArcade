@@ -19,8 +19,7 @@ Player::~Player()
 
 void Player::Update()
 {
-	Move();
-
+	StatusUpdate();
 	IdleChange();
 	animation[character]->Update(curStatus);
 
@@ -41,7 +40,23 @@ void Player::Render()
 
 void Player::Die()
 {
+	if (curStatus == CharacterDie) return;
 	curStatus = CharacterDie;
+	animation[character]->Play(curStatus);
+}
+
+void Player::Trap()
+{
+	curStatus = BubbleTrapped;
+	animation[character]->Play(curStatus);
+	isTrap = true;
+}
+
+bool Player::IsDieOrTrap()
+{
+	if (curStatus == CharacterDie || curStatus == BubbleTrapped)
+		return true;
+	return false;
 }
 
 
@@ -111,8 +126,8 @@ void Player::LoadAnimation()
 		animation[(CharacterName)i]->LoadClip(path + file, "down.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "left.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "right.xml", true);
-		animation[(CharacterName)i]->LoadClip(path + file, "trap.xml", false,0.5f);
-		animation[(CharacterName)i]->LoadClip(path + file, "die.xml", false, 0.6f);
+		animation[(CharacterName)i]->LoadClip(path + file, "trap.xml", false,0.7f);
+		animation[(CharacterName)i]->LoadClip(path + file, "die.xml", false, 0.7f);
 		animation[(CharacterName)i]->LoadClip(path + file, "live.xml", false, 0.4f);
 		
 	}
@@ -134,6 +149,42 @@ void Player::DeleteAnimation()
 		delete animation[(CharacterName)i];
 	}
 	animation.clear();
+}
+void Player::StatusUpdate()
+{
+	switch (curStatus)
+	{
+	case BubbleTrapped:
+		TrapPlayer();
+		break;
+	case CharacterDie:
+		Move(); // ¹Ù²ãÁà¾ßµÊ
+		break;
+	case CharacterLive:
+		if (!animation[character]->IsPlay(curStatus))
+			curStatus = DownIdle;
+		break;
+	default:
+		Move();
+		break;
+	}
+}
+
+void Player::TrapPlayer()
+{
+	timer += DELTA;
+	if (Input::Get()->IsKeyPress(VK_LCONTROL))
+	{
+		curStatus = CharacterLive;
+		animation[character]->Play(curStatus);
+		timer = 0.0f;
+		isTrap = false;
+	}
+	else if (timer > DEAD_TIME)
+	{
+		curStatus = CharacterDie;
+		animation[character]->Play(curStatus);
+	}
 }
 
 void Player::IdleChange()

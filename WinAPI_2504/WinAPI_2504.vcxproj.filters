@@ -219,7 +219,7 @@
     <ClInclude Include="Objects\CrazyArcade\Monster\PurpleStar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\CrazyArcade\Monster\HealthPointBar.h">
+    <ClInclude Include="Objects\Basic\HealthPointBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -398,7 +398,7 @@
     <ClCompile Include="Objects\CrazyArcade\Monster\PurpleStar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\CrazyArcade\Monster\HealthPointBar.cpp">
+    <ClCompile Include="Objects\Basic\HealthPointBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

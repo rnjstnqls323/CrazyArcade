@@ -3,10 +3,17 @@
 TuttleKing::TuttleKing():Monster(Vector2(150,150))
 {
 	LoadAnimation();
+
+	healthPointBar = new HealthPointBar(healthPoint);
+	healthPointBar->SetParent(this);
+	Vector2 pos = this->GetLocalPosition();
+	healthPointBar->SetLocalPosition(pos.x, pos.y + 100);
+	healthPointBar->UpdateWorld();
 }
 
 TuttleKing::~TuttleKing()
 {
+	delete healthPointBar;
 }
 
 void TuttleKing::Update()
@@ -17,6 +24,7 @@ void TuttleKing::Update()
 	animation->Update(kingStatus);
 	UpdateWorld();
 	animationTransform->UpdateWorld();
+	healthPointBar->Update();
 }
 
 void TuttleKing::Render()
@@ -25,11 +33,13 @@ void TuttleKing::Render()
 	worldBuffer->Set(animationTransform->GetWorld());
 	worldBuffer->SetVS(0);
 	animation->Render(kingStatus);
+	healthPointBar->Render();
 }
 
 void TuttleKing::Damage()
 {
 	healthPoint -= DAMAGE;
+	healthPointBar->SetLength(healthPoint);
 	kingStatus = KingDamage;
 	animation->Play(KingDamage);
 }
