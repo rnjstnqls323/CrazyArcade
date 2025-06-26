@@ -135,11 +135,12 @@ void MonsterManager::MonsterSpawn()
 
 void MonsterManager::MonsterCollisionPlayer(Monster* monster, Player* player)
 {
-	if (monster->GetMonsterStatus() == MonsterIdle)
-		return;
+	//if (monster->GetMonsterStatus() == MonsterIdle)  여기꺼주니까 됨 ㅇㅇ
+	//	return;
 	Vector2 overlap;
-	bool isCollision = monster->IsRectCollision(player, &overlap);
-	if (monster->GetMonsterType() == MonsterType::TuttleKing && isCollision)
+	if (!monster->IsRectCollision(player, &overlap)) return;
+
+	if (monster->GetMonsterType() == MonsterType::TuttleKing) // 여기 고장남
 	{
 		TuttleKing* king = (TuttleKing*)monster;
 		if (king->GetKingStatus() == KingTrap)
@@ -149,18 +150,18 @@ void MonsterManager::MonsterCollisionPlayer(Monster* monster, Player* player)
 		}
 		else if (king->GetKingStatus() == KingDie)
 			return;
-		else if(isCollision)
+		else
 			player->Die();
 	}
 	else
 	{
-		if (monster->GetMonsterStatus() == MonsterTrap && isCollision)
+		if (monster->GetMonsterStatus() == MonsterTrap)
 		{
 			monster->SetMonsterStatus(MonsterTrapMove);
 			monster->SetHitDir(overlap, player->GetLocalPosition());
 			trapMoveMonster.insert(monster);
 		}
-		else if (isCollision && !monster->IsDeadOrTrap())
+		else if (!monster->IsDeadOrTrap())
 			player->Die();
 	}
 	
