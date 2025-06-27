@@ -18,10 +18,20 @@ public:
 	bool SpawnBubble(Vector2 pos,Index2 index,TileMap* map);
 	void BombBubble(Index2 index);
 
+	void SetBubbles(int bubbleCount, int jetCount);
+
+	void SetJetLengthMax();
+	void AddJetLength();
+	void AddMaxBubble();
+
+	void ResetBubble();
+
 private:
 	int tag = 0;
+	int maxBubbleCount = 0;
+	int curBubbleCount = 0;
+
 	TileMap* map;
 
 	vector<Bubble*> bubbles;
-		//버블마다 타이머설정해둬야겠는디  
 };

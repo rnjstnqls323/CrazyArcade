@@ -147,12 +147,18 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/Bubble/WaterJet.h"
 #include "Objects/CrazyArcade/Bubble/Bubble.h"
 
+#include "Objects/CrazyArcade/Item/Item.h"
+#include "Objects/CrazyArcade/Item/BubbleItem.h"
+#include "Objects/CrazyArcade/Item/SkateItem.h"
+#include "Objects/CrazyArcade/Item/WaterJetItem.h"
+#include "Objects/CrazyArcade/Item/SuperWaterJetItem.h"
+#include "Objects/CrazyArcade/Item/NeedleItem.h"
 
 #include "Objects/CrazyArcade/Player/Player.h"
 
 #include "Objects/CrazyArcade/Bubble/BubbleManager.h"
 #include "Objects/CrazyArcade/Monster/MonsterManager.h"
-
+#include "Objects/CrazyArcade/Item/ItemManager.h"
 
 #include "Scenes/Scene.h"
 #include "Framework/Manager/SceneManager.h"

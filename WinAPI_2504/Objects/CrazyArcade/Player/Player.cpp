@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-Player::CharacterName Player::character = Player::Marid;
+CharacterName Player::character = CharacterName::Hook;
 Player::Player():RectCollider(Vector2(35, 30))
 {
 	CreateAnimation();
@@ -9,6 +9,10 @@ Player::Player():RectCollider(Vector2(35, 30))
 	animationTransform->SetParent(this);
 	animationTransform->SetLocalPosition(this->GetLocalPosition().x, this->GetLocalPosition().y + 17);
 	animationTransform->UpdateWorld();
+
+	DataManager::Get()->LoadData("CharacterDataTable.csv");
+	stat = DataManager::Get()->GetCharacterData((int)character);
+	BubbleManager::Get()->SetBubbles(stat.bubbleCount, stat.waterJetCount);
 }
 
 Player::~Player()
@@ -59,6 +63,12 @@ bool Player::IsDieOrTrap()
 	return false;
 }
 
+void Player::AddSpeed()
+{
+	if (stat.speed >= MAX_SPEED)return;
+	stat.speed += 10;
+}
+
 
 void Player::Move()
 {
@@ -68,25 +78,25 @@ void Player::Move()
 	if (Input::Get()->IsKeyPress(VK_UP))
 	{
 		isKeyPress = true;
-		Translate(Vector2::Up() * speed * DELTA);
+		Translate(Vector2::Up() * stat.speed * DELTA);
 		curStatus = MoveUp;
 	}
 	else if (Input::Get()->IsKeyPress(VK_DOWN))
 	{
 		isKeyPress = true;
-		Translate(Vector2::Down() * speed * DELTA);
+		Translate(Vector2::Down() * stat.speed * DELTA);
 		curStatus = MoveDown;
 	}
 	else if (Input::Get()->IsKeyPress(VK_LEFT))
 	{
 		isKeyPress = true;
-		Translate(Vector2::Left() * speed * DELTA);
+		Translate(Vector2::Left() * stat.speed * DELTA);
 		curStatus = MoveLeft;
 	}
 	else if (Input::Get()->IsKeyPress(VK_RIGHT))
 	{
 		isKeyPress = true;
-		Translate(Vector2::Right() * speed * DELTA);
+		Translate(Vector2::Right() * stat.speed * DELTA);
 		curStatus = MoveRight;
 	}
 
@@ -96,15 +106,15 @@ string Player::CharacterNameToString(CharacterName name)
 {
 	switch (name)
 	{
-	case Player::Bazzi:
+	case CharacterName::Bazzi:
 		return "Bazzi";
-	case Player::Dao:
+	case CharacterName::Dao:
 		return "Dao";
-	case Player::Cappi:
+	case CharacterName::Cappi:
 		return "Cappi";
-	case Player::Marid:
+	case CharacterName::Marid:
 		return "Marid";
-	case Player::Hook:
+	case CharacterName::Hook:
 		return "Hook";
 	}
 }
@@ -114,7 +124,7 @@ void Player::LoadAnimation()
 	string path = "Resources/Textures/CrazyArcade_Player/";
 
 
-	for (int i = 0;i < (int)EndCharacter;i++)
+	for (int i = 0;i < (int)CharacterName::EndCharacter;i++)
 	{
 		string file = CharacterNameToString((CharacterName)i)+"/";
 		
@@ -136,7 +146,7 @@ void Player::LoadAnimation()
 
 void Player::CreateAnimation()
 {
-	for (int i = 0;i < (int)EndCharacter;i++)
+	for (int i = 0;i < (int)CharacterName::EndCharacter;i++)
 	{
 		animation[(CharacterName)i] = new Animation;
 	}
@@ -144,7 +154,7 @@ void Player::CreateAnimation()
 
 void Player::DeleteAnimation()
 {
-	for (int i = 0;i < (int)EndCharacter;i++)
+	for (int i = 0;i < (int)CharacterName::EndCharacter;i++)
 	{
 		delete animation[(CharacterName)i];
 	}
@@ -173,12 +183,13 @@ void Player::StatusUpdate()
 void Player::TrapPlayer()
 {
 	timer += DELTA;
-	if (Input::Get()->IsKeyPress(VK_LCONTROL))
+	if (Input::Get()->IsKeyPress(VK_LCONTROL) && needleNum > 0)
 	{
 		curStatus = CharacterLive;
 		animation[character]->Play(curStatus);
 		timer = 0.0f;
 		isTrap = false;
+		needleNum--;
 	}
 	else if (timer > DEAD_TIME)
 	{

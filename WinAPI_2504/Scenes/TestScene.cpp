@@ -6,6 +6,7 @@ TestScene::TestScene()
 	BlockFactory::Get();
 	BubbleManager::Get();
 	MonsterManager::Get();
+	ItemManager::Get();
 
 	map = new TileMap("Resources/TextData/TestStage1.map");
 	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
@@ -16,12 +17,14 @@ TestScene::TestScene()
 	MonsterManager::Get()->MonsterSpawn();
 	MonsterManager::Get()->SpawnTuttleKing();
 
+
 }
 
 TestScene::~TestScene()
 {
 	BlockFactory::Delete();
 	BubbleManager::Delete();
+	ItemManager::Delete();
 
 	delete map;
 	delete player;
@@ -32,12 +35,13 @@ void TestScene::Update()
 {
 	SpawnBubble();
 
-	MonsterManager::Get()->Update(player);
+	//MonsterManager::Get()->Update(player);
 	CheckCollision();
 	player->Update();
 
 	BubbleManager::Get()->Update();
 
+	ItemManager::Get()->Update(player);
 }
 
 void TestScene::Render()
@@ -48,10 +52,10 @@ void TestScene::Render()
 
 	BubbleManager::Get()->Render();
 
-	MonsterManager::Get()->Render();
+	//MonsterManager::Get()->Render();
 
 	player->Render();
-
+	ItemManager::Get()->Render();
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자

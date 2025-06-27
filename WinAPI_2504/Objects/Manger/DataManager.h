@@ -1,18 +1,15 @@
 #pragma once
 
-struct ItemData
+enum class CharacterName {
+	Bazzi, Cappi, Dao, Hook, Marid, EndCharacter// 우니 고민하기
+};
+struct CharacterData
 {
-	enum Type
-	{
-		Weapon = 1, Armor, Potion
-	};
-
 	int key;
-	string name;
-	string explane;
-	int price;
-	int value;
-	Type type;
+	CharacterName name;
+	float speed = 200.0f;
+	int bubbleCount;
+	int waterJetCount;
 };
 
 class DataManager : public Singleton<DataManager>
@@ -26,10 +23,11 @@ private:
 public:
 	void LoadData(const string& fileName);
 	
-	ItemData GetItem(int key) { return itemDatas[key]; }
-	int GetItemCount() { return itemDatas.size(); }
+	CharacterData GetCharacterData(int key) { return characterDatas[key]; }
+	int GetCharacterDataCount() { return characterDatas.size(); }
 
 private:
-	unordered_map<int, ItemData> itemDatas;
+	string filePath;
+	unordered_map<int, CharacterData> characterDatas;
 
 };

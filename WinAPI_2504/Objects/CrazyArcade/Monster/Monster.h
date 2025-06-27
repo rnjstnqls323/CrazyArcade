@@ -17,6 +17,8 @@ struct MonsterPos
 	bool isLive = false;
 };
 
+class Player;
+
 class Monster :public RectCollider 
 {
 	//죽으면 애니 다 끝나고 die처리해야됨 핑크는 die다시 스폰해야됨
@@ -32,6 +34,9 @@ public:
 
 	virtual void Update();
 	void Render();
+	virtual bool MonsterCollisionPlayer(Player* player);
+	virtual bool MonsterCollisionMonster(Monster* monster);
+
 	
 	Vector2 GetStartPos() { return startPos; }
 	void SetStartPos(Vector2 pos) { startPos = pos; }

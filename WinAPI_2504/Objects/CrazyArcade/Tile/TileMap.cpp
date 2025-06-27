@@ -92,6 +92,7 @@ void TileMap::CrushBlock(Index2 index)
 	Tile* tile = tiles[index.y][index.x];
 	tile->SetTileType(PassTile);
 	BlockFactory::Get()->PopBlock(tile->GetCategory(), tile->GetLocalPosition());
+	ItemManager::Get()->Spawn(tile->GetLocalPosition());
 }
 
 Index2 TileMap::CheckCollision(RectCollider* collider)
@@ -155,6 +156,7 @@ void TileMap::PushCollider(Vector2 overlap, Tile& tile, RectCollider* collider)
 
 void TileMap::Load()
 {
+	BlockFactory::Get()->Reset();
 	BinaryReader* reader = new BinaryReader(loadFilePath);
 	if (reader->IsFailed())
 	{

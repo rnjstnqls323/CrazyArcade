@@ -36,8 +36,8 @@ void MonsterManager::Update(Player* player)
 				continue;
 			MonsterCheckDie(mon);
 			MonsterCollisionPlayer(mon, player);
-			if (mon->GetMonsterStatus() != MonsterTrapMove)
-				MonsterCollisionMonster(mon);
+			MonsterCollisionMonster(mon);
+
 			if (mon->GetMonsterType() == MonsterType::TuttleKing)
 				GeneratePathTuttleKing(mon, player);
 			mon->Update();
@@ -135,36 +135,8 @@ void MonsterManager::MonsterSpawn()
 
 void MonsterManager::MonsterCollisionPlayer(Monster* monster, Player* player)
 {
-	//if (monster->GetMonsterStatus() == MonsterIdle)  여기꺼주니까 됨 ㅇㅇ
-	//	return;
-	Vector2 overlap;
-	if (!monster->IsRectCollision(player, &overlap)) return;
-
-	if (monster->GetMonsterType() == MonsterType::TuttleKing) // 여기 고장남
-	{
-		TuttleKing* king = (TuttleKing*)monster;
-		if (king->GetKingStatus() == KingTrap)
-		{
-			king->SetKingStatus(KingDie);
-			return;
-		}
-		else if (king->GetKingStatus() == KingDie)
-			return;
-		else
-			player->Die();
-	}
-	else
-	{
-		if (monster->GetMonsterStatus() == MonsterTrap)
-		{
-			monster->SetMonsterStatus(MonsterTrapMove);
-			monster->SetHitDir(overlap, player->GetLocalPosition());
-			trapMoveMonster.insert(monster);
-		}
-		else if (!monster->IsDeadOrTrap() && !player->IsDieOrTrap())
-			player->Die();
-	}
-	
+	if (monster->MonsterCollisionPlayer(player))
+		player->Die();
 }
 
 void MonsterManager::DeadMonster(Monster* monster)
@@ -203,28 +175,22 @@ void MonsterManager::SpawnTuttleKing()
 }
 
 
+void MonsterManager::BlockBubbleMonster(Monster* monster)
+{
+	map->CheckCollision(monster); //이거 고민 좀 더 하자. 막을지말지
+}
+
 void MonsterManager::MonsterCollisionMonster(Monster* monster)
 {
-	if (monster->GetMonsterType() == MonsterType::TuttleKing)
+	eraseMonster.clear();
+	for (Monster* mon : trapMoveMonster)
 	{
-		TuttleKing* king = (TuttleKing*) monster;
-		if (king->GetKingStatus() == KingTrap || king->GetKingStatus() == KingDie) return;
-		for (Monster* mon : trapMoveMonster)
-		{
-			if (!mon->IsRectCollision(monster, nullptr)) return;
-			king->Damage();
-			mon->SetMonsterStatus(MonsterTrapDie);
-			trapMoveMonster.erase(mon);
-			return;
-		}
+		if (monster->MonsterCollisionMonster(mon))
+			eraseMonster.insert(mon);
 	}
-	else
+	for (Monster* mon : eraseMonster)
 	{
-		for (Monster* mon : trapMoveMonster)
-		{
-			if (mon->IsRectCollision(monster, nullptr))
-				monster->SetMonsterStatus(MonsterDie);
-		}
+		trapMoveMonster.erase(mon);
 	}
 }
 

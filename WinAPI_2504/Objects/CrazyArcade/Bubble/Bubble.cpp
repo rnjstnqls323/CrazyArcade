@@ -34,19 +34,19 @@ Bubble::~Bubble()
 void Bubble::Render()
 {
 	if (isActive == false || curStatus == Dead)
-		return;									
-	
+		return;
+
 	worldBuffer->Set(this->GetWorld());
 	worldBuffer->SetVS(0);
 	animation->Render(curStatus);
- 
+
 	RenderJet();
 
 }
 void Bubble::Update()
 {
 	if (isActive == false || curStatus == Dead)
-		return;									
+		return;
 
 	animation->Update(curStatus);
 	UpdateStatus();
@@ -70,13 +70,14 @@ void Bubble::Spawn(Vector2 spawnPos, Index2 index, TileMap* map, int tag)
 
 void Bubble::Reset()
 {
-
+	isActive = false;
+	// 셋팅해줄거있나 고민
 }
 
 void Bubble::LoadAnimation()
 {
-	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Idle.xml", true,0.4f);
-	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Exploding.xml", true,0.5f);
+	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Idle.xml", true, 0.4f);
+	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Exploding.xml", true, 0.5f);
 }
 
 void Bubble::LoadWaterJetAnimation()
@@ -101,10 +102,10 @@ void Bubble::LoadWaterJetAnimation()
 		}
 		waterJetAnimation[(WaterJetStatus)i] = new Animation;
 		waterJetAnimation[(WaterJetStatus)i]->LoadClip("Resources/Textures/CrazyArcade_Bubble/",
-			"Create_Jet_"+ fileName +".xml", false, 0.2f);
+			"Create_Jet_" + fileName + ".xml", false, 0.2f);
 	}
-	
-	
+
+
 }
 
 void Bubble::UpdateStatus()
@@ -123,7 +124,7 @@ void Bubble::UpdateStatus()
 
 		}
 	}
-		break;
+	break;
 	case Exploding:
 	{
 		if (timer >= EXPLOING_TIME + BOMB_TIME)
@@ -142,7 +143,7 @@ void Bubble::UpdateStatus()
 			}
 		}
 	}
-		break;
+	break;
 	}
 }
 
@@ -220,13 +221,13 @@ void Bubble::UpdateJet()
 			else if (map->GetPreTileType(index) == CrushTile)
 			{
 				isBlocked = true;
-				jet->SetIsRender(true);
+				jet->SetIsRender(false);
 			}
 			else
 			{
 				jet->SetIsRender(true);
 				map->SetTileType(WaterTile, index);
-				map->SetTileTag(jet->GetJetTag(),index);
+				map->SetTileTag(jet->GetJetTag(), index);
 			}
 		}
 	}
@@ -250,14 +251,14 @@ void Bubble::SetIndexJet(Index2 index)
 				});
 			Index2 jetindex = jet->GetIndex();
 			jet->SetJetTag(tag);
-			count++;  
+			count++;
 		}
 	}
 }
 
 bool Bubble::IsBlockingTile(Index2 index)
 {
-	if(map->GetTileType(index)==CrushTile || map->GetTileType(index)==BlockTile )
+	if (map->GetTileType(index) == CrushTile || map->GetTileType(index) == BlockTile)
 		return true;
 	return false;
 }

@@ -28,6 +28,7 @@ public:
 
 	void CreateInstanceBuffer();
 
+	void Reset();
 private:
 	void CreateBlockInstances();
 	void CreateMap();

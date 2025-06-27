@@ -26,7 +26,13 @@ public:
 	
 	void SpawnTuttleKing();
 
+	void TrapMoveMonsterInsert(Monster* monster)
+	{
+		trapMoveMonster.insert(monster);
+	}
+
 private:
+	void BlockBubbleMonster(Monster* monster);
 	void MonsterCollisionMonster(Monster* monster);
 	void MonsterCheckDie(Monster* monster);
 
@@ -63,4 +69,5 @@ private:
 	unordered_map<MonsterType, vector<Monster*>> monsters; 
 	unordered_map<MonsterType, vector<MonsterPos>> monsterPos;
 	unordered_set<Monster*> trapMoveMonster;
+	unordered_set<Monster*> eraseMonster;
 };

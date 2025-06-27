@@ -192,6 +192,13 @@
     <ClInclude Include="Objects\CrazyArcade\Bubble\BubbleManager.h" />
     <ClInclude Include="Objects\CrazyArcade\Bubble\WaterJet.h" />
     <ClInclude Include="Objects\Basic\HealthPointBar.h" />
+    <ClInclude Include="Objects\CrazyArcade\Item\BubbleItem.h" />
+    <ClInclude Include="Objects\CrazyArcade\Item\Item.h" />
+    <ClInclude Include="Objects\CrazyArcade\Item\ItemManager.h" />
+    <ClInclude Include="Objects\CrazyArcade\Item\NeedleItem.h" />
+    <ClInclude Include="Objects\CrazyArcade\Item\SkateItem.h" />
+    <ClInclude Include="Objects\CrazyArcade\Item\SuperWaterJetItem.h" />
+    <ClInclude Include="Objects\CrazyArcade\Item\WaterJetItem.h" />
     <ClInclude Include="Objects\CrazyArcade\Monster\Monster.h" />
     <ClInclude Include="Objects\CrazyArcade\Monster\MonsterManager.h" />
     <ClInclude Include="Objects\CrazyArcade\Monster\PinkStar.h" />
@@ -260,6 +267,13 @@
     <ClCompile Include="Objects\CrazyArcade\Bubble\BubbleManager.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Bubble\WaterJet.cpp" />
     <ClCompile Include="Objects\Basic\HealthPointBar.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Item\BubbleItem.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Item\Item.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Item\ItemManager.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Item\NeedleItem.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Item\SkateItem.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Item\SuperWaterJetItem.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Item\WaterJetItem.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Monster\Monster.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Monster\MonsterManager.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Monster\PinkStar.cpp" />

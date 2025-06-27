@@ -4,6 +4,7 @@ TuttleKing::TuttleKing():Monster(Vector2(150,150))
 {
 	LoadAnimation();
 
+	curStatus = MonsterDown;
 	healthPointBar = new HealthPointBar(healthPoint);
 	healthPointBar->SetParent(this);
 	Vector2 pos = this->GetLocalPosition();
@@ -35,6 +36,30 @@ void TuttleKing::Render()
 	animation->Render(kingStatus);
 	healthPointBar->Render();
 }
+
+bool TuttleKing::MonsterCollisionPlayer(Player* player)
+{
+	Vector2 overlap;
+	if (!IsRectCollision(player, &overlap) || kingStatus == KingIdle) return false;
+	if (kingStatus == KingTrap)
+	{
+		SetKingStatus(KingDie);
+		return false;
+	}
+	if (kingStatus == KingDie || player->IsDieOrTrap())
+		return false;
+	return true;
+}
+
+bool TuttleKing::MonsterCollisionMonster(Monster* monster)
+{
+	if (kingStatus == KingTrap || kingStatus == KingDie) return false;
+	if (!monster || !IsRectCollision(monster, nullptr)) return false;
+	Damage();
+	monster->SetMonsterStatus(MonsterTrapDie);
+	return true;
+}
+
 
 void TuttleKing::Damage()
 {

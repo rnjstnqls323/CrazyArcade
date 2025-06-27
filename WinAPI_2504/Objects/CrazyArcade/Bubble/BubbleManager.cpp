@@ -44,19 +44,22 @@ void BubbleManager::Update()
 		{
  			bubble->SetActive(false);
 			map->SetTileType(PassTile, bubble->GetBubbleIndex());
+			curBubbleCount--;
 		}
 	}
 }
 
 bool BubbleManager::SpawnBubble(Vector2 pos, Index2 index,TileMap* map)
 {
-		this->map = map;
+	this->map = map;
+	if (curBubbleCount == maxBubbleCount)return false;
 	for (Bubble* bubble : bubbles)
 	{
 		if (bubble->IsActive())
 			continue;
 		bubble->Spawn(pos,index,map,tag);
 		tag++;
+		curBubbleCount++;
 		return true;
 	}
 	return false;
@@ -74,5 +77,48 @@ void BubbleManager::BombBubble(Index2 index)
 		map->SetTileType(PassTile, index);
 		bubble->SetBombTime();
 	}
+}
+
+void BubbleManager::SetBubbles(int bubbleCount, int jetCount)
+{
+	for (Bubble* bubble : bubbles)
+	{
+		bubble->SetJetLength(jetCount);
+	}
+	maxBubbleCount = bubbleCount;
+}
+
+void BubbleManager::SetJetLengthMax()
+{
+	for (Bubble* bubble : bubbles)
+	{
+		bubble->SetJetMaxLength();
+	}
+}
+
+void BubbleManager::AddJetLength()
+{
+	for (Bubble* bubble : bubbles)
+	{
+		bubble->AddLength();
+	}
+}
+
+void BubbleManager::AddMaxBubble()
+{
+	if (maxBubbleCount == BUBBLE_POOL_SIZE) return;
+	maxBubbleCount++;
+}
+
+void BubbleManager::ResetBubble()
+{
+	for (Bubble* bubble : bubbles)
+	{
+		bubble->Reset();
+	}
+
+	tag = 0;
+	maxBubbleCount = 0;
+	curBubbleCount = 0;
 }
 

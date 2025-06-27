@@ -79,6 +79,17 @@ void BlockFactory::CreateInstanceBuffer()
 	}
 }
 
+void BlockFactory::Reset() // 맵 로드할때 리셋해주고 로드하자
+{
+	for (auto& pair : blockInstances)
+	{
+		pair.second->blockWorld.clear();
+
+		if (pair.second->instanceBuffer != nullptr)
+			delete pair.second->instanceBuffer;
+	}
+}
+
 void BlockFactory::CreateBlockInstances()
 {
 	CreateMap();

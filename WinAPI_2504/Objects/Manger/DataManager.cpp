@@ -10,7 +10,9 @@ DataManager::~DataManager()
 
 void DataManager::LoadData(const string& fileName)
 {
-	ifstream file(fileName);
+	filePath = "Resources/Tables/"+fileName;
+	
+	ifstream file(filePath);
 	if (!file.is_open())
 	{
 		MessageBox(nullptr, L"Failed to open file", L"Error", MB_OK);
@@ -31,15 +33,14 @@ void DataManager::LoadData(const string& fileName)
 
 		vector<string> data = Utility::SplitString(line, ",");
 
-		ItemData itemData;
-		itemData.key = stoi(data[0]);
-		itemData.name = data[1];
-		itemData.explane = data[2];
-		itemData.price = stoi(data[3]);
-		itemData.value = stoi(data[4]);
-		itemData.type = (ItemData::Type)stoi(data[5]);
+		CharacterData characterData;
+		characterData.key = stoi(data[0]);
+		characterData.name = (CharacterName)stoi(data[1]);
+		characterData.speed = stof(data[2]);
+		characterData.bubbleCount = stoi(data[3]);
+		characterData.waterJetCount = stoi(data[4]);
 
-		itemDatas[itemData.key] = itemData;
+		characterDatas[characterData.key] = characterData;
 	}
 	file.close();
 }

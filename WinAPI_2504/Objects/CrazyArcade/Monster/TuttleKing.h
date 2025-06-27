@@ -19,7 +19,8 @@ public:
 
 	void Update() override;
 	void Render() override;
-
+	bool MonsterCollisionPlayer(Player* player) override;
+	bool MonsterCollisionMonster(Monster* monster) override;
 
 	void SetKingStatus(const KingStatus& status)
 	{
@@ -47,7 +48,7 @@ private:
 private:
 
 	int damageTag = -1;
-	int healthPoint = 10;
+	int healthPoint = 50;
 	double timer = 0.0f;
 	double attackTimer = 0.0f;
 	double moveTimer = 0.0f;

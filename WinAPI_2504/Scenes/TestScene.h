@@ -26,4 +26,5 @@ private:
 	Index2 playerIndex;
 	Index2 preIndex;
 
+	BubbleItem* item;
 };

@@ -30,18 +30,19 @@ public:
 	Index2 GetBubbleIndex() { return index; }
 
 	void SetTag(int num) { tag = num; }
-	void SetBombTime() 
-	{  
-		timer = BOMB_TIME;
-	}
+	void SetBombTime() { timer = BOMB_TIME; }
+	
 
 	void Reset();
 	void AddLength() 
 	{
 		if (curLength < MAX_JET_LENGTH)
 			curLength++;
-	} //이거보다 매니저가 한번에 관리하는게 훨씬 간단하겠는데?
+	} 
+	void MaxLength(){	curLength = MAX_JET_LENGTH;	}
 
+	void SetJetLength(int length) { this->curLength = length; }
+	void SetJetMaxLength() { this->curLength = MAX_JET_LENGTH; }
 
 private:
 	void MakeMesh() override {}; 
@@ -61,7 +62,7 @@ private:
 
 private:
 	int tag = 0;
-	int curLength = 7;
+	int curLength = 0;
 	double timer = 0.0f;
 
 	TileMap* map;

@@ -50,6 +50,33 @@ void Monster::Render()
 	animation->Render(curStatus);
 }
 
+bool Monster::MonsterCollisionPlayer(Player* player)
+{
+	Vector2 overlap;
+	if (!IsRectCollision(player, &overlap) || curStatus == MonsterIdle) return false;
+	
+	if (curStatus == MonsterTrap)
+	{
+		SetMonsterStatus(MonsterTrapMove);
+		SetHitDir(overlap, player->GetLocalPosition());
+		MonsterManager::Get()->TrapMoveMonsterInsert(this);
+		return false;
+	}
+
+	if (IsDeadOrTrap() || player->IsDieOrTrap()) return false;
+	return true;
+}
+
+bool Monster::MonsterCollisionMonster(Monster* monster)
+{
+	if (curStatus == MonsterTrapMove) return false;
+	if (IsRectCollision(monster, nullptr))
+	{
+		SetMonsterStatus(MonsterDie);
+		return false;
+	}
+}
+
 void Monster::ResetMonster()
 {
 	curStatus = MonsterIdle;
