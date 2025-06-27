@@ -161,7 +161,7 @@ void MonsterManager::MonsterCollisionPlayer(Monster* monster, Player* player)
 			monster->SetHitDir(overlap, player->GetLocalPosition());
 			trapMoveMonster.insert(monster);
 		}
-		else if (!monster->IsDeadOrTrap())
+		else if (!monster->IsDeadOrTrap() && !player->IsDieOrTrap())
 			player->Die();
 	}
 	

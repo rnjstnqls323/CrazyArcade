@@ -58,11 +58,11 @@ void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자
 {
 	//MonsterManager::Get()->MonsterCollisionPlayer(player); // 매니저업데이트로빼자
 	playerIndex = map->CheckCollision(player);
-	//if (player->IsDieOrTrap()) return;
-	//if (map->GetTileType(playerIndex) == WaterTile && !player->GetIsTrap())
-	//{
-	//	player->Trap();
-	//}
+	if (player->IsDieOrTrap()) return;
+	if (map->GetTileType(playerIndex) == WaterTile && !player->GetIsTrap())
+	{
+		player->Trap();
+	}
 }
 
 void TestScene::SpawnBubble()
