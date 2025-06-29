@@ -9,6 +9,7 @@ public :
 	void Update() override;
 
 	void Render() override;
+	void GUIRender() override;
 
 private:
 	void CheckCollision();

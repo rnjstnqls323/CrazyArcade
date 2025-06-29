@@ -41,7 +41,7 @@ void TestScene::Update()
 
 	BubbleManager::Get()->Update();
 
-	ItemManager::Get()->Update(player);
+	ItemManager::Get()->Update(player,map);
 }
 
 void TestScene::Render()
@@ -56,6 +56,17 @@ void TestScene::Render()
 
 	player->Render();
 	ItemManager::Get()->Render();
+}
+
+void TestScene::GUIRender()
+{
+	player->Edit();
+	playerIndex = map->GetTileIndex(player);
+
+	ImGui::Text("Tile Index: (%f, %f)", playerIndex.x,playerIndex.y);
+	ImGui::Text("TileType: %d", (int)map->GetTileType(playerIndex)); 
+	ImGui::Text("PreTileType: %d", (int)map->GetPreTileType(playerIndex)); 
+
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자

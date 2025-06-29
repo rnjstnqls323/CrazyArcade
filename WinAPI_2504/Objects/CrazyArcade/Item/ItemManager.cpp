@@ -37,12 +37,13 @@ ItemManager::~ItemManager()
 	items.clear();
 }
 
-void ItemManager::Update(Player* player)
+void ItemManager::Update(Player* player, TileMap* map)
 {
 	for (Item* item : items)
 	{
 		if (!item->IsActive()) continue;
 		item->CollisionPlayer(player);
+		WaterDeleteItem(item, map);
 		item->Update();
 	}
 }
@@ -60,4 +61,11 @@ void ItemManager::Spawn(Vector2 pos)
 {
 	if (itemCount == maxItemCount) itemCount = 0;
 	items[itemCount++]->SpawnItem(pos);
+}
+
+void ItemManager::WaterDeleteItem(Item* item,TileMap* map)
+{
+	Index2 index = map->GetTileIndex(item);
+	if (map->GetTileType(index) == WaterTile)
+		item->SetActive(false);
 }

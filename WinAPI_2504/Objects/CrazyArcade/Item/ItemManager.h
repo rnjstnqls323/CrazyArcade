@@ -12,11 +12,12 @@ private:
 
 
 public:
-	void Update(Player* player);
+	void Update(Player* player, TileMap* map);
 	void Render();
 	void Spawn(Vector2 pos);
 
 private:
+	void WaterDeleteItem(Item* item, TileMap* map);
 	template<typename T>
 	void CreateItem() 
 	{

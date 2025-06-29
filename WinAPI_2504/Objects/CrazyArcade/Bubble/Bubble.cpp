@@ -102,7 +102,7 @@ void Bubble::LoadWaterJetAnimation()
 		}
 		waterJetAnimation[(WaterJetStatus)i] = new Animation;
 		waterJetAnimation[(WaterJetStatus)i]->LoadClip("Resources/Textures/CrazyArcade_Bubble/",
-			"Create_Jet_" + fileName + ".xml", false, 0.2f);
+			"Create_Jet_" + fileName + ".xml", false, 0.4f);
 	}
 
 
@@ -221,7 +221,7 @@ void Bubble::UpdateJet()
 			else if (map->GetPreTileType(index) == CrushTile)
 			{
 				isBlocked = true;
-				jet->SetIsRender(false);
+				jet->SetIsRender(true);
 			}
 			else
 			{
@@ -278,6 +278,8 @@ void Bubble::CrushOrBomb()
 
 			TileType tile = map->GetTileType(index);
 
+			if (map->GetPreTileType(index) == CrushTile) break;
+
 			switch (tile)
 			{
 			case BubbleTile:
@@ -288,13 +290,9 @@ void Bubble::CrushOrBomb()
 				map->CrushBlock(index);
 				break;
 
-			case BlockTile:
-				break;
 			}
-
 			if (tile == BlockTile || tile == CrushTile)
 				break;
-
 		}
 	}
 }
