@@ -1,8 +1,9 @@
 #include "Framework.h"
 
-WaterJet::WaterJet(Animation* animation)
+WaterJet::WaterJet(string path)
 {
-	this->animation = animation;
+	this->animation = new Animation();
+	this->animation -> LoadClip("Resources/Textures/CrazyArcade_Bubble/","Create_Jet_"+path+".xml", false, 0.4f);;
 	transform = new Transform;
 	worldBuffer = new MatrixBuffer;
 

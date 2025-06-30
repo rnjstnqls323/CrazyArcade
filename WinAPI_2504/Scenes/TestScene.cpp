@@ -18,7 +18,7 @@ TestScene::TestScene()
 	MonsterManager::Get()->MonsterSpawn();
 	MonsterManager::Get()->SpawnTuttleKing();
 
-	pannel = new PlayPannel;
+	panel = new PlayPanel;
 
 }
 
@@ -30,7 +30,7 @@ TestScene::~TestScene()
 
 	delete map;
 	delete player;
-	delete pannel;
+	delete panel;
 }
 
 void TestScene::Update()
@@ -44,7 +44,7 @@ void TestScene::Update()
 	BubbleManager::Get()->Update();
 
 	ItemManager::Get()->Update(player,map);
-	pannel->Update();
+	panel->Update();
 
 }
 
@@ -60,7 +60,7 @@ void TestScene::Render()
 
 	player->Render();
 	ItemManager::Get()->Render();
-	pannel->Render();
+	panel->Render();
 }
 
 void TestScene::GUIRender()

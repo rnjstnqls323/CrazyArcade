@@ -29,7 +29,7 @@ private:
 
 	BubbleItem* item;
 
-	PlayPannel* pannel;
+	PlayPanel* panel;
 
 	Button* button;
 };

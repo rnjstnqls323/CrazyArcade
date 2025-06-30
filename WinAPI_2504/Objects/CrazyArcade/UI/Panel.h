@@ -1,12 +1,15 @@
 #pragma once
 
-class Pannel : public GameObject
+enum class PanelType {
+	PlayPanel
+};
+class Panel : public GameObject
 {
 public:
-	Pannel();
-	~Pannel();
+	Panel();
+	~Panel();
 
-	virtual void Update() = 0;
+	virtual void Update(Player* player) = 0;
 	virtual void Render() = 0;
 
 protected:

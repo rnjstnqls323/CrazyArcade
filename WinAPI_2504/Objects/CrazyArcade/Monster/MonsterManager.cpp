@@ -171,7 +171,7 @@ void MonsterManager::SpawnTuttleKing()
 	TuttleKing* king = (TuttleKing*)monsters[MonsterType::TuttleKing][0];
 	king->SetActive(true);
 	king->SetKingStatus(KingIdle);
-	king->SetLocalPosition(500, 500);
+	king->SetLocalPosition(1000, 500);
 }
 
 

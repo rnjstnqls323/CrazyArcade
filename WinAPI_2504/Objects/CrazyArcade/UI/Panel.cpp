@@ -1,10 +1,10 @@
 #include "Framework.h"
 
-Pannel::Pannel()
+Panel::Panel()
 {
 }
 
-Pannel::~Pannel()
+Panel::~Panel()
 {
 	for (Button* button : buttons)
 	{

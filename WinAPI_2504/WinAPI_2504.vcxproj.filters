@@ -246,10 +246,13 @@
     <ClInclude Include="Objects\CrazyArcade\UI\Button.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\CrazyArcade\UI\Pannel.h">
+    <ClInclude Include="Objects\CrazyArcade\UI\UIManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\CrazyArcade\UI\PlayPannel.h">
+    <ClInclude Include="Objects\CrazyArcade\UI\PlayPanel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\UI\Panel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -455,10 +458,13 @@
     <ClCompile Include="Objects\CrazyArcade\UI\Button.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\CrazyArcade\UI\Pannel.cpp">
+    <ClCompile Include="Objects\CrazyArcade\UI\UIManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\CrazyArcade\UI\PlayPannel.cpp">
+    <ClCompile Include="Objects\CrazyArcade\UI\PlayPanel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\UI\Panel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

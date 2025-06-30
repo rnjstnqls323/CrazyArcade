@@ -2,8 +2,6 @@
 
 Bubble::Bubble()
 {
-	LoadWaterJetAnimation();
-
 	animation = new Animation();
 	LoadAnimation();
 
@@ -16,10 +14,6 @@ Bubble::Bubble()
 Bubble::~Bubble()
 {
 	delete animation;
-
-	for (auto& ani : waterJetAnimation)
-		delete ani.second;
-	waterJetAnimation.clear();
 
 	for (int i = 0;i <= DownWater;i++)
 	{
@@ -80,34 +74,6 @@ void Bubble::LoadAnimation()
 	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Exploding.xml", true, 0.5f);
 }
 
-void Bubble::LoadWaterJetAnimation()
-{
-	for (int i = 0;i <= DownWater;i++)
-	{
-		string fileName;
-		switch ((WaterJetStatus)i)
-		{
-		case LeftWater:
-			fileName = "Left";
-			break;
-		case RightWater:
-			fileName = "Right";
-			break;
-		case UpWater:
-			fileName = "Up";
-			break;
-		case DownWater:
-			fileName = "Down";
-			break;
-		}
-		waterJetAnimation[(WaterJetStatus)i] = new Animation;
-		waterJetAnimation[(WaterJetStatus)i]->LoadClip("Resources/Textures/CrazyArcade_Bubble/",
-			"Create_Jet_" + fileName + ".xml", false, 0.4f);
-	}
-
-
-}
-
 void Bubble::UpdateStatus()
 {
 	timer += DELTA;
@@ -164,7 +130,21 @@ void Bubble::CreateJet()
 		int count = 1;
 		for (WaterJet*& jet : waterJets[(WaterJetStatus)i])
 		{
-			jet = new WaterJet(waterJetAnimation[(WaterJetStatus)i]);
+			switch ((WaterJetStatus)i)
+			{
+			case LeftWater:
+				jet = new WaterJet("Left");
+				break;
+			case RightWater:
+				jet = new WaterJet("Right");
+				break;
+			case UpWater:
+				jet = new WaterJet("Up");
+				break;
+			case DownWater:
+				jet = new WaterJet("Down");
+				break;
+			}
 
 			Transform* temp = jet->GetTransform();
 			temp->SetParent(this);
@@ -268,8 +248,11 @@ void Bubble::CrushOrBomb()
 {
 	for (int i = 0; i <= DownWater; i++)
 	{
+		int count = 0;
 		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
 		{
+			if (count++ >= curLength)
+				break;
 			Index2 index = jet->GetIndex();
 
 			if (!map->IsIndexInBound(index))
@@ -279,7 +262,7 @@ void Bubble::CrushOrBomb()
 
 			TileType tile = map->GetTileType(index);
 
-			if (map->GetPreTileType(index) == CrushTile) break;
+			//if (map->GetPreTileType(index) == CrushTile ) break;
 
 			switch (tile)
 			{

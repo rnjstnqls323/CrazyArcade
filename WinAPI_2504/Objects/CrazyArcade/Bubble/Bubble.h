@@ -48,7 +48,6 @@ private:
 	void MakeMesh() override {}; 
 
 	void LoadAnimation();
-	void LoadWaterJetAnimation();
 	
 	void UpdateStatus();
 	
@@ -70,7 +69,6 @@ private:
 	Transform* bubbleTransform;
 	Animation* animation;
 
-	unordered_map<WaterJetStatus, Animation*> waterJetAnimation; //클립으로 뺄까
 	unordered_map<WaterJetStatus, vector<WaterJet*>> waterJets; 
 	
 	BubbleStatus curStatus = Dead;

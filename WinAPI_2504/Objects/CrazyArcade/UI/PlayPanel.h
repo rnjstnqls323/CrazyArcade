@@ -1,12 +1,12 @@
 #pragma once
 
-class PlayPannel : public Pannel
+class PlayPanel : public Panel
 {
 public:
-	PlayPannel();
-	~PlayPannel();
+	PlayPanel();
+	~PlayPanel();
 
-	void Update() override;
+	void Update(Player* player) override;
 	void Render() override;
 
 private:

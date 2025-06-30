@@ -3,7 +3,7 @@
 class WaterJet :public GameObject
 {
 public:
-	WaterJet(Animation* animation);
+	WaterJet(string path);
 	~WaterJet();
 
 	void Render() override;

@@ -86,6 +86,8 @@ void TileMap::ChangeTileTypeToBubble(Index2 index)
 
 void TileMap::CrushBlock(Index2 index)
 {
+	//이펙트 출력하는거 어케할지 고민해보자
+
 	Tile* tile = tiles[index.y][index.x];
 	tile->SetTileType(PassTile);
 	BlockFactory::Get()->PopBlock(tile->GetCategory(), tile->GetLocalPosition());
