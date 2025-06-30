@@ -208,6 +208,9 @@
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\TileMap.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\Button.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\Pannel.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\PlayPannel.h" />
     <ClInclude Include="Objects\Factory\BlockFactory.h" />
     <ClInclude Include="Objects\Manger\DataManager.h" />
     <ClInclude Include="Objects\Manger\EventManager.h" />
@@ -283,6 +286,9 @@
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\TileMap.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\Button.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\Pannel.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\PlayPannel.cpp" />
     <ClCompile Include="Objects\Factory\BlockFactory.cpp" />
     <ClCompile Include="Objects\Manger\DataManager.cpp" />
     <ClCompile Include="Objects\Manger\EventManager.cpp" />

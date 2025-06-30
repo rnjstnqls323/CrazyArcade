@@ -1,6 +1,7 @@
 #include "Framework.h"
 
-CharacterName Player::character = CharacterName::Hook;
+CharacterName Player::character = CharacterName::Bazzi;
+
 Player::Player():RectCollider(Vector2(35, 30))
 {
 	CreateAnimation();
@@ -69,6 +70,23 @@ void Player::AddSpeed()
 	stat.speed += 10;
 }
 
+
+wstring Player::GetWstringCharacter()
+{
+	switch (character)
+	{
+	case CharacterName::Bazzi:
+		return L"Bazzi";
+	case CharacterName::Dao:
+		return L"Dao";
+	case CharacterName::Cappi:
+		return L"Cappi";
+	case CharacterName::Marid:
+		return L"Marid";
+	case CharacterName::Hook:
+		return L"Hook";
+	}
+}
 
 void Player::Move()
 {

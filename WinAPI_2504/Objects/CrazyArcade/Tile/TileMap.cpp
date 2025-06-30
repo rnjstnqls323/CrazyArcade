@@ -3,8 +3,9 @@
 
 TileMap::TileMap(string filePath)
 {
-	this->loadFilePath = filePath;
+	this->loadFilePath = "Resources/TextData/"+filePath;
 	Load();
+	
 }
 
 TileMap::~TileMap()
@@ -13,20 +14,16 @@ TileMap::~TileMap()
 	DeleteTiles();
 }
 
-void TileMap::Update()
-{
-}
-
 void TileMap::Render()
 {
 	backGround->Render();
-
+	
 	for(int y=0;y<ROW;y++)
 		for (int x = 0;x < COL;x++)
 		{
 			tiles[y][x]->RectCollider::Render();
 		}
-		
+	//frontUI->Render();
 }
 
 vector<Tile*> TileMap::GetAroundTile(Index2 index)

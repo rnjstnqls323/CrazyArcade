@@ -71,7 +71,7 @@ void Bubble::Spawn(Vector2 spawnPos, Index2 index, TileMap* map, int tag)
 void Bubble::Reset()
 {
 	isActive = false;
-	// 셋팅해줄거있나 고민
+	timer = 0.0f;
 }
 
 void Bubble::LoadAnimation()
@@ -143,6 +143,7 @@ void Bubble::UpdateStatus()
 			}
 		}
 	}
+
 	break;
 	}
 }

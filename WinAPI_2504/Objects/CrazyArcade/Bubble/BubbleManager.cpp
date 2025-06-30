@@ -42,7 +42,8 @@ void BubbleManager::Update()
 		}
 		else if (bubble->GetStatus() == Dead)
 		{
- 			bubble->SetActive(false);
+			bubble->Reset();
+ 			//bubble->SetActive(false);
 			map->SetTileType(PassTile, bubble->GetBubbleIndex());
 			curBubbleCount--;
 		}

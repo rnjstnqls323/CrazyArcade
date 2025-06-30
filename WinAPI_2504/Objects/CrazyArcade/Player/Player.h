@@ -27,6 +27,8 @@ public:
 
 	void AddSpeed();
 	void AddNeedle(){ needleNum++; }
+
+	static wstring GetWstringCharacter();
 private:
 	void Move();
 	string CharacterNameToString(CharacterName name);

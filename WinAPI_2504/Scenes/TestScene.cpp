@@ -8,15 +8,17 @@ TestScene::TestScene()
 	MonsterManager::Get();
 	ItemManager::Get();
 
-	map = new TileMap("Resources/TextData/TestStage1.map");
+	map = new TileMap("TestStage1.map");
 	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
 
 	player = new Player();
-	player->SetLocalPosition(700, 500);
+	Vector2 pos = map->GetTilePos(Index2(3,2));
+	player->SetLocalPosition(pos);
 
 	MonsterManager::Get()->MonsterSpawn();
 	MonsterManager::Get()->SpawnTuttleKing();
 
+	pannel = new PlayPannel;
 
 }
 
@@ -28,7 +30,7 @@ TestScene::~TestScene()
 
 	delete map;
 	delete player;
-
+	delete pannel;
 }
 
 void TestScene::Update()
@@ -42,6 +44,8 @@ void TestScene::Update()
 	BubbleManager::Get()->Update();
 
 	ItemManager::Get()->Update(player,map);
+	pannel->Update();
+
 }
 
 void TestScene::Render()
@@ -56,12 +60,13 @@ void TestScene::Render()
 
 	player->Render();
 	ItemManager::Get()->Render();
+	pannel->Render();
 }
 
 void TestScene::GUIRender()
 {
-	player->Edit();
 	playerIndex = map->GetTileIndex(player);
+
 
 	ImGui::Text("Tile Index: (%f, %f)", playerIndex.x,playerIndex.y);
 	ImGui::Text("TileType: %d", (int)map->GetTileType(playerIndex)); 

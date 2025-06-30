@@ -6,7 +6,7 @@ GameManager::GameManager()
 {
 	Create();
 		
-	//SCENE->AddScene("Game", new MapEditScene());
+	SCENE->AddScene("Edit", new MapEditScene());
 	SCENE->AddScene("Game", new TestScene());
 
 	SCENE->ChangeScene("Game");

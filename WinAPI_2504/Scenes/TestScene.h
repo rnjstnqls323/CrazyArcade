@@ -28,4 +28,8 @@ private:
 	Index2 preIndex;
 
 	BubbleItem* item;
+
+	PlayPannel* pannel;
+
+	Button* button;
 };

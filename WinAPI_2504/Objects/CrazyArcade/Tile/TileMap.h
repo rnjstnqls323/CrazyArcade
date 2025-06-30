@@ -6,7 +6,6 @@ public:
 	TileMap(string filePath);
 	~TileMap();
 
-	void Update();
 	void Render();
 
 	
@@ -55,6 +54,7 @@ private:
 
 private:
 	string loadFilePath;
+	Quad* frontUI;
 	Quad* backGround;
 	vector<vector<Tile*>> tiles;
 	Vector2 tileStartPos;
