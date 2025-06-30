@@ -3,7 +3,7 @@
 PlayPanel::PlayPanel()
 {
 	CreateBackGround();
-	CreateButton();
+	CreateButtons();
 	SetEventFunc();
 	CreatePlayerAndNeedle();
 }
@@ -15,29 +15,21 @@ PlayPanel::~PlayPanel()
 
 void PlayPanel::Update(Player* player)
 {
-	for (Button* button : buttons)
-	{
-		button->Update();
-	}
-
+	Panel::Update(player);
+	isNeedle = player->IsHaveNeedle();
 }
 
 void PlayPanel::Render()
 {
-	backGround->Render();
+	Panel::Render();
 	player->Render();
-	for (Button* button : buttons)
-	{
-		button->Render();
-	}
+	if(isNeedle)
+		needle->Render(); 
 }
 
-void PlayPanel::CreateButton()
+void PlayPanel::CreateButtons()
 {
-	Button* button = new Button(L"OutButton", Vector2(1112, 120), Vector2(200, 30));
-	button->SetParent(this);
-	button->UpdateWorld();
-	buttons.push_back(button);
+	CreateButton(L"OutButton", Vector2(1112, 120), Vector2(180, 40));
 }
 
 void PlayPanel::CreateBackGround()
@@ -56,6 +48,11 @@ void PlayPanel::CreatePlayerAndNeedle()
 	player->SetLocalPosition(Vector2(1065, 715));
 	player->SetParent(this);
 	player->UpdateWorld();
+
+	needle = new Quad(L"Resources/Textures/CrazyArcade_UI/Play/Needle.png");
+	needle->SetLocalPosition(Vector2(1080, 205));
+	needle->SetParent(this);
+	needle->UpdateWorld();
 }
 
 void PlayPanel::SetEventFunc()
@@ -65,5 +62,6 @@ void PlayPanel::SetEventFunc()
 
 void PlayPanel::OutButton()
 {
-	//SceneManager::Get()->ChangeScene("Edit");  아 여기다가 UIManager로 띄우면되겠다! 굿!
+	UIManager::Get()->AddShowPanel(PanelType::ExitPanel);
 }
+

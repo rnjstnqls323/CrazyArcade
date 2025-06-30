@@ -7,6 +7,10 @@ TestScene::TestScene()
 	BubbleManager::Get();
 	MonsterManager::Get();
 	ItemManager::Get();
+	UIManager::Get();
+	
+	UIManager::Get()->AddShowPanel(PanelType::PlayPanel);
+	UIManager::Get()->AddShowPanel(PanelType::WinPanel);
 
 	map = new TileMap("TestStage1.map");
 	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
@@ -18,8 +22,6 @@ TestScene::TestScene()
 	MonsterManager::Get()->MonsterSpawn();
 	MonsterManager::Get()->SpawnTuttleKing();
 
-	panel = new PlayPanel;
-
 }
 
 TestScene::~TestScene()
@@ -27,10 +29,10 @@ TestScene::~TestScene()
 	BlockFactory::Delete();
 	BubbleManager::Delete();
 	ItemManager::Delete();
+	UIManager::Delete();
 
 	delete map;
 	delete player;
-	delete panel;
 }
 
 void TestScene::Update()
@@ -44,7 +46,7 @@ void TestScene::Update()
 	BubbleManager::Get()->Update();
 
 	ItemManager::Get()->Update(player,map);
-	panel->Update();
+	UIManager::Get()->Update(player);
 
 }
 
@@ -60,7 +62,7 @@ void TestScene::Render()
 
 	player->Render();
 	ItemManager::Get()->Render();
-	panel->Render();
+	UIManager::Get()->Render();
 }
 
 void TestScene::GUIRender()

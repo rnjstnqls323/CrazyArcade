@@ -159,6 +159,9 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/UI/Button.h"
 #include "Objects/CrazyArcade/UI/Panel.h"
 #include "Objects/CrazyArcade/UI/PlayPanel.h"
+#include "Objects/CrazyArcade/UI/ExitPanel.h"
+#include "Objects/CrazyArcade/UI/WinPanel.h"
+#include "Objects/CrazyArcade/UI/LosePanel.h"
 
 #include "Objects/CrazyArcade/Bubble/BubbleManager.h"
 #include "Objects/CrazyArcade/Monster/MonsterManager.h"

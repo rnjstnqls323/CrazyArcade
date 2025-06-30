@@ -19,27 +19,27 @@ Button::~Button()
 
 void Button::Update()
 {
-
-	if (IsPointCollision(mousePos) && Input::Get()->IsKeyDown(VK_LBUTTON)) {
+	
+	if (curStatus == Click && Input::Get()->IsKeyDown(VK_LBUTTON)) {
 		OnClick();
 	}
-	else if (IsPointCollision(mousePos) && Input::Get()->IsKeyUp(VK_LBUTTON))
-	{
+	else if (IsPointCollision(mousePos))
+		curStatus = Click;
+	else
 		curStatus = NoneClick;
-	}
+
 }
 
 void Button::Render()
 {
 	quads[curStatus]->Render();
+	RectCollider::Render();
 }
-
 
 void Button::OnClick()
 {
 	if (!onClick) return;
 	onClick();
-	curStatus = Click;
 }
 
 void Button::CreateQuads()

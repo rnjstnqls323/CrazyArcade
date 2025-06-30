@@ -29,6 +29,7 @@ public:
 	void AddNeedle(){ needleNum++; }
 
 	static wstring GetWstringCharacter();
+	bool IsHaveNeedle();
 private:
 	void Move();
 	string CharacterNameToString(CharacterName name);

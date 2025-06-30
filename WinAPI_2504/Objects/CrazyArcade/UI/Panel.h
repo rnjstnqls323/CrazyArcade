@@ -1,7 +1,7 @@
 #pragma once
 
 enum class PanelType {
-	PlayPanel
+	PlayPanel,ExitPanel,WinPanel,LosePanel
 };
 class Panel : public GameObject
 {
@@ -9,11 +9,12 @@ public:
 	Panel();
 	~Panel();
 
-	virtual void Update(Player* player) = 0;
-	virtual void Render() = 0;
+	virtual void Update(Player* player);
+	virtual void Render();
 
 protected:
-	virtual void CreateButton() = 0;
+	virtual void CreateButtons() = 0;
+	virtual void CreateButton(wstring fileName, Vector2 pos, Vector2 size);
 	virtual void CreateBackGround() = 0;
 	virtual void SetEventFunc() = 0;
 

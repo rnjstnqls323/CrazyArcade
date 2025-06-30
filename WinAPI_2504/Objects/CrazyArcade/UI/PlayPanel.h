@@ -11,7 +11,7 @@ public:
 
 private:
 	void MakeMesh() override {}
-	void CreateButton() override;
+	void CreateButtons() override;
 	void CreateBackGround() override;
 	void CreatePlayerAndNeedle();
 	void SetEventFunc() override;
@@ -19,6 +19,7 @@ private:
 	void OutButton();
 
 private:
+	bool isNeedle = false;
 	Quad* player;
 	Quad* needle;
 	//Quad* backGround;

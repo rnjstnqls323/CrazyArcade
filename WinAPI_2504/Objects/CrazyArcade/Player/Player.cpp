@@ -88,6 +88,13 @@ wstring Player::GetWstringCharacter()
 	}
 }
 
+bool Player::IsHaveNeedle()
+{
+	if(needleNum<=0)
+		return false;
+	return true;
+}
+
 void Player::Move()
 {
 	Vector2 curPos = GetLocalPosition();

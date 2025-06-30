@@ -20,16 +20,8 @@ private:
 private:
 	bool isSpawn = false;
 
-	TuttleKing* king;
-
 	TileMap* map;
 	Player* player;
 	Index2 playerIndex;
 	Index2 preIndex;
-
-	BubbleItem* item;
-
-	PlayPanel* panel;
-
-	Button* button;
 };

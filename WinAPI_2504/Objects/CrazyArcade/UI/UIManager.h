@@ -11,8 +11,10 @@ public:
 	void Render();
 	void Update(Player* player);
 
-	void ShowPanel(PanelType key);
+	void AddShowPanel(PanelType key);
 	void PopForntPanel();
+
+	void Reset() { showPanels.clear(); }
 private:
 	template<typename T>
 	void CreatePanel(PanelType key)

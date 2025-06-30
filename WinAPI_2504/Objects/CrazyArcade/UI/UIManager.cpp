@@ -3,6 +3,9 @@
 UIManager::UIManager()
 {
 	CreatePanel<PlayPanel>(PanelType::PlayPanel);
+	CreatePanel<ExitPanel>(PanelType::ExitPanel);
+	CreatePanel<WinPanel>(PanelType::WinPanel);
+	CreatePanel<LosePanel>(PanelType::LosePanel);
 }
 
 UIManager::~UIManager()
@@ -25,13 +28,11 @@ void UIManager::Render()
 
 void UIManager::Update(Player* player)
 {
-	for (Panel* panel : showPanels)
-	{
-		panel->Update();
-	}
+	if (!showPanels.empty())
+		showPanels.back()->Update(player);
 }
 
-void UIManager::ShowPanel(PanelType key)
+void UIManager::AddShowPanel(PanelType key)
 {
 	showPanels.push_back(panels[key]);
 }

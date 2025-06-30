@@ -13,7 +13,6 @@ public :
 
 	void Update();
 	void Render();
-
 	void SetOnClick(function<void()> func) { onClick = func; }
 private:
 
