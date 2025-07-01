@@ -264,6 +264,18 @@
     <ClInclude Include="Objects\CrazyArcade\UI\LosePanel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\UI\LobyPanel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\LobyScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\Player\PlayerBackGround.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\Player\PlayerViewSmall.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI_2504.cpp">
@@ -483,6 +495,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\CrazyArcade\UI\LosePanel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\UI\LobyPanel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\LobyScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\Player\PlayerBackGround.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\Player\PlayerViewSmall.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

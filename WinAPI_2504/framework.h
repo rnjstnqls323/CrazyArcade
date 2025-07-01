@@ -155,6 +155,8 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/Item/NeedleItem.h"
 
 #include "Objects/CrazyArcade/Player/Player.h"
+#include "Objects/CrazyArcade/Player/PlayerBackGround.h"
+#include "Objects/CrazyArcade/Player/PlayerViewSmall.h"
 
 #include "Objects/CrazyArcade/UI/Button.h"
 #include "Objects/CrazyArcade/UI/Panel.h"
@@ -162,6 +164,7 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/UI/ExitPanel.h"
 #include "Objects/CrazyArcade/UI/WinPanel.h"
 #include "Objects/CrazyArcade/UI/LosePanel.h"
+#include "Objects/CrazyArcade/UI/LobyPanel.h"
 
 #include "Objects/CrazyArcade/Bubble/BubbleManager.h"
 #include "Objects/CrazyArcade/Monster/MonsterManager.h"

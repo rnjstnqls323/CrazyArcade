@@ -6,6 +6,7 @@ UIManager::UIManager()
 	CreatePanel<ExitPanel>(PanelType::ExitPanel);
 	CreatePanel<WinPanel>(PanelType::WinPanel);
 	CreatePanel<LosePanel>(PanelType::LosePanel);
+	CreatePanel<LobyPanel>(PanelType::LobyPanel);
 }
 
 UIManager::~UIManager()
@@ -30,6 +31,12 @@ void UIManager::Update(Player* player)
 {
 	if (!showPanels.empty())
 		showPanels.back()->Update(player);
+}
+
+void UIManager::Edit()
+{
+	if (!showPanels.empty())
+		showPanels.back()->PanelEdit();
 }
 
 void UIManager::AddShowPanel(PanelType key)

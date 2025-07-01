@@ -28,6 +28,8 @@ void Button::Update()
 	else
 		curStatus = NoneClick;
 
+	UpdateWorld(); //this purpose is only test
+	quads[curStatus]->UpdateWorld();
 }
 
 void Button::Render()

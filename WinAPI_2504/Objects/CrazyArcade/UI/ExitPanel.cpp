@@ -47,5 +47,5 @@ void ExitPanel::BackButton()
 }
 void ExitPanel::OutButton()
 {
-	UIManager::Get()->PopForntPanel(); // ø©±‚ø° ∑Œ∫Ò∑Œ µπæ∆∞°∞‘ æ¿ πŸ≤„¡‡æﬂµ 
+	exit(0);
 }

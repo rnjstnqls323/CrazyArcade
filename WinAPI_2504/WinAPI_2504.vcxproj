@@ -205,11 +205,14 @@
     <ClInclude Include="Objects\CrazyArcade\Monster\PurpleStar.h" />
     <ClInclude Include="Objects\CrazyArcade\Monster\TuttleKing.h" />
     <ClInclude Include="Objects\CrazyArcade\Player\Player.h" />
+    <ClInclude Include="Objects\CrazyArcade\Player\PlayerBackGround.h" />
+    <ClInclude Include="Objects\CrazyArcade\Player\PlayerViewSmall.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\TileMap.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\Button.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\ExitPanel.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\LobyPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\LosePanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\Panel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\PlayPanel.h" />
@@ -219,6 +222,7 @@
     <ClInclude Include="Objects\Manger\DataManager.h" />
     <ClInclude Include="Objects\Manger\EventManager.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scenes\LobyScene.h" />
     <ClInclude Include="Scenes\MapEditScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\TestScene.h" />
@@ -287,11 +291,14 @@
     <ClCompile Include="Objects\CrazyArcade\Monster\PurpleStar.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Monster\TuttleKing.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Player\Player.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Player\PlayerBackGround.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Player\PlayerViewSmall.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\TileMap.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\Button.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\ExitPanel.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\LobyPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\LosePanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\Panel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\PlayPanel.cpp" />
@@ -300,6 +307,7 @@
     <ClCompile Include="Objects\Factory\BlockFactory.cpp" />
     <ClCompile Include="Objects\Manger\DataManager.cpp" />
     <ClCompile Include="Objects\Manger\EventManager.cpp" />
+    <ClCompile Include="Scenes\LobyScene.cpp" />
     <ClCompile Include="Scenes\MapEditScene.cpp" />
     <ClCompile Include="Scenes\TestScene.cpp" />
     <ClCompile Include="WinAPI_2504.cpp" />

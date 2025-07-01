@@ -28,8 +28,11 @@ public:
 	void AddSpeed();
 	void AddNeedle(){ needleNum++; }
 
-	static wstring GetWstringCharacter();
+	static wstring GetWstringCharacter(CharacterName name);
 	bool IsHaveNeedle();
+
+	static CharacterName GetCharacter() { return character; }
+	static void SetCharacter(CharacterName name) { character = name; }
 private:
 	void Move();
 	string CharacterNameToString(CharacterName name);

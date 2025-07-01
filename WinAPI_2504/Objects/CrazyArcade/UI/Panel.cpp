@@ -30,6 +30,16 @@ void Panel::Render()
 	}
 }
 
+void Panel::PanelEdit()
+{
+	int count = 0;
+	for (Button* button : buttons)
+	{
+		button->SetTag("button" + to_string(count++));
+		button->Edit();
+	}
+}
+
 void Panel::CreateButton(wstring fileName, Vector2 pos, Vector2 size)
 {
 	Button* button = new Button(fileName, pos, size);

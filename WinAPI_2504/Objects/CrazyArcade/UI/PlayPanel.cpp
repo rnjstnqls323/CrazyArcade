@@ -42,12 +42,7 @@ void PlayPanel::CreateBackGround()
 
 void PlayPanel::CreatePlayerAndNeedle()
 {
-	wstring path = Player::GetWstringCharacter() + L".png";
-	player = new Quad(L"Resources/Textures/CrazyArcade_UI/Play/" + path);
-	player->SetLocalScale(1.5, 1.5);
-	player->SetLocalPosition(Vector2(1065, 715));
-	player->SetParent(this);
-	player->UpdateWorld();
+	player = new PlayerViewSmall();
 
 	needle = new Quad(L"Resources/Textures/CrazyArcade_UI/Play/Needle.png");
 	needle->SetLocalPosition(Vector2(1080, 205));

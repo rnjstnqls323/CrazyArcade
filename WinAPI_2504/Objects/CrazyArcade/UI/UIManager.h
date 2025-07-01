@@ -9,7 +9,8 @@ private:
 
 public:
 	void Render();
-	void Update(Player* player);
+	void Update(Player* player = nullptr);
+	void Edit();
 
 	void AddShowPanel(PanelType key);
 	void PopForntPanel();

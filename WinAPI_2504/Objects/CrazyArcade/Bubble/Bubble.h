@@ -9,7 +9,10 @@ enum BubbleStatus
 {
 	BubbleIdle, Exploding, Dead
 };
-
+enum class BubbleType
+{
+	Basic, Bling, Dark, DarkStar, Korea, Rainbow, RedDevil, RedPang
+};
 class Bubble : public GameObject
 {
 private:

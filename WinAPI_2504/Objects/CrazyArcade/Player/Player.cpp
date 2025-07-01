@@ -30,6 +30,11 @@ void Player::Update()
 
 	UpdateWorld();
 	animationTransform->UpdateWorld();
+
+	//if (Input::Get()->IsKeyDown(VK_SPACE))
+	//{
+	//	character = (CharacterName)(int(character) + 1);
+	//}
 }
 
 void Player::Render()
@@ -70,10 +75,10 @@ void Player::AddSpeed()
 	stat.speed += 10;
 }
 
-
-wstring Player::GetWstringCharacter()
+wstring Player::GetWstringCharacter(CharacterName name)
 {
-	switch (character)
+
+	switch (name)
 	{
 	case CharacterName::Bazzi:
 		return L"Bazzi";

@@ -20,7 +20,7 @@ private:
 
 private:
 	bool isNeedle = false;
-	Quad* player;
+	PlayerViewSmall* player;
 	Quad* needle;
 	//Quad* backGround;
 };

@@ -2,14 +2,16 @@
 
 #include "Scenes/MapEditScene.h"
 #include "Scenes/TestScene.h"
+#include "Scenes/LobyScene.h"
 GameManager::GameManager()
 {
 	Create();
 		
 	SCENE->AddScene("Edit", new MapEditScene());
 	SCENE->AddScene("Game", new TestScene());
+	SCENE->AddScene("Loby", new LobyScene());
 
-	SCENE->ChangeScene("Game");
+	SCENE->ChangeScene("Loby");
 }
 
 GameManager::~GameManager()
