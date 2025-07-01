@@ -13,8 +13,6 @@ public:
 
 	void Reset();
 private:
-
-	void MakeMesh() override {}
 	void CreateButtons() override {}
 	void CreateBackGround() override;
 	void SetEventFunc() override {}

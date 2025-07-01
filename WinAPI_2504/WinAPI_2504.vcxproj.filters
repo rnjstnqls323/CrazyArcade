@@ -276,6 +276,9 @@
     <ClInclude Include="Objects\CrazyArcade\Player\PlayerViewSmall.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\CrazyArcade\UI\InventoryPanel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI_2504.cpp">
@@ -507,6 +510,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\CrazyArcade\Player\PlayerViewSmall.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CrazyArcade\UI\InventoryPanel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

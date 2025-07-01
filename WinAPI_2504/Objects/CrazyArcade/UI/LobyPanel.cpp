@@ -4,11 +4,12 @@ LobyPanel::LobyPanel()
 {
 	CreateButtons();
 	CreateBackGround();
-	SetEventFunc();
 	CreateCharacterButton();
+	SetEventFunc();
 
 	playerBG = new PlayerBackGround(Vector2(280, 660));
 	playerBG->SetParent(this);
+	CreatePlayerAndSelectPanel();
 }
 
 LobyPanel::~LobyPanel()
@@ -33,6 +34,8 @@ void LobyPanel::Render()
 	{
 		button.second->Render();
 	}
+	player->Render();
+	selectPlayerPanel->Render();
 }
 
 void LobyPanel::CreateButtons()
@@ -58,21 +61,42 @@ void LobyPanel::SetEventFunc()
 	buttons[1]->SetOnClick([this]() {OnClickItemShopButton();});
 	buttons[2]->SetOnClick([this]() {OnClickInventoryButton();});
 	buttons[3]->SetOnClick([this]() {OnClickExitButton();});
+
+	for (int i = 0; i < (int)CharacterName::EndCharacter; i++)
+	{
+		CharacterName name = (CharacterName)i;
+		characterButton[name]->SetOnClick([this, name]() {OnClickCharacterButton(name);	});
+	}
 }
 
 void LobyPanel::CreateCharacterButton()
 {
-	Vector2 startPos = { 500,500 };
-	Vector2 AddPos = { 70,50 };
+	Vector2 startPos = { 775,700 };
+	float AddPos = 75;
 
 	for (int i = 0;i < (int)CharacterName::EndCharacter;i++)
 	{
 		wstring name = Player::GetWstringCharacter((CharacterName)i);
-		characterButton[(CharacterName)i] = new Button(name, Vector2(startPos.x+ (i + 1) * AddPos.x, startPos.y ), Vector2(50, 50));
+		characterButton[(CharacterName)i] = new Button(name, Vector2(startPos.x+ (i + 1) * AddPos, startPos.y ), Vector2(60, 40));
 		characterButton[(CharacterName)i]->SetParent(this);
 		characterButton[(CharacterName)i]->UpdateWorld();
 	}
 }
+
+void LobyPanel::CreatePlayerAndSelectPanel()
+{
+	wstring playerName = Player::GetWstringCharacter(Player::GetCharacter());
+	player = new Quad(path+ playerName +L".png");
+	player->SetLocalPosition(Vector2(280,650));
+	player->SetParent(this);
+	player->UpdateWorld();
+
+	selectPlayerPanel = new Quad(path + playerName + L"Panel.png");
+	selectPlayerPanel->SetLocalPosition(Vector2(1000,800));
+	selectPlayerPanel->SetParent(this);
+	selectPlayerPanel->UpdateWorld();
+}
+
 
 void LobyPanel::OnClickStartButton()
 {
@@ -85,12 +109,18 @@ void LobyPanel::OnClickExitButton()
 
 void LobyPanel::OnClickItemShopButton()
 {
+	//¾À¹Ù²Ù±â
 }
 
 void LobyPanel::OnClickInventoryButton()
 {
+	UIManager::Get()->AddShowPanel(PanelType::InventoryPanel);
 }
 
 void LobyPanel::OnClickCharacterButton(CharacterName name)
 {
+	Player::SetCharacter(name);
+	wstring playerName = Player::GetWstringCharacter(Player::GetCharacter());
+	player->GetMaterial()->SetBaseMap(path + playerName + L".png");
+	selectPlayerPanel->GetMaterial()->SetBaseMap(path + playerName + L"Panel.png");
 }

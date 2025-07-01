@@ -43,7 +43,7 @@ void ExitPanel::SetEventFunc()
 
 void ExitPanel::BackButton()
 {
-	UIManager::Get()->PopForntPanel();
+	SCENE->ChangeScene("Loby");
 }
 void ExitPanel::OutButton()
 {

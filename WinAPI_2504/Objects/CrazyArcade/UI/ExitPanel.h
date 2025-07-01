@@ -11,7 +11,6 @@ public:
 
 private:
 	void SetEventFunc() override;
-	void MakeMesh() override {}
 	void CreateButtons() override;
 	void CreateBackGround() override;
 

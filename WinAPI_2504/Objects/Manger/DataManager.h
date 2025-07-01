@@ -1,7 +1,7 @@
 #pragma once
 
 enum class CharacterName {
-	Bazzi, Cappi, Dao, Hook, Marid, EndCharacter// 우니 고민하기
+	Bazzi, Cappi, Dao, Marid, Hook, EndCharacter// 우니 고민하기
 };
 struct CharacterData
 {

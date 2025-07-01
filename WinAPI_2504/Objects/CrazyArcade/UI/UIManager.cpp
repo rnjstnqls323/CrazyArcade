@@ -7,6 +7,7 @@ UIManager::UIManager()
 	CreatePanel<WinPanel>(PanelType::WinPanel);
 	CreatePanel<LosePanel>(PanelType::LosePanel);
 	CreatePanel<LobyPanel>(PanelType::LobyPanel);
+	CreatePanel<InventoryPanel>(PanelType::InventoryPanel);
 }
 
 UIManager::~UIManager()

@@ -4,17 +4,16 @@ enum class PlayerBackGroundType
 {
 	Basic, Clover, Cute, Dragon, Gold, Green, Hopi
 };
-class PlayerBackGround : public GameObject
+class PlayerBackGround : public Transform
 {
 public:
 	PlayerBackGround(Vector2 pos);
 	~PlayerBackGround();
 
-	void Render() override;
+	void Render();
 	static PlayerBackGroundType GetBackGroundType() { return curType; }
 	static void SetBackGroundType(PlayerBackGroundType type) { curType = type; }
 private:
-	void MakeMesh() override {}
 	void CreateQuad();
 	wstring ChangeTypeToWstring(PlayerBackGroundType name);
 

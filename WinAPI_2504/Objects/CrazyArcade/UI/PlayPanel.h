@@ -10,7 +10,6 @@ public:
 	void Render() override;
 
 private:
-	void MakeMesh() override {}
 	void CreateButtons() override;
 	void CreateBackGround() override;
 	void CreatePlayerAndNeedle();

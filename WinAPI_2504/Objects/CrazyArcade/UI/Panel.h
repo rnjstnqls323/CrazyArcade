@@ -1,9 +1,9 @@
 #pragma once
 
 enum class PanelType {
-	PlayPanel,ExitPanel,WinPanel,LosePanel, LobyPanel
+	PlayPanel,ExitPanel,WinPanel,LosePanel, LobyPanel, InventoryPanel
 };
-class Panel : public GameObject
+class Panel : public Transform
 {
 public:
 	Panel();

@@ -10,11 +10,11 @@ public:
 	void Render() override;
 
 private:
-	void MakeMesh() override {}
 	void CreateButtons() override;
 	void CreateBackGround() override;
 	void SetEventFunc() override;
 	void CreateCharacterButton();
+	void CreatePlayerAndSelectPanel();
 
 	void OnClickStartButton();
 	void OnClickExitButton();
@@ -22,7 +22,13 @@ private:
 	void OnClickInventoryButton();
 	void OnClickCharacterButton(CharacterName name);
 private:
+
+	wstring path = L"Resources/Textures/CrazyArcade_UI/Loby/";
+
 	PlayerBackGround* playerBG;
 	Quad* player;
+	Quad* selectPlayerPanel;
+
+
 	unordered_map<CharacterName, Button*> characterButton;
 };

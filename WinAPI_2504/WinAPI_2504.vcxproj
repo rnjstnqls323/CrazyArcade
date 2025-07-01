@@ -212,6 +212,7 @@
     <ClInclude Include="Objects\CrazyArcade\Tile\TileMap.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\Button.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\ExitPanel.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\InventoryPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\LobyPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\LosePanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\Panel.h" />
@@ -298,6 +299,7 @@
     <ClCompile Include="Objects\CrazyArcade\Tile\TileMap.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\Button.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\ExitPanel.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\InventoryPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\LobyPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\LosePanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\Panel.cpp" />
