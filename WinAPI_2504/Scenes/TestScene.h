@@ -11,6 +11,9 @@ public :
 	void Render() override;
 	void GUIRender() override;
 
+	void Start() override;
+	void End() override;
+
 private:
 	void CheckCollision();
 

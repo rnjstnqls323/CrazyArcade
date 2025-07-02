@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:9dbe01329eb90fa5d4d78abb3421501e:b51fb36e0e714e4ed09cf1b652c58589:e6bc737d07ed13365a892a72a8ed675e$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Bling.png" width="225" height="86">
+    <sprite n="bubble0.png" x="1" y="1" w="73" h="84" pX="0.5" pY="0.5"/>
+    <sprite n="bubble1.png" x="76" y="1" w="73" h="84" pX="0.5" pY="0.5"/>
+    <sprite n="bubble2.png" x="151" y="1" w="73" h="84" pX="0.5" pY="0.5"/>
+    <sprite n="bubble3.png" x="76" y="1" w="73" h="84" pX="0.5" pY="0.5"/>
+</TextureAtlas>

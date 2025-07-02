@@ -25,15 +25,17 @@ PlayerItem::~PlayerItem()
 
 void PlayerItem::Update()
 {
+    //이거 계속 업데이트안해도된다. 상점에서 구매하면 업데이트되게하자
     switch (curStatus)
     {
     case ShowItemStatus::None:
         return;
     case ShowItemStatus::Bubble:
+        BubbleUpdate();
         return;
     case ShowItemStatus::BackGround:
         BackGroundUpdate();
-        break;
+        return;
     }
 }
 
@@ -44,10 +46,11 @@ void PlayerItem::Render()
     case ShowItemStatus::None:
         return;
     case ShowItemStatus::Bubble:
+        BubbleRender();
         return;
     case ShowItemStatus::BackGround:
         BackGroundRender();
-        break;
+        return;
     }
 }
 
@@ -56,6 +59,12 @@ bool PlayerItem::InsertBubble(BubbleType type)
     if(inventoryBubble.count(type)) return false;
     
     inventoryBubble.insert(type);
+    int num = inventoryBubble.size() - 1;
+    int col = 4;
+    Vector2 pos = { startPos.x + (num % col) * addPos.x , startPos.y + (num / col) * addPos.y };
+    showBubble[type]->SetParent(this);
+    showBubble[type]->SetLocalPosition(pos);
+    showBubble[type]->UpdateWorld();
     return true;
 }
 
@@ -73,11 +82,19 @@ bool PlayerItem::InsertBackGround(PlayerBackGroundType type)
 
     return true;
 }
-
-void PlayerItem::SetBasic()
+void PlayerItem::SetBasic(ShowItemStatus status)
 {
-    choiceType.backGroundType = PlayerBackGroundType::Basic;
-    choiceType.bubbleType = BubbleType::Basic;
+    switch (status)
+    {
+    case ShowItemStatus::Bubble:
+        choiceType.bubbleType = BubbleType::Basic;
+        break;
+    case ShowItemStatus::BackGround:
+        choiceType.backGroundType = PlayerBackGroundType::Basic;
+        break;
+    case ShowItemStatus::ShaShak:
+        break;
+    }
 }
 
 wstring PlayerItem::GetShowItemStatusToWString(ShowItemStatus status)
@@ -100,10 +117,20 @@ void PlayerItem::SetEventFunc()
         PlayerBackGroundType key = backGround.first;
         backGround.second->SetOnClick([this, key]() {OnClickBackGroundButton(key);});
     }
+    for (auto& bubble : showBubble)
+    {
+        BubbleType key = bubble.first;
+        bubble.second->SetOnClick([this, key]() {OnClickBubbleButton(key); });
+    }
 }
 
 void PlayerItem::BubbleRender()
 {
+    backGround->Render();
+    for (BubbleType type : inventoryBubble)
+    {
+        showBubble[type]->Render();
+    }
 }
 
 void PlayerItem::BackGroundRender()
@@ -117,6 +144,10 @@ void PlayerItem::BackGroundRender()
 
 void PlayerItem::BubbleUpdate()
 {
+    for (BubbleType type : inventoryBubble)
+    {
+        showBubble[type]->Update();
+    }
 }
 
 void PlayerItem::BackGroundUpdate()
@@ -129,7 +160,14 @@ void PlayerItem::BackGroundUpdate()
 
 void PlayerItem::CreateBubble()
 {
-
+    Vector2 size = Vector2{ 80,80 };
+    wstring path = L"Item/Bubble/";
+    for (int i = 0; i < (int)BubbleType::RedPang; i++)
+    {
+        BubbleType type = (BubbleType)(i + 1);
+        wstring name = BubbleManager::Get()->GetBubbleTypeToWString(type);
+        showBubble[type] = new Button(path + name, startPos, size);
+    }
 }
 
 void PlayerItem::CreateBackGround() //여기서 애초에 위치를 잡을 필요가없네
@@ -147,5 +185,10 @@ void PlayerItem::CreateBackGround() //여기서 애초에 위치를 잡을 필요가없네
 void PlayerItem::OnClickBackGroundButton(PlayerBackGroundType type)
 {
     choiceType.backGroundType = type;
+}
+
+void PlayerItem::OnClickBubbleButton(BubbleType type)
+{
+    choiceType.bubbleType = type;
 }
 

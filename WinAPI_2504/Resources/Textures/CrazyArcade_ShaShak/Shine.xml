@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:a2795d970745ee722f96de69387a0080:cdf47385bb65ccb69bcaca184415d47d:ad2cf37a579727ecd9f164e5851e391d$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Shine.png" width="601" height="100">
+    <sprite n="custom_move_138_frame_1.png" x="102" y="1" w="98" h="98" pX="0.5" pY="0.5"/>
+    <sprite n="custom_move_138_frame_2.png" x="202" y="1" w="98" h="98" pX="0.5" pY="0.5"/>
+    <sprite n="custom_move_138_frame_3.png" x="302" y="1" w="98" h="98" pX="0.5" pY="0.5"/>
+    <sprite n="custom_move_138_frame_4.png" x="402" y="1" w="98" h="98" pX="0.5" pY="0.5"/>
+    <sprite n="custom_move_138_frame_5.png" x="502" y="1" w="98" h="98" pX="0.5" pY="0.5"/>
+    <sprite n="custom_move_138_frame_6.png" x="1" y="1" w="99" h="98" pX="0.5" pY="0.5"/>
+</TextureAtlas>

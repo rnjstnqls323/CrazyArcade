@@ -25,6 +25,11 @@ public:
 	void AddMaxBubble();
 
 	void ResetBubble();
+	
+	void ChangeBubbleType(BubbleType type) { bubbles[0]->SetBubbleType(type); }
+	BubbleType GetBubbleType() { return bubbles[0]->GetBubbleType(); }
+	wstring GetBubbleTypeToWString(BubbleType type) { return bubbles[0]->GetBubbleTypeToWString(type); }
+
 
 private:
 	int tag = 0;

@@ -1,8 +1,8 @@
 #include "Framework.h"
 
+BubbleType Bubble::bubble = BubbleType::Rainbow;
 Bubble::Bubble()
 {
-	animation = new Animation();
 	LoadAnimation();
 
 	worldBuffer = new MatrixBuffer;
@@ -13,8 +13,11 @@ Bubble::Bubble()
 
 Bubble::~Bubble()
 {
-	delete animation;
-
+	for (auto& ani : animation)
+	{
+		delete ani.second;
+	}
+	animation.clear();
 	for (int i = 0;i <= DownWater;i++)
 	{
 		for (WaterJet* jet : waterJets[(WaterJetStatus)i])
@@ -32,7 +35,7 @@ void Bubble::Render()
 
 	worldBuffer->Set(this->GetWorld());
 	worldBuffer->SetVS(0);
-	animation->Render(curStatus);
+	animation[bubble]->Render(curStatus);
 
 	RenderJet();
 
@@ -42,7 +45,7 @@ void Bubble::Update()
 	if (isActive == false || curStatus == Dead)
 		return;
 
-	animation->Update(curStatus);
+	animation[bubble]->Update(curStatus);
 	UpdateStatus();
 	UpdateJet();
 
@@ -68,10 +71,69 @@ void Bubble::Reset()
 	timer = 0.0f;
 }
 
+string Bubble::GetBubbleTypeToString(BubbleType type)
+{
+	switch (type)
+	{
+	case BubbleType::Basic:
+		return "Basic";
+	case BubbleType::Bling:
+		return "Bling";
+	case BubbleType::Dark:
+		return "Dark";
+	case BubbleType::DarkStar:
+		return "DarkStar";
+	case BubbleType::Korea:
+		return "Korea";
+	case BubbleType::Rainbow:
+		return "Rainbow";
+	case BubbleType::RedDevil:
+		return "RedDevil";
+	case BubbleType::RedPang:
+		return "RedPang";
+	case BubbleType::Punk:
+		return "Punk";
+
+	}
+}
+
+wstring Bubble::GetBubbleTypeToWString(BubbleType type)
+{
+	switch (type)
+	{
+	case BubbleType::Basic:
+		return L"Basic";
+	case BubbleType::Bling:
+		return L"Bling";
+	case BubbleType::Dark:
+		return L"Dark";
+	case BubbleType::DarkStar:
+		return L"DarkStar";
+	case BubbleType::Korea:
+		return L"Korea";
+	case BubbleType::Rainbow:
+		return L"Rainbow";
+	case BubbleType::RedDevil:
+		return L"RedDevil";
+	case BubbleType::RedPang:
+		return L"RedPang";
+	case BubbleType::Punk:
+		return L"Punk";
+	}
+}
+
 void Bubble::LoadAnimation()
 {
-	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Idle.xml", true, 0.4f);
-	animation->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Exploding.xml", true, 0.5f);
+	for (int i = 0; i < (int)BubbleType::RedPang + 1; i++)
+	{
+		BubbleType type = (BubbleType)i;
+		string name = GetBubbleTypeToString(type);
+		animation[type] = new Animation();
+		
+		animation[type]->LoadClip("Resources/Textures/CrazyArcade_Bubble/", name+".xml", true, 0.4f);
+		animation[type]->LoadClip("Resources/Textures/CrazyArcade_Bubble/", "Bubble_Exploding.xml", true, 0.5f);
+	}
+	
 }
 
 void Bubble::UpdateStatus()
@@ -85,7 +147,7 @@ void Bubble::UpdateStatus()
 		if (timer >= BOMB_TIME)
 		{
 			curStatus = Exploding;
-			animation->Play(curStatus);
+			animation[bubble]->Play(curStatus);
 			CrushOrBomb();
 
 		}
@@ -262,7 +324,7 @@ void Bubble::CrushOrBomb()
 
 			TileType tile = map->GetTileType(index);
 
-			//if (map->GetPreTileType(index) == CrushTile ) break;
+			if (map->GetPreTileType(index) == CrushTile ) break;
 
 			switch (tile)
 			{

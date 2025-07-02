@@ -4,6 +4,7 @@ InventoryPanel::InventoryPanel()
 {
 	CreateButtons();
 	CreateBackGround();
+	CreateShowSetItem();
 
 	SetEventFunc();
 
@@ -14,12 +15,27 @@ InventoryPanel::InventoryPanel()
 	itemPanel->InsertBackGround(PlayerBackGroundType::Dragon);
 	itemPanel->InsertBackGround(PlayerBackGroundType::Clover);
 	itemPanel->InsertBackGround(PlayerBackGroundType::Cute);
-	itemPanel->InsertBackGround(PlayerBackGroundType::Gold);
+	itemPanel->InsertBackGround(PlayerBackGroundType::Gold); // 여기 이벤트매니저에 등록해서써주자
+
+
+	itemPanel->InsertBubble(BubbleType::Bling);
+	itemPanel->InsertBubble(BubbleType::Bling);
+	itemPanel->InsertBubble(BubbleType::DarkStar);
+	itemPanel->InsertBubble(BubbleType::Dark);
+	itemPanel->InsertBubble(BubbleType::Punk);
+	itemPanel->InsertBubble(BubbleType::Rainbow);
 }
 
 InventoryPanel::~InventoryPanel()
 {
 	delete itemPanel;
+
+	for (int i = 0; i < (int)ShowItemStatus::ShaShak; i++)
+	{
+		ShowItemStatus type = (ShowItemStatus)(i + 1);
+		delete showSetItem[type].back;
+		delete showSetItem[type].front;
+	}
 }
 
 void InventoryPanel::Update(Player* player)
@@ -41,15 +57,38 @@ void InventoryPanel::Render()
 
 void InventoryPanel::CreateShowSetItem()
 {
-	for (int i=0;i< (int)ShowItemStatus::ShaShak+1;i++)                                       
+	Vector2 startPos = {600,280 };
+	float addX = 100;
+	for (int i=0;i< (int)ShowItemStatus::ShaShak;i++)                                       
 	{
 		ShowItemStatus type = (ShowItemStatus)(i + 1);
-		wstring name = itemPanel->GetShowItemStatusToWString((ShowItemStatus)i); //스태틱으로 안빼도되겠지?
-		showSetItem[(ShowItemStatus)i].back = new Quad(path + name + L"/backGround.png");
-		showSetItem[(ShowItemStatus)i].front = new Quad(path + name + L"/basic.png");
-
-		
+		wstring name = itemPanel->GetShowItemStatusToWString(type);
+		showSetItem[type].back = new Quad(path + name + L"/backGround.png");
+		showSetItem[type].front = new Quad(path + name + L"/basic.png");
+		showSetItem[type].back->SetParent(this);
+		showSetItem[type].front->SetParent(this);
+		showSetItem[type].back->SetLocalPosition(startPos.x+addX*i,startPos.y);
+		showSetItem[type].front->SetLocalPosition(startPos.x + addX * i, startPos.y);
+		showSetItem[type].back->UpdateWorld();
+		showSetItem[type].front->UpdateWorld();
 	}
+}
+
+void InventoryPanel::ChangeShowItemFront(ShowItemStatus type)
+{
+	wstring item = L"/";
+	switch (type)
+	{
+	case ShowItemStatus::Bubble:
+		item += BubbleManager::Get()->GetBubbleTypeToWString(BubbleManager::Get()->GetBubbleType());
+		break;
+	case ShowItemStatus::BackGround:
+		item += PlayerBackGround::GetBackGroundTypeToWString(PlayerBackGround::GetBackGroundType());
+		break;
+	}
+	wstring name = itemPanel->GetShowItemStatusToWString(type);
+
+	 showSetItem[type].front->GetMaterial()->SetBaseMap(path + name + item + L".png");
 }
 
 void InventoryPanel::CreateButtons()
@@ -87,7 +126,7 @@ void InventoryPanel::OnClickCloseButton()
 
 void InventoryPanel::OnClickItemButton(ShowItemStatus status)
 {
-	itemPanel->SetBasic();
+	itemPanel->SetBasic(status);
 	itemPanel->ChaingeCurStatus(status);
 }
 
@@ -100,9 +139,12 @@ void InventoryPanel::OnClickItemSetting()
 	case ShowItemStatus::None:
 		return;
 	case ShowItemStatus::Bubble:
+		BubbleManager::Get()->ChangeBubbleType(type.bubbleType);
+		ChangeShowItemFront(ShowItemStatus::Bubble);
 		break;
 	case ShowItemStatus::BackGround:
 		PlayerBackGround::SetBackGroundType(type.backGroundType);
+		ChangeShowItemFront(ShowItemStatus::BackGround);
 		break;
 	}
 
@@ -110,17 +152,21 @@ void InventoryPanel::OnClickItemSetting()
 
 void InventoryPanel::OnClickItemSetOff()
 {
-	itemPanel->SetBasic();
 	ShowItemStatus status = itemPanel->GetCurStatus();
+	itemPanel->SetBasic(status);
 	ChoiceItemType type = itemPanel->GetItemType();
 	switch (status)
 	{
 	case ShowItemStatus::None:
 		return;
 	case ShowItemStatus::Bubble:
+		BubbleManager::Get()->ChangeBubbleType(type.bubbleType);
+		ChangeShowItemFront(ShowItemStatus::Bubble);
 		break;
 	case ShowItemStatus::BackGround:
 		PlayerBackGround::SetBackGroundType(type.backGroundType);
+		ChangeShowItemFront(ShowItemStatus::BackGround);
 		break;
 	}
 }
+

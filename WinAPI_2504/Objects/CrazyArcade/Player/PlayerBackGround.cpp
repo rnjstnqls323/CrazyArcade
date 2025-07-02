@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-PlayerBackGroundType PlayerBackGround::curType = PlayerBackGroundType::Hopi;
+PlayerBackGroundType PlayerBackGround::curType = PlayerBackGroundType::Basic;
 PlayerBackGround::PlayerBackGround(Vector2 pos)
 {
 	SetLocalPosition(pos);

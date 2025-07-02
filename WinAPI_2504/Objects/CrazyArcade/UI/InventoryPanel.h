@@ -15,6 +15,7 @@ public:
 	void Render() override;
 private:
 	void CreateShowSetItem();
+	void ChangeShowItemFront(ShowItemStatus type);
 	
 	void CreateButtons() override;
 	void CreateBackGround() override;

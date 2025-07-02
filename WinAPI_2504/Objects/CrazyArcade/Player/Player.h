@@ -14,6 +14,8 @@ public:
 	Player();
 	~Player();
 
+	void Reset();
+
 	void Update();
 	void Render();
 

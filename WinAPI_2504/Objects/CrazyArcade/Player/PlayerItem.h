@@ -24,7 +24,7 @@ public:
 	void ChaingeCurStatus(ShowItemStatus status) { curStatus = status; }
 	ShowItemStatus GetCurStatus() { return curStatus; }
 
-	void SetBasic();
+	void SetBasic(ShowItemStatus status);
 	ChoiceItemType GetItemType() { return choiceType; }
 
 	wstring GetShowItemStatusToWString(ShowItemStatus status);
@@ -41,6 +41,7 @@ private:
 	void CreateBackGround();
 
 	void OnClickBackGroundButton(PlayerBackGroundType type);
+	void OnClickBubbleButton(BubbleType type);
 
 private:
 	Quad* backGround;

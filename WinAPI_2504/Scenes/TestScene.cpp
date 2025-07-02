@@ -3,14 +3,6 @@
 
 TestScene::TestScene()
 {
-	BlockFactory::Get();
-	BubbleManager::Get();
-	MonsterManager::Get();
-	ItemManager::Get();
-	UIManager::Get();
-	
-	UIManager::Get()->AddShowPanel(PanelType::PlayPanel);
-	UIManager::Get()->AddShowPanel(PanelType::WinPanel);
 
 	map = new TileMap("TestStage1.map");
 	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
@@ -26,10 +18,7 @@ TestScene::TestScene()
 
 TestScene::~TestScene()
 {
-	BlockFactory::Delete();
-	BubbleManager::Delete();
-	ItemManager::Delete();
-	UIManager::Delete();
+
 
 	delete map;
 	delete player;
@@ -74,6 +63,17 @@ void TestScene::GUIRender()
 	ImGui::Text("TileType: %d", (int)map->GetTileType(playerIndex)); 
 	ImGui::Text("PreTileType: %d", (int)map->GetPreTileType(playerIndex)); 
 
+}
+
+void TestScene::Start()
+{
+	player->Reset();
+	UIManager::Get()->AddShowPanel(PanelType::PlayPanel);
+}
+
+void TestScene::End()
+{
+	UIManager::Get()->Reset();
 }
 
 void TestScene::CheckCollision() //이거 씬에서 계속 확인해주자

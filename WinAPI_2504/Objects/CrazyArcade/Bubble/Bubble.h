@@ -11,7 +11,7 @@ enum BubbleStatus
 };
 enum class BubbleType
 {
-	Basic, Bling, Dark, DarkStar, Korea, Rainbow, RedDevil, RedPang
+	Basic, Bling, Dark, DarkStar, Punk, Korea, Rainbow, RedDevil, RedPang
 };
 class Bubble : public GameObject
 {
@@ -27,6 +27,9 @@ public:
 	void Render();
 	void Update();
 	void Spawn(Vector2 spawnPos,Index2 index, TileMap* map, int tag);
+
+	BubbleType GetBubbleType() { return bubble; }
+	void SetBubbleType(BubbleType type) { bubble = type; }
 
 	BubbleStatus GetStatus() { return curStatus; }
 	int GetTag() { return tag; }
@@ -46,6 +49,9 @@ public:
 
 	void SetJetLength(int length) { this->curLength = length; }
 	void SetJetMaxLength() { this->curLength = MAX_JET_LENGTH; }
+
+	string GetBubbleTypeToString(BubbleType type);
+	wstring GetBubbleTypeToWString(BubbleType type);
 
 private:
 	void MakeMesh() override {}; 
@@ -67,10 +73,12 @@ private:
 	int curLength = 0;
 	double timer = 0.0f;
 
+	static BubbleType bubble;
+
 	TileMap* map;
 	Index2 index;
 	Transform* bubbleTransform;
-	Animation* animation;
+	unordered_map< BubbleType,Animation*> animation;
 
 	unordered_map<WaterJetStatus, vector<WaterJet*>> waterJets; 
 	

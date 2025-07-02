@@ -71,6 +71,12 @@ void GameManager::Create()
 
 	Environment::Get();
 
+	BlockFactory::Get();
+	BubbleManager::Get();
+	MonsterManager::Get();
+	ItemManager::Get();
+	UIManager::Get();
+
 	ImGui::CreateContext();
 	ImGui::StyleColorsDark();
 
@@ -91,6 +97,12 @@ void GameManager::Release()
 	SceneManager::Delete();
 
 	Environment::Delete();
+
+	BlockFactory::Delete();
+	BubbleManager::Delete();
+	MonsterManager::Delete();
+	ItemManager::Delete();
+	UIManager::Delete();
 
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();

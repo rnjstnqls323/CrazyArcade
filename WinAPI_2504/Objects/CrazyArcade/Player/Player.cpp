@@ -23,6 +23,19 @@ Player::~Player()
 	delete animationTransform;
 }
 
+void Player::Reset()
+{
+	DataManager::Get()->LoadData("CharacterDataTable.csv");
+	stat = DataManager::Get()->GetCharacterData((int)character);
+	BubbleManager::Get()->SetBubbles(stat.bubbleCount, stat.waterJetCount);
+
+	curStatus = DownIdle;
+	needleNum = 0;
+	timer = 0.0f;
+	isTrap = false;
+	isKeyPress = false;
+}
+
 void Player::Update()
 {
 	StatusUpdate();

@@ -4,7 +4,6 @@
 MapEditScene::MapEditScene()
 {
 	//CreateEditTiles();
-
 	LoadTextures();
 }
 
@@ -60,6 +59,16 @@ void MapEditScene::GUIRender()
 	}
 
 	RenderSampleButtons();
+}
+
+void MapEditScene::Start()
+{
+
+}
+
+void MapEditScene::End()
+{
+
 }
 
 void MapEditScene::EditBgTiles()
