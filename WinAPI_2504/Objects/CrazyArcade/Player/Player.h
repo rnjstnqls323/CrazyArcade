@@ -44,6 +44,7 @@ private:
 	void StatusUpdate();
 
 	void TrapPlayer();
+	void CheckRandom();
 
 private:
 	int needleNum = 0;

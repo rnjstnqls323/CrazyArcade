@@ -4,6 +4,7 @@ CharacterName Player::character = CharacterName::Bazzi;
 
 Player::Player():RectCollider(Vector2(35, 30))
 {
+	CheckRandom();
 	CreateAnimation();
 	LoadAnimation();
 	animationTransform = new Transform;
@@ -226,6 +227,13 @@ void Player::TrapPlayer()
 		curStatus = CharacterDie;
 		animation[character]->Play(curStatus);
 	}
+}
+
+void Player::CheckRandom()
+{
+	if (character != CharacterName::Hook) return;
+	int num = rand() % (int)CharacterName::EndCharacter;
+	character = (CharacterName)num;
 }
 
 void Player::IdleChange()

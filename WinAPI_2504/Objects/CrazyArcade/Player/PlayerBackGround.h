@@ -13,6 +13,7 @@ public:
 	void Render();
 	static PlayerBackGroundType GetBackGroundType() { return curType; }
 	static void SetBackGroundType(PlayerBackGroundType type) { curType = type; }
+	static wstring GetBackGroundTypeToWString(PlayerBackGroundType type);
 private:
 	void CreateQuad();
 	wstring ChangeTypeToWstring(PlayerBackGroundType name);

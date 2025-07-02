@@ -206,6 +206,7 @@
     <ClInclude Include="Objects\CrazyArcade\Monster\TuttleKing.h" />
     <ClInclude Include="Objects\CrazyArcade\Player\Player.h" />
     <ClInclude Include="Objects\CrazyArcade\Player\PlayerBackGround.h" />
+    <ClInclude Include="Objects\CrazyArcade\Player\PlayerItem.h" />
     <ClInclude Include="Objects\CrazyArcade\Player\PlayerViewSmall.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
@@ -293,6 +294,7 @@
     <ClCompile Include="Objects\CrazyArcade\Monster\TuttleKing.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Player\Player.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Player\PlayerBackGround.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Player\PlayerItem.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Player\PlayerViewSmall.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />

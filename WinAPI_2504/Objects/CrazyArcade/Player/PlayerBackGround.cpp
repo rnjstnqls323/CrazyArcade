@@ -22,6 +22,28 @@ void PlayerBackGround::Render()
 	quads[curType]->Render();
 }
 
+
+wstring PlayerBackGround::GetBackGroundTypeToWString(PlayerBackGroundType type)
+{
+	switch (type)
+	{
+	case PlayerBackGroundType::Basic:
+		return L"Basic";
+	case PlayerBackGroundType::Clover:
+		return L"Clover";
+	case PlayerBackGroundType::Cute:
+		return L"Cute";
+	case PlayerBackGroundType::Dragon:
+		return L"Dragon";
+	case PlayerBackGroundType::Gold:
+		return L"Gold";
+	case PlayerBackGroundType::Green:
+		return L"Green";
+	case PlayerBackGroundType::Hopi:
+		return L"Hopi";
+	}
+}
+
 void PlayerBackGround::CreateQuad()
 {
 	wstring path = L"Resources/Textures/CrazyArcade_Player/BackGround/";
