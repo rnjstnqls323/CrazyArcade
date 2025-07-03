@@ -6,9 +6,12 @@ StorePanel::StorePanel()
 	CreateBackGround();
 	CreateShowLucci();
 	SettingItem();
+	CreateChoiceItem();
 
 
 	SetEventFunc();
+
+
 }
 
 StorePanel::~StorePanel()
@@ -18,6 +21,9 @@ StorePanel::~StorePanel()
 		delete quad;
 	}
 	showLucci.clear();
+
+	delete item;
+	delete choiceItem;
 }
 
 void StorePanel::Update(Player* player)
@@ -26,8 +32,8 @@ void StorePanel::Update(Player* player)
 
 	item->Update();
 
-	if (!isSavePreType) SavePreType();
-
+	SavePreType();
+	ChangeCoiceItem();
 	if (player->GetLucci() == lucci) return;
 	ChangeLucci(player->GetLucci());
 }
@@ -41,6 +47,7 @@ void StorePanel::Render()
 	}
 	item->Render();
 
+	choiceItem->Render();
 }
 
 void StorePanel::CreateButtons()
@@ -78,6 +85,14 @@ void StorePanel::CreateShowLucci()
 	}
 }
 
+void StorePanel::CreateChoiceItem()
+{
+	choiceItem = new Quad(path+L"Information.png");
+	choiceItem->SetLocalPosition(Vector2(520, 300));
+	choiceItem->SetParent(this);
+	choiceItem->UpdateWorld();
+}
+
 void StorePanel::SetEventFunc()
 {
 	buttons[0]->SetOnClick([this]() {OnClickGoBack();});
@@ -85,6 +100,12 @@ void StorePanel::SetEventFunc()
 	buttons[2]->SetOnClick([this]() {OnClickItem(ShowItemStatus::Bubble);});
 	buttons[3]->SetOnClick([this]() {OnClickItem(ShowItemStatus::BackGround);});
 	buttons[4]->SetOnClick([this]() {OnClickItem(ShowItemStatus::None);});
+	buttons[5]->SetOnClick([this]() {OnClickTest();});
+	buttons[6]->SetOnClick([this]() {OnClickSet();});
+
+
+	EventManager::Get()->AddEvent("BuyConfirmEvent", [this](void* param) {	TryBuyItem();	});
+	//이거 생각해보니까 인벤토리패널에서 넣어야되네 고민 좀 해보자
 }
 
 void StorePanel::OnClickExit()
@@ -101,8 +122,17 @@ void StorePanel::OnClickGoBack()
 
 void StorePanel::OnClickItem(ShowItemStatus status)
 {
-	item->SetBasic(status);
 	item->ChaingeCurStatus(status);
+}
+
+void StorePanel::OnClickTest()
+{
+	//패널만들어서 갈아끼기
+}
+
+void StorePanel::OnClickSet()
+{
+	UIManager::Get()->AddShowPanel(PanelType::BuyCheckPanel);
 }
 
 void StorePanel::ChangeLucci(int lucci)
@@ -133,8 +163,32 @@ void StorePanel::ChangeLucci(int lucci)
 
 }
 
+void StorePanel::ChangeCoiceItem()
+{
+	if (item->GetItemType().backGroundType == preChoiceType.backGroundType && item->GetItemType().bubbleType == preChoiceType.bubbleType) return;
+	ShowItemStatus type = item->GetCurStatus();
+	preChoiceType = item->GetItemType();
+	wstring name;
+	switch (type)
+	{
+	case ShowItemStatus::Bubble:
+		name = L"bubble";
+		name+=BubbleManager::Get()->GetBubbleTypeToWString(preChoiceType.bubbleType);
+		break;
+	case ShowItemStatus::BackGround:
+		name = L"backGround";
+		name += PlayerBackGround::GetBackGroundTypeToWString(preChoiceType.backGroundType);
+		break;
+	case ShowItemStatus::ShaShak:
+		break;
+	}
+	choiceItem->GetMaterial()->SetBaseMap(path+name+L".png");
+}
+
 void StorePanel::SavePreType()
 {
+	if (isSavePreType) return;
+
 	isSavePreType = true;
 	preType.backGroundType = PlayerBackGround::GetBackGroundType();
 	preType.bubbleType = BubbleManager::Get()->GetBubbleType();
@@ -156,4 +210,10 @@ void StorePanel::SettingItem()
 		PlayerBackGroundType type = (PlayerBackGroundType)(i + 1);
 		item->InsertBackGround(type);
 	}
+	preChoiceType = item->GetItemType();
+}
+
+void StorePanel::TryBuyItem()
+{
+
 }

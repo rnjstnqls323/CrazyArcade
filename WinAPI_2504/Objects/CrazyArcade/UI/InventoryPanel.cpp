@@ -57,7 +57,7 @@ void InventoryPanel::Render()
 
 void InventoryPanel::CreateShowSetItem()
 {
-	Vector2 startPos = {600,280 };
+	Vector2 startPos = {600,280};
 	float addX = 100;
 	for (int i=0;i< (int)ShowItemStatus::ShaShak;i++)                                       
 	{
