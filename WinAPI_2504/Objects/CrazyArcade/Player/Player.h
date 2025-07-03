@@ -23,6 +23,9 @@ public:
 	
 	bool GetIsTrap() { return isTrap; }
 
+	int GetLucci() { return lucci; }
+	void SetLucci(int lucci) { this->lucci = lucci; }
+
 	void Die();
 	void Trap();
 	bool IsDieOrTrap();
@@ -49,6 +52,7 @@ private:
 	void CheckRandom();
 
 private:
+	static int lucci;
 	int needleNum = 0;
 	double timer = 0.0f;
 	bool isTrap = false;

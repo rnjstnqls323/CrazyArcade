@@ -57,6 +57,6 @@ void PlayPanel::SetEventFunc()
 
 void PlayPanel::OutButton()
 {
-	UIManager::Get()->AddShowPanel(PanelType::ExitPanel);
+	UIManager::Get()->AddShowPanel(PanelType::GoBackPanel);
 }
 

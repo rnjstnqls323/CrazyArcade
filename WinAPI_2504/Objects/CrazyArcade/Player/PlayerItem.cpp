@@ -3,9 +3,9 @@
 PlayerItem::PlayerItem()
 {
     SetLocalPosition(Vector2{CENTER_X-200,CENTER_Y+50});
-    UpdateWorld();
     CreateBubble();
     CreateBackGround();
+    UpdateWorld();
 
     backGround = new Quad(L"Resources/Textures/CrazyArcade_UI/Inventory/Panel.png");
     backGround->SetParent(this);

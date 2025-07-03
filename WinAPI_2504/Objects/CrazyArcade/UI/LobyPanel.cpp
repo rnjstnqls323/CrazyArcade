@@ -15,6 +15,8 @@ LobyPanel::LobyPanel()
 LobyPanel::~LobyPanel()
 {
 	delete playerBG;
+	delete player;
+	delete selectPlayerPanel;
 }
 
 void LobyPanel::Update(Player* player)
@@ -43,7 +45,7 @@ void LobyPanel::CreateButtons()
 	CreateButton(L"Start", Vector2(1000, 190), Vector2(280, 70)); 
 	CreateButton(L"ItemShopButton", Vector2(1090, 480), Vector2(140, 40));
 	CreateButton(L"InventoryButton", Vector2(910, 480), Vector2(140, 40));
-	CreateButton(L"ExitButton", Vector2(240, 110), Vector2(40, 30));
+	CreateButton(L"ExitButton", Vector2(1175, 110), Vector2(40, 30));
 
 }
 
@@ -110,7 +112,7 @@ void LobyPanel::OnClickExitButton()
 
 void LobyPanel::OnClickItemShopButton()
 {
-	//¾À¹Ù²Ù±â
+	SCENE->ChangeScene("Store");
 }
 
 void LobyPanel::OnClickInventoryButton()

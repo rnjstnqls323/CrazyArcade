@@ -6,9 +6,6 @@ public:
 	ExitPanel();
 	~ExitPanel();
 
-	void Render() override;
-	void Update(Player* player) override;
-
 private:
 	void SetEventFunc() override;
 	void CreateButtons() override;

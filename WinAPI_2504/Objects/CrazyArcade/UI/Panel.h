@@ -1,7 +1,8 @@
 #pragma once
 
 enum class PanelType {
-	PlayPanel,ExitPanel,WinPanel,LosePanel, LobyPanel, InventoryPanel
+	PlayPanel,ExitPanel,GoBackPanel, WinPanel,LosePanel, LobyPanel, InventoryPanel, StorePanel, BuyCheckPanel,
+	NoLucciAlretPanel, InventoryCheckAlretPanel
 };
 class Panel : public Transform
 {

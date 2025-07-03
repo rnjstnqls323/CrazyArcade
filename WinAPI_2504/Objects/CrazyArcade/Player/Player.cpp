@@ -1,6 +1,7 @@
 #include "Framework.h"
 
 CharacterName Player::character = CharacterName::Bazzi;
+int Player::lucci = 12345678;
 
 Player::Player():RectCollider(Vector2(35, 30))
 {

@@ -46,7 +46,7 @@ wstring PlayerBackGround::GetBackGroundTypeToWString(PlayerBackGroundType type)
 
 void PlayerBackGround::CreateQuad()
 {
-	wstring path = L"Resources/Textures/CrazyArcade_Player/BackGround/";
+	wstring path = L"Resources/Textures/CrazyArcade_BackGround/";
 	for (int i = 0;i < (int)PlayerBackGroundType::Hopi +1 ;i++)
 	{
 		wstring name = ChangeTypeToWstring((PlayerBackGroundType)i);

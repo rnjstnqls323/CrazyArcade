@@ -19,7 +19,6 @@ TestScene::TestScene()
 TestScene::~TestScene()
 {
 
-
 	delete map;
 	delete player;
 }

@@ -29,6 +29,8 @@ public:
 
 	wstring GetShowItemStatusToWString(ShowItemStatus status);
 
+	void ItemUpdateWorld() { UpdateWorld();backGround->UpdateWorld();}
+
 private:
 	void SetEventFunc();
 	void BubbleRender();

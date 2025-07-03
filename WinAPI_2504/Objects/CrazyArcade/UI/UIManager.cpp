@@ -4,10 +4,15 @@ UIManager::UIManager()
 {
 	CreatePanel<PlayPanel>(PanelType::PlayPanel);
 	CreatePanel<ExitPanel>(PanelType::ExitPanel);
+	CreatePanel<GoBackPanel>(PanelType::GoBackPanel);
 	CreatePanel<WinPanel>(PanelType::WinPanel);
 	CreatePanel<LosePanel>(PanelType::LosePanel);
 	CreatePanel<LobyPanel>(PanelType::LobyPanel);
 	CreatePanel<InventoryPanel>(PanelType::InventoryPanel);
+	CreatePanel<StorePanel>(PanelType::StorePanel);
+	CreatePanel<BuyCheckPanel>(PanelType::BuyCheckPanel);
+	CreatePanel<NoLucciAlretPanel>(PanelType::NoLucciAlretPanel);
+	CreatePanel<InventoryCheckAlretPanel>(PanelType::InventoryCheckAlretPanel);
 }
 
 UIManager::~UIManager()

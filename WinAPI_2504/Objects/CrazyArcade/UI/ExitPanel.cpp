@@ -11,16 +11,6 @@ ExitPanel::~ExitPanel()
 {
 }
 
-void ExitPanel::Render()
-{
-	Panel::Render();
-}
-
-void ExitPanel::Update(Player* player)
-{
-	Panel::Update(player);
-}
-
 void ExitPanel::CreateButtons()
 {
 	CreateButton(L"YesButton", Vector2(600, 450), Vector2(80, 50));
@@ -44,7 +34,6 @@ void ExitPanel::SetEventFunc()
 void ExitPanel::BackButton()
 {
 	UIManager::Get()->PopForntPanel();
-	SCENE->ChangeScene("Loby");
 }
 void ExitPanel::OutButton()
 {

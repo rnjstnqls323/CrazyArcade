@@ -99,6 +99,7 @@ void InventoryPanel::CreateButtons()
 	CreateButton(L"ShaShakButton", Vector2{ 690,760 }, Vector2{ 100,30 });
 	CreateButton(L"ItemSettingButton", Vector2{ 590,220 }, Vector2{ 150,40 });
 	CreateButton(L"ItemSetOffButton", Vector2{ 780,220 }, Vector2{ 150,40 });
+
 }
 
 void InventoryPanel::CreateBackGround()
