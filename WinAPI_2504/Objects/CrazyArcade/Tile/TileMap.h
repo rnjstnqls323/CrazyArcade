@@ -3,11 +3,11 @@
 class TileMap
 {
 public:
-	TileMap(string filePath);
+	TileMap(string filePath,Vector2 startPos = Vector2(TILE_SIZE.x * 0.5f + 100, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f - 30),Vector2 backGroundPos = Vector2(600,480));
 	~TileMap();
 
 	void Render();
-
+	void Load();
 	
 	Vector2 GetStartPos() { return tileStartPos; }
 
@@ -44,7 +44,7 @@ public:
 	
 private:
 	void PushCollider(Vector2 overlap, Tile& tile, RectCollider* collider);
-	void Load();
+
 
 	void CreateTiles();
 	void DeleteTiles();
@@ -53,10 +53,12 @@ private:
 
 
 private:
+	bool isCreate = false;
 	string loadFilePath;
 	Quad* frontUI;
 	Quad* backGround;
 	vector<vector<Tile*>> tiles;
 	Vector2 tileStartPos;
+	Vector2 backGroundPos;
 	unordered_map<int, MonsterPos> monsterPos;
 };

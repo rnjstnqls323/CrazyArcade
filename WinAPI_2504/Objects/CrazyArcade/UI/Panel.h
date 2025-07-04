@@ -2,7 +2,7 @@
 
 enum class PanelType {
 	PlayPanel,ExitPanel,GoBackPanel, WinPanel,LosePanel, LobyPanel, InventoryPanel, StorePanel, BuyCheckPanel,
-	NoLucciAlretPanel, InventoryCheckAlretPanel
+	NoLucciAlretPanel, InventoryCheckAlretPanel, NoChoiceAlretPanel
 };
 class Panel : public Transform
 {
@@ -20,6 +20,7 @@ protected:
 	virtual void CreateBackGround() = 0;
 	virtual void SetEventFunc() = 0;
 
+	virtual void Reset() = 0;
 protected:
 
 	Vector2 pos = { 700, 480 };

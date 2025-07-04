@@ -1,18 +1,13 @@
 #pragma once
 
-class InventoryCheckAlretPanel :public Panel
+class NoChoiceAlretPanel : public Panel
 {
 public:
-	InventoryCheckAlretPanel();
-	~InventoryCheckAlretPanel();
+	NoChoiceAlretPanel();
+	~NoChoiceAlretPanel();
 private:
-
-
-	// Panel을(를) 통해 상속됨
 	void CreateButtons() override;
-
 	void CreateBackGround() override;
-
 	void SetEventFunc() override;
 
 	void OnClickYes();

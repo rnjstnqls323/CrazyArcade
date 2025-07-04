@@ -22,11 +22,6 @@ void LosePanel::Render()
 {
 	backGround->UpdateWorld();
 }
-void LosePanel::Reset()
-{
-	timer = 0.0f;
-}
-
 void LosePanel::CreateBackGround()
 {
 	backGround = new Quad(L"Resources/Textures/CrazyArcade_UI/Lose/LosePannel.png");

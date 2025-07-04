@@ -7,6 +7,7 @@ StorePanel::StorePanel()
 	CreateShowLucci();
 	SettingItem();
 	CreateChoiceItem();
+	testBackGround = new PlayerBackGround({930,550});
 
 
 	SetEventFunc();
@@ -48,6 +49,7 @@ void StorePanel::Render()
 	item->Render();
 
 	choiceItem->Render();
+	testBackGround->Render();
 }
 
 void StorePanel::CreateButtons()
@@ -102,10 +104,6 @@ void StorePanel::SetEventFunc()
 	buttons[4]->SetOnClick([this]() {OnClickItem(ShowItemStatus::None);});
 	buttons[5]->SetOnClick([this]() {OnClickTest();});
 	buttons[6]->SetOnClick([this]() {OnClickSet();});
-
-
-	EventManager::Get()->AddEvent("BuyConfirmEvent", [this](void* param) {	TryBuyItem();	});
-	//이거 생각해보니까 인벤토리패널에서 넣어야되네 고민 좀 해보자
 }
 
 void StorePanel::OnClickExit()
@@ -127,11 +125,28 @@ void StorePanel::OnClickItem(ShowItemStatus status)
 
 void StorePanel::OnClickTest()
 {
-	//패널만들어서 갈아끼기
+	switch (item->GetCurStatus())
+	{
+	case ShowItemStatus::Bubble:
+		BubbleManager::Get()->ChangeBubbleType(item->GetItemType().bubbleType);
+		break;
+	case ShowItemStatus::BackGround:
+		PlayerBackGround::SetBackGroundType(item->GetItemType().backGroundType);
+		break;
+	case ShowItemStatus::ShaShak:
+		break;
+	}
 }
 
 void StorePanel::OnClickSet()
 {
+	if (!isChoice)
+	{
+		UIManager::Get()->AddShowPanel(PanelType::NoChoiceAlretPanel);
+		return;
+	}
+	SetBuyItem();
+	EventManager::Get()->ExcuteEvent("SendItemData", &buyItem);
 	UIManager::Get()->AddShowPanel(PanelType::BuyCheckPanel);
 }
 
@@ -183,6 +198,7 @@ void StorePanel::ChangeCoiceItem()
 		break;
 	}
 	choiceItem->GetMaterial()->SetBaseMap(path+name+L".png");
+	isChoice = true;
 }
 
 void StorePanel::SavePreType()
@@ -213,7 +229,10 @@ void StorePanel::SettingItem()
 	preChoiceType = item->GetItemType();
 }
 
-void StorePanel::TryBuyItem()
+void StorePanel::SetBuyItem()
 {
-
+	buyItem.status = item->GetCurStatus();
+	buyItem.bubbleType = item->GetItemType().bubbleType;
+	buyItem.backGroundType = item->GetItemType().backGroundType;
 }
+

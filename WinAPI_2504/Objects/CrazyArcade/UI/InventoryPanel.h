@@ -26,6 +26,9 @@ private:
 	void OnClickItemSetting();
 	void OnClickItemSetOff();
 
+	void AddItem(BuyItem* item);
+
+	void Reset() override {} //¿Ã∞« ∞ÌπŒ
 private:
 	wstring path = L"Resources/Textures/CrazyArcade_UI/Inventory/";
 	unordered_map<ShowItemStatus,ShowSetItem> showSetItem;

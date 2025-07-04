@@ -17,6 +17,7 @@ private:
 
 	void OutButton();
 
+	void Reset() override {} //ÇÊ¿ä
 private:
 	bool isNeedle = false;
 	PlayerViewSmall* player;

@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 CharacterName Player::character = CharacterName::Bazzi;
-int Player::lucci = 12345678;
+int Player::lucci = 50000;
 
 Player::Player():RectCollider(Vector2(35, 30))
 {
@@ -16,12 +16,17 @@ Player::Player():RectCollider(Vector2(35, 30))
 	DataManager::Get()->LoadData("CharacterDataTable.csv");
 	stat = DataManager::Get()->GetCharacterData((int)character);
 	BubbleManager::Get()->SetBubbles(stat.bubbleCount, stat.waterJetCount);
+
+	shashak = new ShaShak;
+	shashak->SetParent(this);
+	shashak->Update();
 }
 
 Player::~Player()
 {
 	DeleteAnimation();
 	delete animationTransform;
+	delete shashak;
 }
 
 void Player::Reset()
@@ -35,6 +40,7 @@ void Player::Reset()
 	timer = 0.0f;
 	isTrap = false;
 	isKeyPress = false;
+
 }
 
 void Player::Update()
@@ -45,6 +51,7 @@ void Player::Update()
 
 	UpdateWorld();
 	animationTransform->UpdateWorld();
+	shashak->Update();
 
 	//if (Input::Get()->IsKeyDown(VK_SPACE))
 	//{
@@ -57,10 +64,11 @@ void Player::Render()
 	RectCollider::Render();
 	//if (curStatus == CharacterDie)//일케하면안될듯 재생안되고있으면 isdie트루로주자
 	//	return;
-
+	shashak->Render();
 	worldBuffer->Set(animationTransform->GetWorld());
 	worldBuffer->SetVS(0);
 	animation[character]->Render(curStatus);
+
 }
 
 void Player::Die()
@@ -125,24 +133,28 @@ void Player::Move()
 		isKeyPress = true;
 		Translate(Vector2::Up() * stat.speed * DELTA);
 		curStatus = MoveUp;
+		shashak->SetCurStatus(ShaShakStatus::MoveUp);
 	}
 	else if (Input::Get()->IsKeyPress(VK_DOWN))
 	{
 		isKeyPress = true;
 		Translate(Vector2::Down() * stat.speed * DELTA);
 		curStatus = MoveDown;
+		shashak->SetCurStatus(ShaShakStatus::MoveDown);
 	}
 	else if (Input::Get()->IsKeyPress(VK_LEFT))
 	{
 		isKeyPress = true;
 		Translate(Vector2::Left() * stat.speed * DELTA);
 		curStatus = MoveLeft;
+		shashak->SetCurStatus(ShaShakStatus::MoveLeft);
 	}
 	else if (Input::Get()->IsKeyPress(VK_RIGHT))
 	{
 		isKeyPress = true;
 		Translate(Vector2::Right() * stat.speed * DELTA);
 		curStatus = MoveRight;
+		shashak->SetCurStatus(ShaShakStatus::MoveRight);
 	}
 
 }
@@ -268,4 +280,5 @@ void Player::IdleChange()
 		curStatus = RightIdle;
 		break;
 	}
+	shashak->SetCurStatus(ShaShakStatus::Idle);
 }

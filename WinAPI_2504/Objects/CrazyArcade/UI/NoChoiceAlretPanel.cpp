@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-NoLucciAlretPanel::NoLucciAlretPanel()
+NoChoiceAlretPanel::NoChoiceAlretPanel()
 {
 	CreateButtons();
 	CreateBackGround();
@@ -8,29 +8,29 @@ NoLucciAlretPanel::NoLucciAlretPanel()
 	SetEventFunc();
 }
 
-NoLucciAlretPanel::~NoLucciAlretPanel()
+NoChoiceAlretPanel::~NoChoiceAlretPanel()
 {
 }
 
-void NoLucciAlretPanel::CreateButtons()
+void NoChoiceAlretPanel::CreateButtons()
 {
 	CreateButton(L"YesButton", { 500,450 }, { 80,30 });
 }
 
-void NoLucciAlretPanel::CreateBackGround()
+void NoChoiceAlretPanel::CreateBackGround()
 {
-	backGround = new Quad(L"Resources/Textures/CrazyArcade_UI/NoLucciAlret/backGround.png");
+	backGround = new Quad(L"Resources/Textures/CrazyArcade_UI/NoChoiceItem/backGround.png");
 	backGround->SetParent(this);
 	backGround->SetLocalPosition({ 500,500 });
 	backGround->UpdateWorld();
 }
 
-void NoLucciAlretPanel::SetEventFunc()
+void NoChoiceAlretPanel::SetEventFunc()
 {
 	buttons[0]->SetOnClick([this]() {OnClickYes();});
 }
 
-void NoLucciAlretPanel::OnClickYes()
+void NoChoiceAlretPanel::OnClickYes()
 {
 	UIManager::Get()->PopForntPanel();
 }

@@ -1,11 +1,10 @@
 #include "Framework.h"
 
-
-TileMap::TileMap(string filePath)
+TileMap::TileMap(string filePath, Vector2 startPos, Vector2 backGroundPos)
 {
-	this->loadFilePath = "Resources/TextData/"+filePath;
-	Load();
-	
+	this->loadFilePath = "Resources/TextData/" + filePath;
+	tileStartPos = startPos;
+	this->backGroundPos = backGroundPos;
 }
 
 TileMap::~TileMap()
@@ -36,7 +35,7 @@ vector<Tile*> TileMap::GetAroundTile(Index2 index)
 		aroundTile.push_back(tiles[index.y + 1][index.x]);
 	if (index.x - 1 >= 0)				 
 		aroundTile.push_back(tiles[index.y][index.x - 1]);
-	if (index.x < COL)					 
+	if (index.x+1 < COL)					 
 		aroundTile.push_back(tiles[index.y][index.x + 1]);
 
 
@@ -166,11 +165,15 @@ void TileMap::Load()
 	UINT tileCount = reader->UInt();
 	wstring filePath = reader->WString();
 
-	backGround = new Quad(filePath);
-	backGround->SetLocalPosition({ 600,480 });
-	backGround->UpdateWorld();
+	if (!isCreate)
+	{
+		backGround = new Quad(filePath);
+		backGround->SetLocalPosition(backGroundPos);
+		backGround->UpdateWorld();
 
-	CreateTiles();
+		CreateTiles();
+		isCreate = true;
+	}
 
 	for (int y = 0;y < ROW;y++)
 		for (int x = 0;x < COL;x++)
@@ -193,7 +196,7 @@ void TileMap::CreateTiles()
 	for (int y = 0;y < ROW;y++)
 		tiles[y].resize(COL);
 
-	tileStartPos = Vector2(TILE_SIZE.x * 0.5f + 100, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f - 30);
+	//tileStartPos = Vector2(TILE_SIZE.x * 0.5f + 100, SCREEN_HEIGHT - TILE_SIZE.y * 0.5f - 30);
 
 	for (int y = 0; y < ROW; y++)
 	{

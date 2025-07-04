@@ -13,6 +13,7 @@ UIManager::UIManager()
 	CreatePanel<BuyCheckPanel>(PanelType::BuyCheckPanel);
 	CreatePanel<NoLucciAlretPanel>(PanelType::NoLucciAlretPanel);
 	CreatePanel<InventoryCheckAlretPanel>(PanelType::InventoryCheckAlretPanel);
+	CreatePanel<NoChoiceAlretPanel>(PanelType::NoChoiceAlretPanel);
 }
 
 UIManager::~UIManager()

@@ -154,9 +154,11 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/Item/SuperWaterJetItem.h"
 #include "Objects/CrazyArcade/Item/NeedleItem.h"
 
+#include "Objects/CrazyArcade/Player/ShaShak.h"
 #include "Objects/CrazyArcade/Player/Player.h"
 #include "Objects/CrazyArcade/Player/PlayerBackGround.h"
 #include "Objects/CrazyArcade/Player/PlayerViewSmall.h"
+
 
 #include "Objects/CrazyArcade/UI/Button.h"
 
@@ -169,11 +171,12 @@ typedef function<void()> Event;
 #include "Objects/CrazyArcade/UI/WinPanel.h"
 #include "Objects/CrazyArcade/UI/LosePanel.h"
 #include "Objects/CrazyArcade/UI/LobyPanel.h"
-#include "Objects/CrazyArcade/UI/InventoryPanel.h"
 #include "Objects/CrazyArcade/UI/StorePanel.h"
+#include "Objects/CrazyArcade/UI/InventoryPanel.h"
 #include "Objects/CrazyArcade/UI/BuyCheckPanel.h"
 #include "Objects/CrazyArcade/UI/NoLucciAlretPanel.h"
 #include "Objects/CrazyArcade/UI/InventoryCheckAlretPanel.h"
+#include "Objects/CrazyArcade/UI/NoChoiceAlretPanel.h"
 
 #include "Objects/CrazyArcade/Bubble/BubbleManager.h"
 #include "Objects/CrazyArcade/Monster/MonsterManager.h"

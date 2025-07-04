@@ -5,14 +5,9 @@ TestScene::TestScene()
 {
 
 	map = new TileMap("TestStage1.map");
-	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
 
 	player = new Player();
-	Vector2 pos = map->GetTilePos(Index2(3,2));
-	player->SetLocalPosition(pos);
 
-	MonsterManager::Get()->MonsterSpawn();
-	MonsterManager::Get()->SpawnTuttleKing();
 
 }
 
@@ -27,7 +22,7 @@ void TestScene::Update()
 {
 	SpawnBubble();
 
-	//MonsterManager::Get()->Update(player);
+	MonsterManager::Get()->Update(player);
 	CheckCollision();
 	player->Update();
 
@@ -46,7 +41,7 @@ void TestScene::Render()
 
 	BubbleManager::Get()->Render();
 
-	//MonsterManager::Get()->Render();
+	MonsterManager::Get()->Render();
 
 	player->Render();
 	ItemManager::Get()->Render();
@@ -55,9 +50,6 @@ void TestScene::Render()
 
 void TestScene::GUIRender()
 {
-	playerIndex = map->GetTileIndex(player);
-
-
 	ImGui::Text("Tile Index: (%f, %f)", playerIndex.x,playerIndex.y);
 	ImGui::Text("TileType: %d", (int)map->GetTileType(playerIndex)); 
 	ImGui::Text("PreTileType: %d", (int)map->GetPreTileType(playerIndex)); 
@@ -68,6 +60,13 @@ void TestScene::Start()
 {
 	player->Reset();
 	UIManager::Get()->AddShowPanel(PanelType::PlayPanel);
+	map->Load();
+	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
+	Vector2 pos = map->GetTilePos(Index2(3, 2));
+	player->SetLocalPosition(pos);
+
+	MonsterManager::Get()->MonsterSpawn();
+	//MonsterManager::Get()->SpawnTuttleKing();
 }
 
 void TestScene::End()

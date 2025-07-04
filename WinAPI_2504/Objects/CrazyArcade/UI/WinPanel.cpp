@@ -23,11 +23,6 @@ void WinPanel::Render()
 {
 	backGround->Render();
 }
-void WinPanel::Reset()
-{
-	timer = 0.0f;
-}
-
 void WinPanel::CreateBackGround()
 {
 	backGround = new Quad(L"Resources/Textures/CrazyArcade_UI/Win/WinPannel.png");

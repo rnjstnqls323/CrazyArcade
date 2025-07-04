@@ -2,6 +2,7 @@
 
 struct BuyItem
 {
+	ShowItemStatus status;
 	BubbleType bubbleType;
 	PlayerBackGroundType backGroundType;
 	//»þ¼¡ ³Ö±â
@@ -32,10 +33,12 @@ private:
 	void SavePreType();
 	void SettingItem();
 
-	void TryBuyItem();
+	void SetBuyItem();
 
+	void Reset() override {}
 private:
 	bool isSavePreType = false;
+	bool isChoice = false;
 	int lucci;
 	wstring path = L"Resources/Textures/CrazyArcade_UI/Store/";
 
@@ -43,6 +46,8 @@ private:
 	ChoiceItemType preChoiceType;
 
 	BuyItem buyItem;
+
+	PlayerBackGround* testBackGround;
 
 	PlayerItem* item;
 	vector<Quad*> showLucci;

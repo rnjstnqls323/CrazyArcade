@@ -8,9 +8,9 @@ enum KingStatus
 class TuttleKing : public Monster
 {
 private:
-	const float ATTACK_TIME = 10.0f;
+	const float ATTACK_TIME = 20.0f;
 	const float TRAP_TIME = 5.0f;
-	const float MOVE_TIME = 5.0f;
+	const float MOVE_TIME = 10.0f;
 	const int DAMAGE = 10;
 	const int ATTACK_SPEED = 110;
 public:

@@ -6,24 +6,11 @@ InventoryPanel::InventoryPanel()
 	CreateBackGround();
 	CreateShowSetItem();
 
-	SetEventFunc();
 
 	itemPanel = new PlayerItem;
 	itemPanel->SetParent(this);
 
-	itemPanel->InsertBackGround(PlayerBackGroundType::Hopi);
-	itemPanel->InsertBackGround(PlayerBackGroundType::Dragon);
-	itemPanel->InsertBackGround(PlayerBackGroundType::Clover);
-	itemPanel->InsertBackGround(PlayerBackGroundType::Cute);
-	itemPanel->InsertBackGround(PlayerBackGroundType::Gold); // 여기 이벤트매니저에 등록해서써주자
-
-
-	itemPanel->InsertBubble(BubbleType::Bling);
-	itemPanel->InsertBubble(BubbleType::Bling);
-	itemPanel->InsertBubble(BubbleType::DarkStar);
-	itemPanel->InsertBubble(BubbleType::Dark);
-	itemPanel->InsertBubble(BubbleType::Punk);
-	itemPanel->InsertBubble(BubbleType::Rainbow);
+	SetEventFunc();
 }
 
 InventoryPanel::~InventoryPanel()
@@ -118,6 +105,8 @@ void InventoryPanel::SetEventFunc()
 	buttons[3]->SetOnClick([this]() {OnClickItemButton(ShowItemStatus::None);});
 	buttons[4]->SetOnClick([this]() {OnClickItemSetting();});
 	buttons[5]->SetOnClick([this]() {OnClickItemSetOff();});
+
+	EventManager::Get()->AddEvent("BuyItem", [this](void* param) {AddItem((BuyItem*)param);});
 }
 
 void InventoryPanel::OnClickCloseButton()
@@ -169,5 +158,33 @@ void InventoryPanel::OnClickItemSetOff()
 		ChangeShowItemFront(ShowItemStatus::BackGround);
 		break;
 	}
+}
+
+void InventoryPanel::AddItem(BuyItem* item)
+{
+	if (Player::GetLucci() < 10000)
+	{
+		UIManager::Get()->AddShowPanel(PanelType::NoLucciAlretPanel);
+		return;
+	}
+	bool isInsert = false;
+	switch (item->status)
+	{
+	case ShowItemStatus::BackGround:
+		isInsert = itemPanel->InsertBackGround(item->backGroundType);
+		break;
+	case ShowItemStatus::Bubble:
+		isInsert = itemPanel->InsertBubble(item->bubbleType);
+		break;
+	case ShowItemStatus::ShaShak:
+		break;
+	}
+	
+	if (!isInsert)
+	{
+		UIManager::Get()->AddShowPanel(PanelType::InventoryCheckAlretPanel);
+		return;
+	}
+	Player::SetLucci(Player::GetLucci() - 10000);
 }
 

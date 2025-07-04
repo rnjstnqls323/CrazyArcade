@@ -23,8 +23,8 @@ public:
 	
 	bool GetIsTrap() { return isTrap; }
 
-	int GetLucci() { return lucci; }
-	void SetLucci(int lucci) { this->lucci = lucci; }
+	static int GetLucci() { return lucci; }
+	static void SetLucci(int lucci) { Player::lucci = lucci; }
 
 	void Die();
 	void Trap();
@@ -63,4 +63,5 @@ private:
 	CharacterStatus curStatus = DownIdle;
 	static CharacterName character;
 	unordered_map<CharacterName, Animation*> animation;
+	ShaShak* shashak;
 };

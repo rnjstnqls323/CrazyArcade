@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-BubbleType Bubble::bubble = BubbleType::Rainbow;
+BubbleType Bubble::bubble = BubbleType::Basic;
 Bubble::Bubble()
 {
 	LoadAnimation();

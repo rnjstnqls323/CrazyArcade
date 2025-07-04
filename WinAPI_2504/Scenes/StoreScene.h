@@ -12,5 +12,12 @@ public:
 	void End() override;
 
 private:
+	void SpawnBubble();
+	void CheckCollision();
+private:
+	bool isSpawn;
+	Index2 playerIndex;
+
 	Player* player;
+	TileMap* map;
 };

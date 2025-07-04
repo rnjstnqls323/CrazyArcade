@@ -11,11 +11,6 @@ private:
 public:
 	void AddEvent(const string& eventName, function<void(void*)> event)
 	{
-		//if (eventWithParams.count(eventName) > 0)
-		//{
-		//	return;
-		//}
-
 		eventWithParams[eventName].push_back(event);
 	}
 

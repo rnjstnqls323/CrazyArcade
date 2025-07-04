@@ -154,20 +154,21 @@ void TuttleKing::StatusUpdate()
 void TuttleKing::AttackTime()
 {
 	if (kingStatus == KingDie || kingStatus == KingTrap) return;
+
 	timer += DELTA;
-	if (timer >= MOVE_TIME + attackTimer && isAttack)
+
+	if (timer >= ATTACK_TIME && !isAttack)
+	{
+		isAttack = true;
+		kingStatus = KingAngry;
+		timer = 0.0f;  // 다시 타이머 리셋
+	}
+	else if (isAttack && timer >= MOVE_TIME)
 	{
 		isAttack = false;
 		kingStatus = KingIdle;
+		timer = 0.0f;
 	}
-	if (timer >= ATTACK_TIME + attackTimer)
-	{
-		attackTimer += timer;
-		isAttack = true;
-		kingStatus = KingAngry;
-
-	}
-
 }
 
 void TuttleKing::TrapDeadTime()

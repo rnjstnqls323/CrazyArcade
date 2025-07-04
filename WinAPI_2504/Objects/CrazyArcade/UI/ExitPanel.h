@@ -13,4 +13,5 @@ private:
 
 	void OutButton();
 	void BackButton();
+	void Reset() override {}
 };

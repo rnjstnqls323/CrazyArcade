@@ -90,7 +90,8 @@ void MonsterManager::ResetManager()
 void MonsterManager::AddMonsterPos(TileMap* map, unordered_map<int, MonsterPos> pos)
 {
 	this->map = map;
-	astar = new AStar(map);
+	if(astar == nullptr)
+		astar = new AStar(map);
 	ClearMonsterPos();
 
 	for (auto& position : pos)
@@ -98,6 +99,8 @@ void MonsterManager::AddMonsterPos(TileMap* map, unordered_map<int, MonsterPos> 
 		MonsterPos mPos = position.second;
 		if (mPos.endPos == Vector2(0, 0))
 			mPos.endPos = mPos.startPos;
+		if (mPos.startPos == Vector2(0, 0))
+			mPos.startPos = mPos.endPos;
 		if (mPos.type == MonsterType::PinkStar)
 		{
 			monsterPos[MonsterType::PinkStar].emplace_back(mPos);

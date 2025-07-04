@@ -21,6 +21,8 @@ private:
 	void OnClickItemShopButton();
 	void OnClickInventoryButton();
 	void OnClickCharacterButton(CharacterName name);
+
+	void Reset() override {} //¿Ã∞Õµµ∞ÌπŒ
 private:
 
 	wstring path = L"Resources/Textures/CrazyArcade_UI/Loby/";

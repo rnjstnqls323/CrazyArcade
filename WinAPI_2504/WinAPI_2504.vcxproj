@@ -208,6 +208,7 @@
     <ClInclude Include="Objects\CrazyArcade\Player\PlayerBackGround.h" />
     <ClInclude Include="Objects\CrazyArcade\Player\PlayerItem.h" />
     <ClInclude Include="Objects\CrazyArcade\Player\PlayerViewSmall.h" />
+    <ClInclude Include="Objects\CrazyArcade\Player\ShaShak.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\EditTile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\Tile.h" />
     <ClInclude Include="Objects\CrazyArcade\Tile\TileMap.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Objects\CrazyArcade\UI\InventoryPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\LobyPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\LosePanel.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\NoChoiceAlretPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\NoLucciAlretPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\Panel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\PlayPanel.h" />
@@ -302,6 +304,7 @@
     <ClCompile Include="Objects\CrazyArcade\Player\PlayerBackGround.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Player\PlayerItem.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Player\PlayerViewSmall.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\Player\ShaShak.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\EditTile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\Tile.cpp" />
     <ClCompile Include="Objects\CrazyArcade\Tile\TileMap.cpp" />
@@ -313,6 +316,7 @@
     <ClCompile Include="Objects\CrazyArcade\UI\InventoryPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\LobyPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\LosePanel.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\NoChoiceAlretPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\NoLucciAlretPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\Panel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\PlayPanel.cpp" />
