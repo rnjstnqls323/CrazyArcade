@@ -25,9 +25,22 @@ ShaShak::~ShaShak()
 	transform.clear();
 }
 
+wstring ShaShak::GetShaShakTypeToWString(ShaShakType type)
+{
+	switch (type)
+	{
+	case ShaShakType::Shine:
+		return L"Shine";
+	case ShaShakType::Clover:
+		return L"Clover";
+	case ShaShakType::Heart:
+		return L"Heart";
+	}
+}
+
 void ShaShak::Update()
 {
-	if (curStatus == ShaShakStatus::Idle || shaShak == ShaShakType::None) return;
+	if (curStatus == ShaShakStatus::Idle || shaShak == ShaShakType::Basic) return;
 	UpdateWorld();
 	transform[curStatus]->UpdateWorld();
 	animation[shaShak]->Update(0);
@@ -35,7 +48,7 @@ void ShaShak::Update()
 
 void ShaShak::Render()
 {
-	if (curStatus == ShaShakStatus::Idle || shaShak == ShaShakType::None) return;
+	if (curStatus == ShaShakStatus::Idle || shaShak == ShaShakType::Basic) return;
 	worldBuffer->Set(transform[curStatus]->GetWorld());
 	worldBuffer->SetVS(0);
 	animation[shaShak]->Render(0);

@@ -5,6 +5,7 @@ struct BuyItem
 	ShowItemStatus status;
 	BubbleType bubbleType;
 	PlayerBackGroundType backGroundType;
+	ShaShakType shaShakType;
 	//»þ¼¡ ³Ö±â
 };
 class StorePanel :public Panel

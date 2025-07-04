@@ -2,7 +2,7 @@
 
 enum class ShaShakType 
 {
-	None, Shine, Clover,Heart
+	Basic, Shine, Clover,Heart
 };
 enum class ShaShakStatus
 {
@@ -16,6 +16,7 @@ public:
 
 	static ShaShakType GetShaShakType() { return shaShak; }
 	static void SetShaShakType(ShaShakType type) { shaShak = type; }
+	static wstring GetShaShakTypeToWString(ShaShakType type);
 
 	ShaShakStatus GetCurStatus() { return curStatus; }
 	void SetCurStatus(ShaShakStatus status) { curStatus = status; }

@@ -72,6 +72,8 @@ void InventoryPanel::ChangeShowItemFront(ShowItemStatus type)
 	case ShowItemStatus::BackGround:
 		item += PlayerBackGround::GetBackGroundTypeToWString(PlayerBackGround::GetBackGroundType());
 		break;
+	case ShowItemStatus::ShaShak:
+		item += ShaShak::GetShaShakTypeToWString(ShaShak::GetShaShakType());
 	}
 	wstring name = itemPanel->GetShowItemStatusToWString(type);
 
@@ -102,7 +104,7 @@ void InventoryPanel::SetEventFunc()
 	buttons[0]->SetOnClick([this]() {OnClickCloseButton();});
 	buttons[1]->SetOnClick([this]() {OnClickItemButton(ShowItemStatus::Bubble);});
 	buttons[2]->SetOnClick([this]() {OnClickItemButton(ShowItemStatus::BackGround);});
-	buttons[3]->SetOnClick([this]() {OnClickItemButton(ShowItemStatus::None);});
+	buttons[3]->SetOnClick([this]() {OnClickItemButton(ShowItemStatus::ShaShak);});
 	buttons[4]->SetOnClick([this]() {OnClickItemSetting();});
 	buttons[5]->SetOnClick([this]() {OnClickItemSetOff();});
 
@@ -126,8 +128,6 @@ void InventoryPanel::OnClickItemSetting()
 	ChoiceItemType type = itemPanel->GetItemType();
 	switch (status)
 	{
-	case ShowItemStatus::None:
-		return;
 	case ShowItemStatus::Bubble:
 		BubbleManager::Get()->ChangeBubbleType(type.bubbleType);
 		ChangeShowItemFront(ShowItemStatus::Bubble);
@@ -135,6 +135,10 @@ void InventoryPanel::OnClickItemSetting()
 	case ShowItemStatus::BackGround:
 		PlayerBackGround::SetBackGroundType(type.backGroundType);
 		ChangeShowItemFront(ShowItemStatus::BackGround);
+		break;
+	case ShowItemStatus::ShaShak:
+		ShaShak::SetShaShakType(type.shaShakType);
+		ChangeShowItemFront(ShowItemStatus::ShaShak);
 		break;
 	}
 
@@ -157,6 +161,9 @@ void InventoryPanel::OnClickItemSetOff()
 		PlayerBackGround::SetBackGroundType(type.backGroundType);
 		ChangeShowItemFront(ShowItemStatus::BackGround);
 		break;
+	case ShowItemStatus::ShaShak:
+		ShaShak::SetShaShakType(type.shaShakType);
+		ChangeShowItemFront(ShowItemStatus::ShaShak);
 	}
 }
 
@@ -167,6 +174,7 @@ void InventoryPanel::AddItem(BuyItem* item)
 		UIManager::Get()->AddShowPanel(PanelType::NoLucciAlretPanel);
 		return;
 	}
+
 	bool isInsert = false;
 	switch (item->status)
 	{
@@ -177,6 +185,7 @@ void InventoryPanel::AddItem(BuyItem* item)
 		isInsert = itemPanel->InsertBubble(item->bubbleType);
 		break;
 	case ShowItemStatus::ShaShak:
+		isInsert = itemPanel->InsertShaShak(item->shaShakType);
 		break;
 	}
 	

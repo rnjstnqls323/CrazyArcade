@@ -101,7 +101,7 @@ void StorePanel::SetEventFunc()
 	buttons[1]->SetOnClick([this]() {OnClickExit();});
 	buttons[2]->SetOnClick([this]() {OnClickItem(ShowItemStatus::Bubble);});
 	buttons[3]->SetOnClick([this]() {OnClickItem(ShowItemStatus::BackGround);});
-	buttons[4]->SetOnClick([this]() {OnClickItem(ShowItemStatus::None);});
+	buttons[4]->SetOnClick([this]() {OnClickItem(ShowItemStatus::ShaShak);});
 	buttons[5]->SetOnClick([this]() {OnClickTest();});
 	buttons[6]->SetOnClick([this]() {OnClickSet();});
 }
@@ -134,6 +134,7 @@ void StorePanel::OnClickTest()
 		PlayerBackGround::SetBackGroundType(item->GetItemType().backGroundType);
 		break;
 	case ShowItemStatus::ShaShak:
+		ShaShak::SetShaShakType(item->GetItemType().shaShakType);
 		break;
 	}
 }
@@ -180,7 +181,9 @@ void StorePanel::ChangeLucci(int lucci)
 
 void StorePanel::ChangeCoiceItem()
 {
-	if (item->GetItemType().backGroundType == preChoiceType.backGroundType && item->GetItemType().bubbleType == preChoiceType.bubbleType) return;
+	if (item->GetItemType().backGroundType == preChoiceType.backGroundType 
+		&& item->GetItemType().bubbleType == preChoiceType.bubbleType
+		&& item->GetItemType().shaShakType == preChoiceType.shaShakType) return;
 	ShowItemStatus type = item->GetCurStatus();
 	preChoiceType = item->GetItemType();
 	wstring name;
@@ -195,6 +198,8 @@ void StorePanel::ChangeCoiceItem()
 		name += PlayerBackGround::GetBackGroundTypeToWString(preChoiceType.backGroundType);
 		break;
 	case ShowItemStatus::ShaShak:
+		name = L"shaShak";
+		name += ShaShak::GetShaShakTypeToWString(preChoiceType.shaShakType);
 		break;
 	}
 	choiceItem->GetMaterial()->SetBaseMap(path+name+L".png");
@@ -208,6 +213,7 @@ void StorePanel::SavePreType()
 	isSavePreType = true;
 	preType.backGroundType = PlayerBackGround::GetBackGroundType();
 	preType.bubbleType = BubbleManager::Get()->GetBubbleType();
+	preType.shaShakType = ShaShak::GetShaShakType();
 }
 
 void StorePanel::SettingItem()
@@ -226,6 +232,11 @@ void StorePanel::SettingItem()
 		PlayerBackGroundType type = (PlayerBackGroundType)(i + 1);
 		item->InsertBackGround(type);
 	}
+	for (int i = 0; i < (int)ShaShakType::Heart; i++)
+	{
+		ShaShakType type = (ShaShakType)(i + 1);
+		item->InsertShaShak(type);
+	}
 	preChoiceType = item->GetItemType();
 }
 
@@ -234,5 +245,6 @@ void StorePanel::SetBuyItem()
 	buyItem.status = item->GetCurStatus();
 	buyItem.bubbleType = item->GetItemType().bubbleType;
 	buyItem.backGroundType = item->GetItemType().backGroundType;
+	buyItem.shaShakType = item->GetItemType().shaShakType;
 }
 

@@ -8,6 +8,7 @@ struct ChoiceItemType
 {
 	BubbleType bubbleType = BubbleType::Basic;
 	PlayerBackGroundType backGroundType = PlayerBackGroundType::Basic;
+	ShaShakType shaShakType  = ShaShakType::Basic;
 };
 class PlayerItem : public Transform
 {
@@ -20,6 +21,7 @@ public:
 
 	bool InsertBubble(BubbleType type);
 	bool InsertBackGround(PlayerBackGroundType type);
+	bool InsertShaShak(ShaShakType type);
 
 	void ChaingeCurStatus(ShowItemStatus status) { curStatus = status; }
 	ShowItemStatus GetCurStatus() { return curStatus; }
@@ -35,15 +37,19 @@ private:
 	void SetEventFunc();
 	void BubbleRender();
 	void BackGroundRender();
+	void ShaShakRender();
 
 	void BubbleUpdate();
 	void BackGroundUpdate();
+	void ShaShakUpdate();
 
 	void CreateBubble();
 	void CreateBackGround();
+	void CreateShaShak();
 
 	void OnClickBackGroundButton(PlayerBackGroundType type);
 	void OnClickBubbleButton(BubbleType type);
+	void OnClickShaShakButton(ShaShakType type);
 
 private:
 	Quad* backGround;
@@ -56,7 +62,9 @@ private:
 
 	unordered_set<BubbleType> inventoryBubble;
 	unordered_set<PlayerBackGroundType> inventoryBackGround;
+	unordered_set<ShaShakType> inventoryShaShak;
 
 	unordered_map <BubbleType, Button*> showBubble;
 	unordered_map <PlayerBackGroundType, Button*> showBackGround;
+	unordered_map <ShaShakType, Button*> showShaShak;
 };

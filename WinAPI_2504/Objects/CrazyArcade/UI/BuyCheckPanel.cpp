@@ -31,7 +31,7 @@ void BuyCheckPanel::SetEventFunc()
 	buttons[0]->SetOnClick([this]() {OnClickYes(); });
 	buttons[1]->SetOnClick([this]() {OnClickNo(); });
 
-	EventManager::Get()->AddEvent("SendItemData", [this](void* param) {GetInformation((BuyItem*)param);});
+	EventManager::Get()->AddEvent("SendItemData", [this](void* param) {SetInformation((BuyItem*)param);});
 }
 
 void BuyCheckPanel::OnClickYes()

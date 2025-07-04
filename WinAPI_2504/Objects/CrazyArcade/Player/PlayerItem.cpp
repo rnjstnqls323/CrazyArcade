@@ -5,6 +5,7 @@ PlayerItem::PlayerItem()
     SetLocalPosition(Vector2{CENTER_X-200,CENTER_Y+50});
     CreateBubble();
     CreateBackGround();
+    CreateShaShak();
     UpdateWorld();
 
     backGround = new Quad(L"Resources/Textures/CrazyArcade_UI/Inventory/Panel.png");
@@ -21,6 +22,16 @@ PlayerItem::~PlayerItem()
         delete backGround.second;
     }
     showBackGround.clear();
+    for (auto& bubble : showBubble)
+    {
+        delete bubble.second;
+    }
+    showBubble.clear();
+    for (auto& shashak : showShaShak)
+    {
+        delete shashak.second;
+    }
+    showShaShak.clear();
 }
 
 void PlayerItem::Update()
@@ -36,6 +47,9 @@ void PlayerItem::Update()
     case ShowItemStatus::BackGround:
         BackGroundUpdate();
         return;
+    case ShowItemStatus::ShaShak:
+        ShaShakUpdate();
+        return;
     }
 }
 
@@ -50,6 +64,9 @@ void PlayerItem::Render()
         return;
     case ShowItemStatus::BackGround:
         BackGroundRender();
+        return;
+    case ShowItemStatus::ShaShak:
+        ShaShakRender();
         return;
     }
 }
@@ -82,6 +99,20 @@ bool PlayerItem::InsertBackGround(PlayerBackGroundType type)
 
     return true;
 }
+bool PlayerItem::InsertShaShak(ShaShakType type)
+{
+    if (inventoryShaShak.count(type)) return false;
+
+    inventoryShaShak.insert(type);
+    int num = inventoryShaShak.size() - 1;
+    int col = 4;
+    Vector2 pos = { startPos.x + (num % col) * addPos.x , startPos.y + (num / col) * addPos.y };
+    showShaShak[type]->SetParent(this);
+    showShaShak[type]->SetLocalPosition(pos);
+    showShaShak[type]->UpdateWorld();
+
+    return true;
+}
 void PlayerItem::SetBasic(ShowItemStatus status)
 {
     switch (status)
@@ -93,6 +124,7 @@ void PlayerItem::SetBasic(ShowItemStatus status)
         choiceType.backGroundType = PlayerBackGroundType::Basic;
         break;
     case ShowItemStatus::ShaShak:
+        choiceType.shaShakType = ShaShakType::Basic;
         break;
     }
 }
@@ -122,6 +154,11 @@ void PlayerItem::SetEventFunc()
         BubbleType key = bubble.first;
         bubble.second->SetOnClick([this, key]() {OnClickBubbleButton(key); });
     }
+    for (auto& shaShak : showShaShak)
+    {
+        ShaShakType key = shaShak.first;
+        shaShak.second->SetOnClick([this, key]() {OnClickShaShakButton(key); });
+    }
 }
 
 void PlayerItem::BubbleRender()
@@ -142,6 +179,15 @@ void PlayerItem::BackGroundRender()
     }
 }
 
+void PlayerItem::ShaShakRender()
+{
+    backGround->Render();
+    for (ShaShakType type : inventoryShaShak)
+    {
+        showShaShak[type]->Render();
+    }
+}
+
 void PlayerItem::BubbleUpdate()
 {
     for (BubbleType type : inventoryBubble)
@@ -155,6 +201,14 @@ void PlayerItem::BackGroundUpdate()
     for (PlayerBackGroundType type : inventoryBackGround)
     {
         showBackGround[type]->Update();
+    }
+}
+
+void PlayerItem::ShaShakUpdate()
+{
+    for (ShaShakType type : inventoryShaShak)
+    {
+        showShaShak[type]->Update();
     }
 }
 
@@ -182,6 +236,18 @@ void PlayerItem::CreateBackGround() //여기서 애초에 위치를 잡을 필요가없네
     }
 }
 
+void PlayerItem::CreateShaShak()
+{
+    Vector2 size = Vector2{ 80,80 };
+    wstring path = L"Item/ShaShak/";
+    for (int i = 0; i < (int)ShaShakType::Heart; i++)
+    {
+        ShaShakType type = (ShaShakType)(i + 1);
+        wstring name = ShaShak::GetShaShakTypeToWString(type);
+        showShaShak[type] = new Button(path + name, startPos, size);
+    }
+}
+
 void PlayerItem::OnClickBackGroundButton(PlayerBackGroundType type)
 {
     choiceType.backGroundType = type;
@@ -190,5 +256,10 @@ void PlayerItem::OnClickBackGroundButton(PlayerBackGroundType type)
 void PlayerItem::OnClickBubbleButton(BubbleType type)
 {
     choiceType.bubbleType = type;
+}
+
+void PlayerItem::OnClickShaShakButton(ShaShakType type)
+{
+    choiceType.shaShakType = type;
 }
 

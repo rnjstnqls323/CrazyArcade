@@ -14,7 +14,7 @@ private:
 
 	void OnClickYes();
 	void OnClickNo();
-	void GetInformation(BuyItem* itemData) { this->itemData = itemData; this->itemData; }
+	void SetInformation(BuyItem* itemData) { this->itemData = itemData; this->itemData; }
 	void Reset() override {}
 
 private:
