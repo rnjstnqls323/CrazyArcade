@@ -14,5 +14,4 @@ private:
 
 	void OnClickYesButton();
 	void OnClickNoButton();
-	void Reset() override {}
 };

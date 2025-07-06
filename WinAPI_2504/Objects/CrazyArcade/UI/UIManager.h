@@ -15,6 +15,9 @@ public:
 	void AddShowPanel(PanelType key);
 	void PopForntPanel();
 
+	PanelType GetFrontPanelType() { return showPanels.back()->GetPanelType(); }
+	PanelType GetPrePanelType();
+
 	void Reset() { showPanels.clear(); }
 private:
 	template<typename T>

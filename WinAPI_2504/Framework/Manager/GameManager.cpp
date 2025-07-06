@@ -13,7 +13,7 @@ GameManager::GameManager()
 	SCENE->AddScene("Store", new StoreScene());
 	SCENE->AddScene("Loby", new LobyScene());
 
-	SCENE->ChangeScene("Store");
+	SCENE->ChangeScene("Game");
 }
 
 GameManager::~GameManager()

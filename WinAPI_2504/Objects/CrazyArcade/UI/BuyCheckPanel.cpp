@@ -2,6 +2,7 @@
 
 BuyCheckPanel::BuyCheckPanel()
 {
+	type = PanelType::BuyCheckPanel;
 	CreateButtons();
 	CreateBackGround();
 

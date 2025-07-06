@@ -11,6 +11,4 @@ private:
 	void SetEventFunc() override;
 
 	void OnClickYes();
-
-	void Reset() override {}
 };

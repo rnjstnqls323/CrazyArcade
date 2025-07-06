@@ -13,7 +13,6 @@ private:
 	void CreateBackGround() override;
 
 	void SetEventFunc() override;
-	void Reset() override {}
 
 	void OnClickYes();
 

@@ -3,6 +3,7 @@
 
 GoBackPanel::GoBackPanel()
 {
+	type = PanelType::GoBackPanel;
 	CreateButtons();
 	CreateBackGround();
 	SetEventFunc();
@@ -34,6 +35,8 @@ void GoBackPanel::SetEventFunc()
 
 void GoBackPanel::OnClickYesButton()
 {
+	if (UIManager::Get()->GetPrePanelType() == PanelType::StorePanel)
+		EventManager::Get()->ExcuteEvent("OutStore",nullptr);
 	SCENE->ChangeScene("Loby");
 }
 

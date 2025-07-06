@@ -12,7 +12,9 @@ public:
 
 	virtual void Update(Player* player = nullptr);
 	virtual void Render();
+	virtual PanelType GetPanelType() { return type; }
 	void PanelEdit();
+	virtual void Reset() {}
 
 protected:
 	virtual void CreateButtons() = 0;
@@ -20,9 +22,8 @@ protected:
 	virtual void CreateBackGround() = 0;
 	virtual void SetEventFunc() = 0;
 
-	virtual void Reset() = 0;
 protected:
-
+	PanelType type;
 	Vector2 pos = { 700, 480 };
 	Quad* backGround;
 	vector<Button*> buttons;

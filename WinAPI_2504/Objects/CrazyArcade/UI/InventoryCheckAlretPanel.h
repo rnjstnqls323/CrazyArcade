@@ -6,8 +6,6 @@ public:
 	InventoryCheckAlretPanel();
 	~InventoryCheckAlretPanel();
 private:
-
-
 	// Panel을(를) 통해 상속됨
 	void CreateButtons() override;
 
@@ -17,5 +15,4 @@ private:
 
 	void OnClickYes();
 
-	void Reset() override {}
 };

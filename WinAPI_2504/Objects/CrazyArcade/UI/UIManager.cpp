@@ -48,6 +48,7 @@ void UIManager::Edit()
 
 void UIManager::AddShowPanel(PanelType key)
 {
+	panels[key]->Reset();
 	showPanels.push_back(panels[key]);
 }
 
@@ -56,4 +57,10 @@ void UIManager::PopForntPanel()
 	if (showPanels.empty()) return;
 
 	showPanels.pop_back();
+}
+
+PanelType UIManager::GetPrePanelType()
+{
+	if (showPanels.size() - 2 < 0) return PanelType::ExitPanel;
+	return showPanels[showPanels.size() - 2]->GetPanelType();
 }

@@ -13,6 +13,8 @@ public:
 
 	void Update(Player* player) override;
 	void Render() override;
+	
+	void Reset() override {} //¿Ã∞≈∞ÌπŒ
 private:
 	void CreateShowSetItem();
 	void ChangeShowItemFront(ShowItemStatus type);
@@ -28,7 +30,6 @@ private:
 
 	void AddItem(BuyItem* item);
 
-	void Reset() override {} //¿Ã∞« ∞ÌπŒ
 private:
 	wstring path = L"Resources/Textures/CrazyArcade_UI/Inventory/";
 	unordered_map<ShowItemStatus,ShowSetItem> showSetItem;

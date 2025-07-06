@@ -2,6 +2,7 @@
 
 ExitPanel::ExitPanel()
 {
+	type = PanelType::ExitPanel;
 	CreateButtons();
 	CreateBackGround();
 	SetEventFunc();

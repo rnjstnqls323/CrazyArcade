@@ -10,13 +10,13 @@ public:
 
 	void Update(Player* player) override;
 	void Render() override;
-
+	void Reset() override { timer = 0.0f; }
 private:
 	void CreateButtons() override {}
 	void CreateBackGround() override;
 	void SetEventFunc() override {}
 
-	void Reset() override {} //이거타이머초기화
+
 private:
 	float timer = 0.0f;
 };

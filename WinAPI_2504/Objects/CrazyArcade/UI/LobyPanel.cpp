@@ -2,6 +2,7 @@
 
 LobyPanel::LobyPanel()
 {
+	type = PanelType::LobyPanel;
 	CreateButtons();
 	CreateBackGround();
 	CreateCharacterButton();

@@ -2,6 +2,7 @@
 
 InventoryCheckAlretPanel::InventoryCheckAlretPanel()
 {
+	type = PanelType::InventoryCheckAlretPanel;
 	CreateButtons();
 	CreateBackGround();
 

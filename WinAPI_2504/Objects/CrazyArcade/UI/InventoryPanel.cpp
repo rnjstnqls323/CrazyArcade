@@ -2,6 +2,7 @@
 
 InventoryPanel::InventoryPanel()
 {
+	type = PanelType::InventoryPanel;
 	CreateButtons();
 	CreateBackGround();
 	CreateShowSetItem();

@@ -2,6 +2,7 @@
 
 NoChoiceAlretPanel::NoChoiceAlretPanel()
 {
+	type = PanelType::NoChoiceAlretPanel;
 	CreateButtons();
 	CreateBackGround();
 

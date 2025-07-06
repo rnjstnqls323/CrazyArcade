@@ -2,6 +2,7 @@
 
 NoLucciAlretPanel::NoLucciAlretPanel()
 {
+	type = PanelType::NoLucciAlretPanel;
 	CreateButtons();
 	CreateBackGround();
 

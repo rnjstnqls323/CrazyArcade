@@ -2,6 +2,7 @@
 
 StorePanel::StorePanel()
 {
+	type = PanelType::StorePanel;
 	CreateButtons();
 	CreateBackGround();
 	CreateShowLucci();
@@ -50,6 +51,18 @@ void StorePanel::Render()
 
 	choiceItem->Render();
 	testBackGround->Render();
+}
+
+void StorePanel::Reset()
+{
+	isSavePreType = false;
+	isChoice = false;
+
+	preChoiceType.backGroundType = PlayerBackGroundType::Basic;
+	preChoiceType.bubbleType = BubbleType::Basic;
+	preChoiceType.shaShakType = ShaShakType::Basic;
+	buyItem.status = ShowItemStatus::None;
+
 }
 
 void StorePanel::CreateButtons()
@@ -104,6 +117,8 @@ void StorePanel::SetEventFunc()
 	buttons[4]->SetOnClick([this]() {OnClickItem(ShowItemStatus::ShaShak);});
 	buttons[5]->SetOnClick([this]() {OnClickTest();});
 	buttons[6]->SetOnClick([this]() {OnClickSet();});
+
+	EventManager::Get()->AddEvent("OutStore", [this](void* param) {ChangePreType(); });
 }
 
 void StorePanel::OnClickExit()
@@ -113,8 +128,6 @@ void StorePanel::OnClickExit()
 
 void StorePanel::OnClickGoBack()
 {
-	PlayerBackGround::SetBackGroundType(preType.backGroundType);
-	BubbleManager::Get()->ChangeBubbleType(preType.bubbleType);
 	UIManager::Get()->AddShowPanel(PanelType::GoBackPanel);
 }
 
@@ -204,6 +217,12 @@ void StorePanel::ChangeCoiceItem()
 	}
 	choiceItem->GetMaterial()->SetBaseMap(path+name+L".png");
 	isChoice = true;
+}
+
+void StorePanel::ChangePreType()
+{
+	PlayerBackGround::SetBackGroundType(preType.backGroundType);
+	BubbleManager::Get()->ChangeBubbleType(preType.bubbleType);
 }
 
 void StorePanel::SavePreType()

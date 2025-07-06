@@ -16,6 +16,9 @@ public:
 
 	void Update(Player* player) override;
 	void Render() override;
+
+
+	void Reset() override;
 private:
 	void CreateButtons() override;
 	void CreateBackGround() override;
@@ -31,15 +34,15 @@ private:
 
 	void ChangeLucci(int lucci);
 	void ChangeCoiceItem();
+	void ChangePreType();
 	void SavePreType();
 	void SettingItem();
 
 	void SetBuyItem();
 
-	void Reset() override {}
 private:
-	bool isSavePreType = false;
 	bool isChoice = false;
+	bool isSavePreType = false;
 	int lucci;
 	wstring path = L"Resources/Textures/CrazyArcade_UI/Store/";
 

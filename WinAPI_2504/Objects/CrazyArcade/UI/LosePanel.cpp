@@ -2,6 +2,7 @@
 
 LosePanel::LosePanel()
 {
+	type = PanelType::LosePanel;
 	CreateBackGround();
 }
 

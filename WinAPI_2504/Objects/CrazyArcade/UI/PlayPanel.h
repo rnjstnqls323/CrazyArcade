@@ -8,19 +8,25 @@ public:
 
 	void Update(Player* player) override;
 	void Render() override;
-
+	void Reset() override;
 private:
 	void CreateButtons() override;
 	void CreateBackGround() override;
 	void CreatePlayerAndNeedle();
+	void CreateTimer();
+
+	void ChangeTime();
 	void SetEventFunc() override;
 
 	void OutButton();
-
-	void Reset() override {} //ÇÊ¿ä
+	
 private:
+	wstring path = L"Resources/Textures/CrazyArcade_UI/Play/";
+	float leftTime = 180.0f;
+	float timer = 1.0f;
 	bool isNeedle = false;
 	PlayerViewSmall* player;
 	Quad* needle;
+	vector<Quad*> showTime;
 	//Quad* backGround;
 };

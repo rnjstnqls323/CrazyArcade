@@ -2,6 +2,7 @@
 
 WinPanel::WinPanel()
 {
+	type = PanelType::WinPanel;
 	CreateBackGround();
 }
 
