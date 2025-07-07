@@ -36,6 +36,8 @@ private:
 	int maxBubbleCount = 0;
 	int curBubbleCount = 0;
 
+	int jetCount = 0;
+
 	TileMap* map;
 
 	vector<Bubble*> bubbles;

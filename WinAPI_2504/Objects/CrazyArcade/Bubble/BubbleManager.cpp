@@ -58,6 +58,7 @@ bool BubbleManager::SpawnBubble(Vector2 pos, Index2 index,TileMap* map)
 	{
 		if (bubble->IsActive())
 			continue;
+		bubble->SetJetLength(jetCount);
 		bubble->Spawn(pos,index,map,tag);
 		tag++;
 		curBubbleCount++;
@@ -82,27 +83,18 @@ void BubbleManager::BombBubble(Index2 index)
 
 void BubbleManager::SetBubbles(int bubbleCount, int jetCount)
 {
-	for (Bubble* bubble : bubbles)
-	{
-		bubble->SetJetLength(jetCount);
-	}
 	maxBubbleCount = bubbleCount;
+	this->jetCount = jetCount;
 }
 
 void BubbleManager::SetJetLengthMax()
 {
-	for (Bubble* bubble : bubbles)
-	{
-		bubble->SetJetMaxLength();
-	}
+	jetCount = 10;
 }
 
 void BubbleManager::AddJetLength()
 {
-	for (Bubble* bubble : bubbles)
-	{
-		bubble->AddLength();
-	}
+	jetCount++;
 }
 
 void BubbleManager::AddMaxBubble()

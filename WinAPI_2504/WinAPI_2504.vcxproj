@@ -224,6 +224,8 @@
     <ClInclude Include="Objects\CrazyArcade\UI\NoLucciAlretPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\Panel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\PlayPanel.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\PlayStartPanel.h" />
+    <ClInclude Include="Objects\CrazyArcade\UI\StartPanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\StorePanel.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\UIManager.h" />
     <ClInclude Include="Objects\CrazyArcade\UI\WinPanel.h" />
@@ -233,7 +235,11 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scenes\LobyScene.h" />
     <ClInclude Include="Scenes\MapEditScene.h" />
+    <ClInclude Include="Scenes\PlayScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\Stage1Scene.h" />
+    <ClInclude Include="Scenes\Stage2Scene.h" />
+    <ClInclude Include="Scenes\StartScene.h" />
     <ClInclude Include="Scenes\StoreScene.h" />
     <ClInclude Include="Scenes\TestScene.h" />
     <ClInclude Include="targetver.h" />
@@ -320,6 +326,8 @@
     <ClCompile Include="Objects\CrazyArcade\UI\NoLucciAlretPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\Panel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\PlayPanel.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\PlayStartPanel.cpp" />
+    <ClCompile Include="Objects\CrazyArcade\UI\StartPanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\StorePanel.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\UIManager.cpp" />
     <ClCompile Include="Objects\CrazyArcade\UI\WinPanel.cpp" />
@@ -328,6 +336,10 @@
     <ClCompile Include="Objects\Manger\EventManager.cpp" />
     <ClCompile Include="Scenes\LobyScene.cpp" />
     <ClCompile Include="Scenes\MapEditScene.cpp" />
+    <ClCompile Include="Scenes\PlayScene.cpp" />
+    <ClCompile Include="Scenes\Stage1Scene.cpp" />
+    <ClCompile Include="Scenes\Stage2Scene.cpp" />
+    <ClCompile Include="Scenes\StartScene.cpp" />
     <ClCompile Include="Scenes\StoreScene.cpp" />
     <ClCompile Include="Scenes\TestScene.cpp" />
     <ClCompile Include="WinAPI_2504.cpp" />

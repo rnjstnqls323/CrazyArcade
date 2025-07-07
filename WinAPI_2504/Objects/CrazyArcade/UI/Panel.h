@@ -2,7 +2,7 @@
 
 enum class PanelType {
 	PlayPanel,ExitPanel,GoBackPanel, WinPanel,LosePanel, LobyPanel, InventoryPanel, StorePanel, BuyCheckPanel,
-	NoLucciAlretPanel, InventoryCheckAlretPanel, NoChoiceAlretPanel
+	NoLucciAlretPanel, InventoryCheckAlretPanel, NoChoiceAlretPanel, StartPanel, PlayStartPanel
 };
 class Panel : public Transform
 {

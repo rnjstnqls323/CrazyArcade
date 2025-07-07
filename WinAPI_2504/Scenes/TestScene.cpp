@@ -4,7 +4,7 @@
 TestScene::TestScene()
 {
 
-	map = new TileMap("TestStage1.map");
+	map = new TileMap("Stage1.map");
 
 	player = new Player();
 
@@ -59,6 +59,7 @@ void TestScene::GUIRender()
 void TestScene::Start()
 {
 	player->Reset();
+	MonsterManager::Get()->Reset();
 	UIManager::Get()->AddShowPanel(PanelType::PlayPanel);
 	map->Load();
 	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());

@@ -4,6 +4,9 @@
 #include "Scenes/TestScene.h"
 #include "Scenes/LobyScene.h"
 #include "Scenes/StoreScene.h"
+#include "Scenes/StartScene.h"
+#include "Scenes/Stage1Scene.h"
+#include "Scenes/Stage2Scene.h"
 GameManager::GameManager()
 {
 	Create();
@@ -12,8 +15,11 @@ GameManager::GameManager()
 	SCENE->AddScene("Game", new TestScene());
 	SCENE->AddScene("Store", new StoreScene());
 	SCENE->AddScene("Loby", new LobyScene());
+	SCENE->AddScene("Start", new StartScene());
+	SCENE->AddScene("Stage1", new Stage1Scene());
+	SCENE->AddScene("Stage2", new Stage2Scene());
 
-	SCENE->ChangeScene("Game");
+	SCENE->ChangeScene("Stage1");
 }
 
 GameManager::~GameManager()

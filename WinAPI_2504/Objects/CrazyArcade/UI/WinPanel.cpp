@@ -15,14 +15,10 @@ void WinPanel::Update(Player* player)
 	timer += DELTA;
 	if (timer >= SHOW_TIME)
 	{
+		player->SetLucci(player->GetLucci()+ADD_WIN_LUCCI);
 		UIManager::Get()->PopForntPanel();
-		//씬옮기는거 해주자
+		EventManager::Get()->ExcuteEvent("ChangeStage",nullptr);
 	}
-}
-
-void WinPanel::Render()
-{
-	backGround->Render();
 }
 void WinPanel::CreateBackGround()
 {

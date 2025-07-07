@@ -15,8 +15,6 @@ public:
 	void Update(Player* player);
 	void Render();
 
-	void ResetManager();
-
 	void AddMonsterPos(TileMap* map, unordered_map<int, MonsterPos> pos);
 	void MonsterSpawn();
 
@@ -31,7 +29,10 @@ public:
 		trapMoveMonster.insert(monster);
 	}
 
+	void Reset();
+
 private:
+	void CheckMonsterDie();
 	void BlockBubbleMonster(Monster* monster);
 	void MonsterCollisionMonster(Monster* monster);
 	void MonsterCheckDie(Monster* monster);
@@ -62,7 +63,7 @@ private:
 
 private:
 	bool isDead = false;
-
+	bool isKing = false;
 	
 	AStar* astar;
 	TileMap* map;

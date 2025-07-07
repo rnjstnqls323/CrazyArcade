@@ -14,6 +14,8 @@ UIManager::UIManager()
 	CreatePanel<NoLucciAlretPanel>(PanelType::NoLucciAlretPanel);
 	CreatePanel<InventoryCheckAlretPanel>(PanelType::InventoryCheckAlretPanel);
 	CreatePanel<NoChoiceAlretPanel>(PanelType::NoChoiceAlretPanel);
+	CreatePanel<StartPanel>(PanelType::StartPanel);
+	CreatePanel<PlayStartPanel>(PanelType::PlayStartPanel);
 }
 
 UIManager::~UIManager()

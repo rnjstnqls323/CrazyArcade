@@ -36,6 +36,7 @@ public:
 	void Render();
 	virtual bool MonsterCollisionPlayer(Player* player);
 	virtual bool MonsterCollisionMonster(Monster* monster);
+	virtual void SetIsCollision(bool isCollision) { this->isCollision = isCollision; }
 
 	
 	Vector2 GetStartPos() { return startPos; }
@@ -49,7 +50,7 @@ public:
 		animation->Play(curStatus);
 	}
 
-	void ResetMonster();
+	virtual void Reset();
 	void SetHitDir(Vector2 overlap,Vector2 playerPos);
 	bool IsDeadOrTrap();
 
@@ -71,6 +72,7 @@ protected:
 	float speed = 1.0f; 
 	bool forward=true;
 	float lerpT = 0.0f;
+	bool isCollision = false;
 
 	Vector2 startPos;
 	Vector2 endPos;

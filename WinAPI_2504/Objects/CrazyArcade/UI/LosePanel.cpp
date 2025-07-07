@@ -15,13 +15,10 @@ void LosePanel::Update(Player* player)
 	timer += DELTA;
 	if (timer >= SHOW_TIME)
 	{
-		//씬옮기는거 해주자
+		Player::SetLucci(Player::GetLucci() + ADD_LOSE_LUCCI);
+		UIManager::Get()->PopForntPanel();
+		SCENE->ChangeScene("Loby");
 	}
-}
-
-void LosePanel::Render()
-{
-	backGround->UpdateWorld();
 }
 void LosePanel::CreateBackGround()
 {

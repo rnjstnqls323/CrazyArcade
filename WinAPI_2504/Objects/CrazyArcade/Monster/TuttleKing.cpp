@@ -69,6 +69,17 @@ void TuttleKing::Damage()
 	animation->Play(KingDamage);
 }
 
+void TuttleKing::Reset()
+{
+	curStatus = MonsterIdle;
+	forward = true;
+	lerpT = 0.0f;
+	isActive = false;
+	hitDir = Vector2{ 0,0 };
+	timer = 0.0f;
+	isCollision = false; //여기수정해야됨
+}
+
 void TuttleKing::Move()
 {
 	if (path.empty())

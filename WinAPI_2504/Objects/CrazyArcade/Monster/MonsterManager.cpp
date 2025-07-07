@@ -4,7 +4,7 @@ MonsterManager::MonsterManager()
 {
 	CreateMonsters<PinkStar>(MonsterType::PinkStar);
 	CreateMonsters<PurpleStar>(MonsterType::PurpleStar);
-	CreateMonsters<TuttleKing>(MonsterType::TuttleKing);
+	CreateMonster<TuttleKing>(MonsterType::TuttleKing);
 }
 
 MonsterManager::~MonsterManager()
@@ -37,23 +37,13 @@ void MonsterManager::Update(Player* player)
 			MonsterCheckDie(mon);
 			MonsterCollisionPlayer(mon, player);
 			MonsterCollisionMonster(mon);
-
+			BlockBubbleMonster(mon);
 			if (mon->GetMonsterType() == MonsterType::TuttleKing)
 				GeneratePathTuttleKing(mon, player);
 			mon->Update();
 		}
 	}
-	if (isDead)
-	{
-		MonsterSpawn();
-		isDead = false;
-	}
-
-	if (monsterPos[MonsterType::PurpleStar].size() == 0)
-	{
-		isDead = false; // 이거 지우고 씬 넘어가는거 구현하면됨
-	}
-
+	CheckMonsterDie();
 }
 
 void MonsterManager::Render()
@@ -71,22 +61,6 @@ void MonsterManager::Render()
 	//	astar->Render();
 
 }
-
-void MonsterManager::ResetManager()
-{
-	for (auto& monPos : monsterPos)
-	{
-		monPos.second.clear();
-	}
-	monsterPos.clear();
-
-	for (auto& monster : monsters)
-	{
-		for (Monster* mon : monster.second)
-			mon->ResetMonster();
-	}
-}
-
 void MonsterManager::AddMonsterPos(TileMap* map, unordered_map<int, MonsterPos> pos)
 {
 	this->map = map;
@@ -171,6 +145,7 @@ void MonsterManager::DeadMonster(Monster* monster)
 
 void MonsterManager::SpawnTuttleKing()
 {
+	isKing = true;
 	TuttleKing* king = (TuttleKing*)monsters[MonsterType::TuttleKing][0];
 	king->SetActive(true);
 	king->SetKingStatus(KingIdle);
@@ -178,9 +153,51 @@ void MonsterManager::SpawnTuttleKing()
 }
 
 
+void MonsterManager::Reset()
+{
+	isKing = false;
+	isDead = false;
+	for (auto& monPos : monsterPos)
+	{
+		monPos.second.clear();
+	}
+	monsterPos.clear();
+
+	for (auto& monster : monsters)
+	{
+		for (Monster* mon : monster.second)
+			mon->Reset();
+	}
+	eraseMonster.clear();
+	trapMoveMonster.clear();
+
+}
+
+void MonsterManager::CheckMonsterDie()
+{
+	if (isDead)
+	{
+		MonsterSpawn();
+		isDead = false;
+	}
+	if (monsterPos[MonsterType::PurpleStar].size() == 0 && !isKing)
+	{
+		EventManager::Get()->ExcuteEvent("EndStage", nullptr);
+		UIManager::Get()->AddShowPanel(PanelType::WinPanel);
+	}
+	else if (isKing && monsters[MonsterType::TuttleKing][0]->GetMonsterStatus() == KingDie)
+	{
+		EventManager::Get()->ExcuteEvent("EndStage", nullptr);
+		UIManager::Get()->AddShowPanel(PanelType::WinPanel);
+	}
+}
+
 void MonsterManager::BlockBubbleMonster(Monster* monster)
 {
-	map->CheckCollision(monster); //이거 고민 좀 더 하자. 막을지말지
+	if (monster->GetMonsterType() == MonsterType::TuttleKing) return;
+	Index2 monIndex = map->GetTileIndex(monster);
+	if (map->GetTileType(monIndex) == BubbleTile)
+		monster->SetIsCollision(true);
 }
 
 void MonsterManager::MonsterCollisionMonster(Monster* monster)

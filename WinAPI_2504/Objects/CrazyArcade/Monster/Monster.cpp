@@ -77,7 +77,7 @@ bool Monster::MonsterCollisionMonster(Monster* monster)
 	}
 }
 
-void Monster::ResetMonster()
+void Monster::Reset()
 {
 	curStatus = MonsterIdle;
 	forward = true;
@@ -85,6 +85,7 @@ void Monster::ResetMonster()
 	isActive = false;
 	hitDir = Vector2{ 0,0 };
 	timer = 0.0f;
+	isCollision = false;
 }
 
 void Monster::SetHitDir(Vector2 overlap, Vector2 playerPos)
@@ -117,14 +118,10 @@ void Monster::StatusUpdate()
 	switch (curStatus)
 	{
 	case MonsterIdle:
-		timer += DELTA;
-		break;
 	case MonsterTrap:
 		timer += DELTA;
 		break;
 	case MonsterDie:
-		Dead();
-		break;
 	case MonsterTrapDie:
 		Dead();
 		break;
@@ -141,8 +138,8 @@ void Monster::Move()
 		HitMove();
 		return;
 	}
-
-	LinearMove();
+	if(!isCollision)
+		LinearMove();
 }
 
 void Monster::LinearMove()
@@ -191,7 +188,7 @@ void Monster::Dead()
 		return;
 	isActive = false;
 	MonsterManager::Get()->DeadMonster(this);
-	ResetMonster();
+	Reset();
 }
 
 void Monster::MonsterCrush()

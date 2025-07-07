@@ -25,6 +25,12 @@ void PlayPanel::Update(Player* player)
 {
 	Panel::Update(player);
 	isNeedle = player->IsHaveNeedle();
+	if (leftTime <= 0)
+	{
+		EventManager::Get()->ExcuteEvent("EndStage", nullptr);
+		UIManager::Get()->AddShowPanel(PanelType::LosePanel);
+		return;
+	}
 	ChangeTime();
 }
 

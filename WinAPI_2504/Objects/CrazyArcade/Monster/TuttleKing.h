@@ -37,6 +37,7 @@ public:
 
 	bool IsPathEmpty() { return path.empty(); }
 	
+	void Reset() override;
 private:
 	void Move() override;
 	void StatusUpdate() override;

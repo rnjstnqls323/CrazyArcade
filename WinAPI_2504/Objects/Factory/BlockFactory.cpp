@@ -86,7 +86,10 @@ void BlockFactory::Reset() // 맵 로드할때 리셋해주고 로드하자
 		pair.second->blockWorld.clear();
 
 		if (pair.second->instanceBuffer != nullptr)
+		{
 			delete pair.second->instanceBuffer;
+			pair.second->instanceBuffer = nullptr;
+		}
 	}
 }
 

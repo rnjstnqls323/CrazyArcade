@@ -63,7 +63,8 @@ void MapEditScene::GUIRender()
 
 void MapEditScene::Start()
 {
-
+	CreateEditTiles();
+	CreateBackGround();
 }
 
 void MapEditScene::End()

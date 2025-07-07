@@ -225,7 +225,11 @@ void Player::StatusUpdate()
 		TrapPlayer();
 		break;
 	case CharacterDie:
-		Move(); // ¹Ù²ãÁà¾ßµÊ
+		if (!animation[character]->IsPlay(curStatus))
+		{
+			UIManager::Get()->AddShowPanel(PanelType::LosePanel);
+			EventManager::Get()->ExcuteEvent("EndStage", nullptr);
+		}
 		break;
 	case CharacterLive:
 		if (!animation[character]->IsPlay(curStatus))
