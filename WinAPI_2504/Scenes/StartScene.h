@@ -19,6 +19,7 @@ public:
 private:
 	void ChangeStatus();
 	void CreateAnimation();
+	void AddAudio();
 private:
 	Transform* transform;
 	MatrixBuffer* worldBuffer;

@@ -27,9 +27,11 @@ void LobyScene::GUIRender()
 void LobyScene::Start()
 {
 	UIManager::Get()->AddShowPanel(PanelType::LobyPanel);
+	Audio::Get()->Play("bg_Loby");
 }
 
 void LobyScene::End()
 {
 	UIManager::Get()->Reset();
+	Audio::Get()->Stop("bg_Loby");
 }

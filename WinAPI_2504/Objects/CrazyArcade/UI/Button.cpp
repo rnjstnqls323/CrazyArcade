@@ -20,13 +20,25 @@ Button::~Button()
 void Button::Update()
 {
 	
-	if (curStatus == Click && Input::Get()->IsKeyDown(VK_LBUTTON)) {
+	if (curStatus == Click && Input::Get()->IsKeyDown(VK_LBUTTON)) 
+	{
+		Audio::Get()->Play("ef_Click");
 		OnClick();
 	}
 	else if (IsPointCollision(mousePos))
+	{
 		curStatus = Click;
+		if (!isOnTheButton)
+		{
+			Audio::Get()->Play("ef_Hover",0.8);
+			isOnTheButton = true;
+		}
+	}
 	else
+	{
 		curStatus = NoneClick;
+		isOnTheButton = false;
+	}
 
 	UpdateWorld(); //this purpose is only test
 	quads[curStatus]->UpdateWorld();

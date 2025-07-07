@@ -183,11 +183,13 @@ void MonsterManager::CheckMonsterDie()
 	if (monsterPos[MonsterType::PurpleStar].size() == 0 && !isKing)
 	{
 		EventManager::Get()->ExcuteEvent("EndStage", nullptr);
+		Audio::Get()->Play("ef_Win");
 		UIManager::Get()->AddShowPanel(PanelType::WinPanel);
 	}
 	else if (isKing && monsters[MonsterType::TuttleKing][0]->GetMonsterStatus() == KingDie)
 	{
 		EventManager::Get()->ExcuteEvent("EndStage", nullptr);
+		Audio::Get()->Play("ef_Win");
 		UIManager::Get()->AddShowPanel(PanelType::WinPanel);
 	}
 }

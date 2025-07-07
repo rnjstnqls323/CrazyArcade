@@ -148,22 +148,28 @@ void InventoryPanel::OnClickItemSetting()
 void InventoryPanel::OnClickItemSetOff()
 {
 	ShowItemStatus status = itemPanel->GetCurStatus();
+	if (status == ShowItemStatus::None)
+	{
+		BubbleManager::Get()->ChangeBubbleType(BubbleType::Basic);
+		PlayerBackGround::SetBackGroundType(PlayerBackGroundType::Basic);
+		ShaShak::SetShaShakType(ShaShakType::Basic);
+		return;
+	}
 	itemPanel->SetBasic(status);
-	ChoiceItemType type = itemPanel->GetItemType();
 	switch (status)
 	{
 	case ShowItemStatus::None:
 		return;
 	case ShowItemStatus::Bubble:
-		BubbleManager::Get()->ChangeBubbleType(type.bubbleType);
+		BubbleManager::Get()->ChangeBubbleType(BubbleType::Basic);
 		ChangeShowItemFront(ShowItemStatus::Bubble);
 		break;
 	case ShowItemStatus::BackGround:
-		PlayerBackGround::SetBackGroundType(type.backGroundType);
+		PlayerBackGround::SetBackGroundType(PlayerBackGroundType::Basic);
 		ChangeShowItemFront(ShowItemStatus::BackGround);
 		break;
 	case ShowItemStatus::ShaShak:
-		ShaShak::SetShaShakType(type.shaShakType);
+		ShaShak::SetShaShakType(ShaShakType::Basic);
 		ChangeShowItemFront(ShowItemStatus::ShaShak);
 	}
 }

@@ -39,11 +39,13 @@ void StoreScene::Start()
 	player->SetLocalPosition({ 1000,400 });
 	player->UpdateWorld();
 	map->Load();
+	Audio::Get()->Play("bg_Store");
 }
 
 void StoreScene::End()
 {
 	UIManager::Get()->Reset();
+	Audio::Get()->Stop("bg_Store");
 }
 
 void StoreScene::SpawnBubble()

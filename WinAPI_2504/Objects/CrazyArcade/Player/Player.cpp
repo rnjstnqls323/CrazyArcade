@@ -227,6 +227,7 @@ void Player::StatusUpdate()
 	case CharacterDie:
 		if (!animation[character]->IsPlay(curStatus))
 		{
+			Audio::Get()->Play("ef_Lose");
 			UIManager::Get()->AddShowPanel(PanelType::LosePanel);
 			EventManager::Get()->ExcuteEvent("EndStage", nullptr);
 		}

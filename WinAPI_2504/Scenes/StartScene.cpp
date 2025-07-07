@@ -4,6 +4,7 @@
 StartScene::StartScene()
 {
 	CreateAnimation(); // 애니메이션 관련된거 전부 생성
+	AddAudio();
 }
 
 StartScene::~StartScene()
@@ -43,6 +44,7 @@ void StartScene::Start()
 void StartScene::End()
 {
 	UIManager::Get()->Reset();
+	Audio::Get()->Stop("bg_Start");
 }
 
 void StartScene::ChangeStatus()
@@ -54,6 +56,7 @@ void StartScene::ChangeStatus()
 		curStatus = (StartStatus)((int)curStatus + 1);
 		if (curStatus == StartPanel1)
 		{
+			Audio::Get()->Play("bg_Start");
 			UIManager::Get()->AddShowPanel(PanelType::StartPanel);
 			return;
 		}
@@ -74,4 +77,37 @@ void StartScene::CreateAnimation()
 	transform->UpdateWorld();
 
 	worldBuffer = new MatrixBuffer;
+}
+
+void StartScene::AddAudio()
+{
+	string folderPath = "Resources/Sound/";
+	string searchPath = folderPath + "*.*";
+
+	WIN32_FIND_DATAA findData;
+	HANDLE hFind = FindFirstFileA(searchPath.c_str(), &findData);
+
+	if (hFind == INVALID_HANDLE_VALUE)
+		return;
+
+	do {
+		if (!(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+			string fileName = findData.cFileName;
+
+			// 확장자 검사
+			if (fileName.find(".ogg") != string::npos || fileName.find(".mp3") != string::npos
+				|| fileName.find(".wav") != string::npos) {
+				string fullPath = folderPath + fileName;
+				string key = fileName.substr(0, fileName.find_last_of('.'));
+
+				bool isBgm = key.find("bg") != string::npos;
+				bool isLoop = key.find("ef") == string::npos;
+
+				Audio::Get()->Add(key, fullPath, isBgm, isLoop);
+			}
+		}
+
+	} while (FindNextFileA(hFind, &findData));
+
+	FindClose(hFind);
 }

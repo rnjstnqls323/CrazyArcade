@@ -17,13 +17,13 @@ PlayScene::~PlayScene()
 void PlayScene::Update()
 {
 	UIManager::Get()->Update(player);
+	StopAudio();
 	if (isEnd) return;
 	MonsterManager::Get()->Update(player);
 	player->Update();
 	if (!isStart) return;
 	SpawnBubble();
 	CheckCollision();
-
 	BubbleManager::Get()->Update();
 	ItemManager::Get()->Update(player, map);
 }
@@ -45,6 +45,7 @@ void PlayScene::Start()
 	MonsterManager::Get()->Reset();
 	UIManager::Get()->AddShowPanel(PanelType::PlayPanel);
 	UIManager::Get()->AddShowPanel(PanelType::PlayStartPanel);
+	Audio::Get()->Play("ef_GameStart");
 	map->Load();
 	MonsterManager::Get()->AddMonsterPos(map, map->GetMonsterPos());
 	Vector2 pos = map->GetTilePos(Index2(3, 2));
@@ -52,6 +53,7 @@ void PlayScene::Start()
 	isEnd = false;
 	isSpawn = false;
 	isStart = false;
+	isStop = false;
 
 	MonsterManager::Get()->MonsterSpawn();
 }

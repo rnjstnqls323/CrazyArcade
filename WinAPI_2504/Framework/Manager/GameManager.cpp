@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 #include "Scenes/MapEditScene.h"
-#include "Scenes/TestScene.h"
+//#include "Scenes/TestScene.h"
 #include "Scenes/LobyScene.h"
 #include "Scenes/StoreScene.h"
 #include "Scenes/StartScene.h"
@@ -12,14 +12,14 @@ GameManager::GameManager()
 	Create();
 		
 	SCENE->AddScene("Edit", new MapEditScene());
-	SCENE->AddScene("Game", new TestScene());
+	//SCENE->AddScene("Game", new TestScene());
 	SCENE->AddScene("Store", new StoreScene());
 	SCENE->AddScene("Loby", new LobyScene());
 	SCENE->AddScene("Start", new StartScene());
 	SCENE->AddScene("Stage1", new Stage1Scene());
 	SCENE->AddScene("Stage2", new Stage2Scene());
 
-	SCENE->ChangeScene("Stage1");
+	SCENE->ChangeScene("Start");
 }
 
 GameManager::~GameManager()

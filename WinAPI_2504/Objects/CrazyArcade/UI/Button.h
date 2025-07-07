@@ -20,6 +20,7 @@ private:
 	void CreateQuads();
 
 private:
+	bool isOnTheButton;
 	function<void()> onClick;
 	wstring path;
 	ButtonStatus curStatus = NoneClick;

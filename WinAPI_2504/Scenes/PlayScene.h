@@ -19,6 +19,7 @@ public:
 	StageStatus GetStageStatus() { return curStatus; }
 
 protected:
+	virtual void StopAudio() = 0;
 	virtual void CreatePlayerMap() = 0;
 	void CheckCollision();
 	void SpawnBubble();
@@ -27,6 +28,8 @@ protected:
 	void SetIsEndTrue() { isEnd = true; }
 
 protected:
+	bool isStop = false;
+
 	bool isStart = false;
 	bool isEnd = false;
 	bool isSpawn = false;

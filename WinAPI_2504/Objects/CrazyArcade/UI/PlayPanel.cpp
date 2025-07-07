@@ -28,6 +28,7 @@ void PlayPanel::Update(Player* player)
 	if (leftTime <= 0)
 	{
 		EventManager::Get()->ExcuteEvent("EndStage", nullptr);
+		Audio::Get()->Play("ef_Lose");
 		UIManager::Get()->AddShowPanel(PanelType::LosePanel);
 		return;
 	}
@@ -93,6 +94,7 @@ void PlayPanel::ChangeTime()
 	leftTime -= 1.0f;
 	if (leftTime <= 0.0f)
 	{
+		Audio::Get()->Play("ef_Lose");
 		UIManager::Get()->AddShowPanel(PanelType::LosePanel);
 	}
 	int minutes = (int)leftTime / 60;

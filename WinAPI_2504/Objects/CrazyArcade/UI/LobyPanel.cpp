@@ -103,7 +103,7 @@ void LobyPanel::CreatePlayerAndSelectPanel()
 
 void LobyPanel::OnClickStartButton()
 {
-	SCENE->ChangeScene("Game");
+	SCENE->ChangeScene("Stage1");
 }
 
 void LobyPanel::OnClickExitButton()
