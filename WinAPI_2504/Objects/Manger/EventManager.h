@@ -9,9 +9,10 @@ private:
 	~EventManager();
 
 public:
-	void AddEvent(const string& eventName, function<void(void*)> event)
+	int AddEvent(const string& eventName, function<void(void*)> event)
 	{
 		eventWithParams[eventName].push_back(event);
+		return eventWithParams[eventName].size()-1;
 	}
 
 	void ExcuteEvent(const string& eventName, void* param)
@@ -23,6 +24,10 @@ public:
 				event(param);
 			}
 		}
+	}
+	void RemoveEvent(const string& eventName, const int& key)
+	{
+		eventWithParams[eventName].erase(eventWithParams[eventName].begin() + key);
 	}
 
 private:

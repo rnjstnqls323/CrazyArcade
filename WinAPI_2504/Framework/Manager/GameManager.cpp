@@ -7,6 +7,7 @@
 #include "Scenes/StartScene.h"
 #include "Scenes/Stage1Scene.h"
 #include "Scenes/Stage2Scene.h"
+#include "Scenes/BossStageScene.h"
 GameManager::GameManager()
 {
 	Create();
@@ -18,6 +19,7 @@ GameManager::GameManager()
 	SCENE->AddScene("Start", new StartScene());
 	SCENE->AddScene("Stage1", new Stage1Scene());
 	SCENE->AddScene("Stage2", new Stage2Scene());
+	SCENE->AddScene("BossStage", new BossStageScene());
 
 	SCENE->ChangeScene("Start");
 }

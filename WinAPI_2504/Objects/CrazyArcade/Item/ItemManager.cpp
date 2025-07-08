@@ -59,8 +59,19 @@ void ItemManager::Render()
 
 void ItemManager::Spawn(Vector2 pos)
 {
+	int num = rand() % 10;
+	if (num > 2) return;
 	if (itemCount == maxItemCount) itemCount = 0;
 	items[itemCount++]->SpawnItem(pos);
+}
+
+void ItemManager::Reset()
+{
+	for (Item* item : items)
+	{
+		if (!item->IsActive()) continue;
+		item->SetActive(false);
+	}
 }
 
 void ItemManager::WaterDeleteItem(Item* item,TileMap* map)

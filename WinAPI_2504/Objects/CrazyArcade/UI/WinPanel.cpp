@@ -13,7 +13,7 @@ WinPanel::~WinPanel()
 void WinPanel::Update(Player* player)
 {
 	timer += DELTA;
-	if (timer >= SHOW_TIME)
+	if (timer >= SHOW_TIME )
 	{
 		player->SetLucci(player->GetLucci()+ADD_WIN_LUCCI);
 		UIManager::Get()->PopForntPanel();

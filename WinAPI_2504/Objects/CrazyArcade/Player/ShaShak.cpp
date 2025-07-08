@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-ShaShakType ShaShak :: shaShak = ShaShakType::Heart;
+ShaShakType ShaShak :: shaShak = ShaShakType::Basic;
 ShaShak::ShaShak()
 {
 	UpdateWorld();

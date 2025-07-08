@@ -116,6 +116,7 @@ void StorePanel::SetEventFunc()
 	buttons[3]->SetOnClick([this]() {OnClickItem(ShowItemStatus::BackGround);});
 	buttons[4]->SetOnClick([this]() {OnClickItem(ShowItemStatus::ShaShak);});
 	buttons[5]->SetOnClick([this]() {OnClickTest();});
+	buttons[5]->SetClickSound("ef_Set");
 	buttons[6]->SetOnClick([this]() {OnClickSet();});
 
 	EventManager::Get()->AddEvent("OutStore", [this](void* param) {ChangePreType(); });
@@ -223,6 +224,7 @@ void StorePanel::ChangePreType()
 {
 	PlayerBackGround::SetBackGroundType(preType.backGroundType);
 	BubbleManager::Get()->ChangeBubbleType(preType.bubbleType);
+	ShaShak::SetShaShakType(preType.shaShakType);
 }
 
 void StorePanel::SavePreType()

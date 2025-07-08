@@ -146,6 +146,7 @@ void Bubble::UpdateStatus()
 	{
 		if (timer >= BOMB_TIME)
 		{
+			Audio::Get()->Play("ef_Bomb");
 			curStatus = Exploding;
 			animation[bubble]->Play(curStatus);
 			CrushOrBomb();

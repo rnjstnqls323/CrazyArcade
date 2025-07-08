@@ -107,7 +107,9 @@ void InventoryPanel::SetEventFunc()
 	buttons[2]->SetOnClick([this]() {OnClickItemButton(ShowItemStatus::BackGround);});
 	buttons[3]->SetOnClick([this]() {OnClickItemButton(ShowItemStatus::ShaShak);});
 	buttons[4]->SetOnClick([this]() {OnClickItemSetting();});
+	buttons[4]->SetClickSound("ef_Set");
 	buttons[5]->SetOnClick([this]() {OnClickItemSetOff();});
+	buttons[5]->SetClickSound("ef_Set");
 
 	EventManager::Get()->AddEvent("BuyItem", [this](void* param) {AddItem((BuyItem*)param);});
 }
@@ -201,6 +203,6 @@ void InventoryPanel::AddItem(BuyItem* item)
 		UIManager::Get()->AddShowPanel(PanelType::InventoryCheckAlretPanel);
 		return;
 	}
-	Player::SetLucci(Player::GetLucci() - 10000);
+	Player::SetLucci(Player::GetLucci() - 5000);
 }
 

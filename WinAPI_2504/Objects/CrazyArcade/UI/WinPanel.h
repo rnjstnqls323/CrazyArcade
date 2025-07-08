@@ -10,7 +10,7 @@ public:
 	~WinPanel();
 
 	void Update(Player* player) override;
-	void Reset() override { timer = 0.0f; }
+	void Reset() override { timer = 0.0f;}
 private:
 	void CreateButtons() override {}
 	void CreateBackGround() override;

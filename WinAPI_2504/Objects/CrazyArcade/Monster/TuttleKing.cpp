@@ -19,6 +19,7 @@ TuttleKing::~TuttleKing()
 
 void TuttleKing::Update()
 {
+	isAttack = false;
 	AttackTime();
 	StatusUpdate();
 
@@ -26,6 +27,7 @@ void TuttleKing::Update()
 	UpdateWorld();
 	animationTransform->UpdateWorld();
 	healthPointBar->Update();
+
 }
 
 void TuttleKing::Render()
@@ -140,6 +142,7 @@ void TuttleKing::StatusUpdate()
 		break;
 	case KingAttack:
 		speed = ATTACK_SPEED;
+		isAttack = true;
 		Move();
 		break;
 	case KingDamage:
@@ -150,7 +153,9 @@ void TuttleKing::StatusUpdate()
 		break;
 	case KingAngry:
 		if (!animation->IsPlay(KingAngry))
+		{
 			kingStatus = KingAttack;
+		}
 		break;
 	case KingDie:
 		if (!animation->IsPlay(KingAngry))
@@ -171,6 +176,7 @@ void TuttleKing::AttackTime()
 	if (timer >= ATTACK_TIME && !isAttack)
 	{
 		isAttack = true;
+		Audio::Get()->Play("bg_BossAttack");
 		kingStatus = KingAngry;
 		timer = 0.0f;  // 다시 타이머 리셋
 	}
@@ -179,6 +185,7 @@ void TuttleKing::AttackTime()
 		isAttack = false;
 		kingStatus = KingIdle;
 		timer = 0.0f;
+		Audio::Get()->Stop("bg_BossAttack");
 	}
 }
 

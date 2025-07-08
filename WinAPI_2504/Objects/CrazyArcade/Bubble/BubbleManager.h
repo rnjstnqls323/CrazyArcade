@@ -24,7 +24,7 @@ public:
 	void AddJetLength();
 	void AddMaxBubble();
 
-	void ResetBubble();
+	void Reset();
 	
 	void ChangeBubbleType(BubbleType type) { bubbles[0]->SetBubbleType(type); }
 	BubbleType GetBubbleType() { return bubbles[0]->GetBubbleType(); }

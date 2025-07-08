@@ -19,7 +19,7 @@ public:
 	StageStatus GetStageStatus() { return curStatus; }
 
 protected:
-	virtual void StopAudio() = 0;
+	void StopAudio();
 	virtual void CreatePlayerMap() = 0;
 	void CheckCollision();
 	void SpawnBubble();
@@ -29,11 +29,15 @@ protected:
 
 protected:
 	bool isStop = false;
-
 	bool isStart = false;
 	bool isEnd = false;
 	bool isSpawn = false;
+	int eventKey;
 
+	static bool isSetEvent;
+	
+
+	string audioKey;
 	StageStatus curStatus;
 	TileMap* map;
 	Player* player;

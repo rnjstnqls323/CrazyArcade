@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 CharacterName Player::character = CharacterName::Bazzi;
-int Player::lucci = 50000;
+int Player::lucci = 0;
 
 Player::Player():RectCollider(Vector2(35, 30))
 {
@@ -12,10 +12,6 @@ Player::Player():RectCollider(Vector2(35, 30))
 	animationTransform->SetParent(this);
 	animationTransform->SetLocalPosition(this->GetLocalPosition().x, this->GetLocalPosition().y + 17);
 	animationTransform->UpdateWorld();
-
-	DataManager::Get()->LoadData("CharacterDataTable.csv");
-	stat = DataManager::Get()->GetCharacterData((int)character);
-	BubbleManager::Get()->SetBubbles(stat.bubbleCount, stat.waterJetCount);
 
 	shashak = new ShaShak;
 	shashak->SetParent(this);
@@ -31,6 +27,7 @@ Player::~Player()
 
 void Player::Reset()
 {
+
 	DataManager::Get()->LoadData("CharacterDataTable.csv");
 	stat = DataManager::Get()->GetCharacterData((int)character);
 	BubbleManager::Get()->SetBubbles(stat.bubbleCount, stat.waterJetCount);
@@ -76,6 +73,7 @@ void Player::Die()
 	if (curStatus == CharacterDie) return;
 	curStatus = CharacterDie;
 	animation[character]->Play(curStatus);
+	Audio::Get()->Play("ef_Die");
 }
 
 void Player::Trap()
@@ -247,6 +245,7 @@ void Player::TrapPlayer()
 	timer += DELTA;
 	if (Input::Get()->IsKeyPress(VK_LCONTROL) && needleNum > 0)
 	{
+		Audio::Get()->Play("ef_Needle");
 		curStatus = CharacterLive;
 		animation[character]->Play(curStatus);
 		timer = 0.0f;
@@ -257,6 +256,7 @@ void Player::TrapPlayer()
 	{
 		curStatus = CharacterDie;
 		animation[character]->Play(curStatus);
+		Audio::Get()->Play("ef_Die");
 	}
 }
 

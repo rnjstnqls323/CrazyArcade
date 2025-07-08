@@ -59,7 +59,6 @@ void MonsterManager::Render()
 	}
 	//if (astar != nullptr)
 	//	astar->Render();
-
 }
 void MonsterManager::AddMonsterPos(TileMap* map, unordered_map<int, MonsterPos> pos)
 {
@@ -180,6 +179,7 @@ void MonsterManager::CheckMonsterDie()
 		MonsterSpawn();
 		isDead = false;
 	}
+
 	if (monsterPos[MonsterType::PurpleStar].size() == 0 && !isKing)
 	{
 		EventManager::Get()->ExcuteEvent("EndStage", nullptr);

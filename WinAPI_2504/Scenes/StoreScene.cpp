@@ -35,6 +35,7 @@ void StoreScene::Render()
 void StoreScene::Start()
 {
 	UIManager::Get()->AddShowPanel(PanelType::StorePanel);
+	BubbleManager::Get()->Reset();
 	player->Reset();
 	player->SetLocalPosition({ 1000,400 });
 	player->UpdateWorld();

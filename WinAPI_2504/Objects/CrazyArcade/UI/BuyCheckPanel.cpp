@@ -30,6 +30,7 @@ void BuyCheckPanel::CreateBackGround()
 void BuyCheckPanel::SetEventFunc()
 {
 	buttons[0]->SetOnClick([this]() {OnClickYes(); });
+	buttons[0]->SetClickSound("ef_Buy");
 	buttons[1]->SetOnClick([this]() {OnClickNo(); });
 
 	EventManager::Get()->AddEvent("SendItemData", [this](void* param) {SetInformation((BuyItem*)param);});

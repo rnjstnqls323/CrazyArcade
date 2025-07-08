@@ -57,6 +57,7 @@ bool Monster::MonsterCollisionPlayer(Player* player)
 	
 	if (curStatus == MonsterTrap)
 	{
+		Audio::Get()->Play("ef_MonsterTrap");
 		SetMonsterStatus(MonsterTrapMove);
 		SetHitDir(overlap, player->GetLocalPosition());
 		MonsterManager::Get()->TrapMoveMonsterInsert(this);
@@ -73,6 +74,7 @@ bool Monster::MonsterCollisionMonster(Monster* monster)
 	if (IsRectCollision(monster, nullptr))
 	{
 		SetMonsterStatus(MonsterDie);
+		//Audio::Get()->Play("ef_MonsterDie");
 		return false;
 	}
 }
@@ -118,6 +120,7 @@ void Monster::StatusUpdate()
 	switch (curStatus)
 	{
 	case MonsterIdle:
+
 	case MonsterTrap:
 		timer += DELTA;
 		break;
@@ -186,6 +189,9 @@ void Monster::Dead()
 {
 	if (animation->IsPlay(curStatus))
 		return;
+	if (Audio::Get()->IsPlaySound("bg_MonsterMove"))
+		Audio::Get()->Stop("bg_MonsterMove");
+	Audio::Get()->Play("ef_MonsterDie");
 	isActive = false;
 	MonsterManager::Get()->DeadMonster(this);
 	Reset();

@@ -22,7 +22,7 @@ void Button::Update()
 	
 	if (curStatus == Click && Input::Get()->IsKeyDown(VK_LBUTTON)) 
 	{
-		Audio::Get()->Play("ef_Click");
+		Audio::Get()->Play(clickSound);
 		OnClick();
 	}
 	else if (IsPointCollision(mousePos))

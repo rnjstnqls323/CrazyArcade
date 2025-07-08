@@ -233,6 +233,7 @@
     <ClInclude Include="Objects\Manger\DataManager.h" />
     <ClInclude Include="Objects\Manger\EventManager.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scenes\BossStageScene.h" />
     <ClInclude Include="Scenes\LobyScene.h" />
     <ClInclude Include="Scenes\MapEditScene.h" />
     <ClInclude Include="Scenes\PlayScene.h" />
@@ -334,6 +335,7 @@
     <ClCompile Include="Objects\Factory\BlockFactory.cpp" />
     <ClCompile Include="Objects\Manger\DataManager.cpp" />
     <ClCompile Include="Objects\Manger\EventManager.cpp" />
+    <ClCompile Include="Scenes\BossStageScene.cpp" />
     <ClCompile Include="Scenes\LobyScene.cpp" />
     <ClCompile Include="Scenes\MapEditScene.cpp" />
     <ClCompile Include="Scenes\PlayScene.cpp" />

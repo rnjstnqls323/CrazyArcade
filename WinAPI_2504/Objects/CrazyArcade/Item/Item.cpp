@@ -46,6 +46,7 @@ void Item::CollisionPlayer(Player* player)
 	if (!IsRectCollision(player, nullptr)) return;
 	isActive = false;
 	PlayerGetItem(player);
+	Audio::Get()->Play("ef_GetItem");
 }
 
 void Item::LoadAnimation()

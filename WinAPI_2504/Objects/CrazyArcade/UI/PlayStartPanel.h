@@ -3,7 +3,7 @@
 class PlayStartPanel :public Panel
 {
 private:
-	const float SHOW_TIME = 3.0f;
+	const float SHOW_TIME = 1.5f;
 public:
 	PlayStartPanel();
 	~PlayStartPanel();

@@ -7,8 +7,6 @@ public:
 	~Stage1Scene();
 
 	void Start() override;
-	void End() override;
 private:
-	void StopAudio() override;
 	void CreatePlayerMap() override;
 };

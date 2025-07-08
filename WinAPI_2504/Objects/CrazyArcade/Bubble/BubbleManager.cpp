@@ -54,6 +54,7 @@ bool BubbleManager::SpawnBubble(Vector2 pos, Index2 index,TileMap* map)
 {
 	this->map = map;
 	if (curBubbleCount == maxBubbleCount)return false;
+	Audio::Get()->Play("ef_SetBubble");
 	for (Bubble* bubble : bubbles)
 	{
 		if (bubble->IsActive())
@@ -103,7 +104,7 @@ void BubbleManager::AddMaxBubble()
 	maxBubbleCount++;
 }
 
-void BubbleManager::ResetBubble()
+void BubbleManager::Reset()
 {
 	for (Bubble* bubble : bubbles)
 	{

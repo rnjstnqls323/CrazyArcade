@@ -5,6 +5,7 @@ Stage1Scene::Stage1Scene()
 {
 	curStatus = Stage1;
 	CreatePlayerMap();
+	audioKey = "bg_Stage1";
 }
 
 Stage1Scene::~Stage1Scene()
@@ -13,29 +14,14 @@ Stage1Scene::~Stage1Scene()
 
 void Stage1Scene::Start()
 {
-	Audio::Get()->Play("bg_Stage1");
 	PlayScene::Start();
-}
 
-void Stage1Scene::End()
-{
-	Audio::Get()->Stop("bg_Stage1");
-	PlayScene::End();
-}
-
-void Stage1Scene::StopAudio()
-{
-	if (UIManager::Get()->GetFrontPanelType() != PanelType::PlayPanel)
+	if (Player::GetCharacter() == CharacterName::Hook)
 	{
-		Audio::Get()->Stop("bg_Stage1");
-		isStop = true;
-	}
-	else if (isStop)
-	{
-		Audio::Get()->Play("bg_Stage1");
+		int num = rand() % (int)CharacterName::EndCharacter;
+		Player::SetCharacter((CharacterName)num);
 	}
 }
-
 void Stage1Scene::CreatePlayerMap()
 {
 	map = new TileMap("Stage1.map");

@@ -16,6 +16,7 @@ public:
 	void Render();
 	void Spawn(Vector2 pos);
 
+	void Reset();
 private:
 	void WaterDeleteItem(Item* item, TileMap* map);
 	template<typename T>
