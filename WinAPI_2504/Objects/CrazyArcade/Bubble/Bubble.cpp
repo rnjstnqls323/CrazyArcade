@@ -150,7 +150,6 @@ void Bubble::UpdateStatus()
 			curStatus = Exploding;
 			animation[bubble]->Play(curStatus);
 			CrushOrBomb();
-
 		}
 	}
 	break;
@@ -326,7 +325,6 @@ void Bubble::CrushOrBomb()
 			TileType tile = map->GetTileType(index);
 
 			if (map->GetPreTileType(index) == CrushTile ) break;
-
 			switch (tile)
 			{
 			case BubbleTile:

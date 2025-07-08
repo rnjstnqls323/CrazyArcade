@@ -15,6 +15,7 @@ public:
 
 	void Start() override;
 	void End() override;
+	void GUIRender() override;
 
 	StageStatus GetStageStatus() { return curStatus; }
 

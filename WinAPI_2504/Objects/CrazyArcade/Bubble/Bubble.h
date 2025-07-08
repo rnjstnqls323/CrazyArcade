@@ -18,7 +18,7 @@ class Bubble : public GameObject
 private:
 	const int MAX_JET_LENGTH = 5;
 	const float BOMB_TIME = 2.0f;
-	const float EXPLOING_TIME = 0.8f;
+	const float EXPLOING_TIME = 0.6f;
 
 public:
 	Bubble();

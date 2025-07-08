@@ -7,6 +7,8 @@ struct ShowSetItem
 };
 class InventoryPanel : public Panel
 {
+private:
+	const int ITEM_PRICE = 5000;
 public:
 	InventoryPanel();
 	~InventoryPanel();

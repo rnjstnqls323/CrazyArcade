@@ -193,7 +193,7 @@ void Player::LoadAnimation()
 		animation[(CharacterName)i]->LoadClip(path + file, "right.xml", true);
 		animation[(CharacterName)i]->LoadClip(path + file, "trap.xml", false,0.7f);
 		animation[(CharacterName)i]->LoadClip(path + file, "die.xml", false, 0.7f);
-		animation[(CharacterName)i]->LoadClip(path + file, "live.xml", false, 0.4f);
+		animation[(CharacterName)i]->LoadClip(path + file, "live.xml", false, 0.6f);
 		
 	}
 	

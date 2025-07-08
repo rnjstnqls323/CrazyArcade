@@ -3,7 +3,7 @@
 WaterJet::WaterJet(string path)
 {
 	this->animation = new Animation();
-	this->animation -> LoadClip("Resources/Textures/CrazyArcade_Bubble/","Create_Jet_"+path+".xml", false, 0.4f);;
+	this->animation -> LoadClip("Resources/Textures/CrazyArcade_Bubble/","Create_Jet_"+path+".xml", false, 1.5f);;
 	transform = new Transform;
 	worldBuffer = new MatrixBuffer;
 

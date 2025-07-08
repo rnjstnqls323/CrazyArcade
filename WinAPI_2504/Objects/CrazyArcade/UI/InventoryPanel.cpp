@@ -178,7 +178,7 @@ void InventoryPanel::OnClickItemSetOff()
 
 void InventoryPanel::AddItem(BuyItem* item)
 {
-	if (Player::GetLucci() < 10000)
+	if (Player::GetLucci() < ITEM_PRICE)
 	{
 		UIManager::Get()->AddShowPanel(PanelType::NoLucciAlretPanel);
 		return;
@@ -203,6 +203,6 @@ void InventoryPanel::AddItem(BuyItem* item)
 		UIManager::Get()->AddShowPanel(PanelType::InventoryCheckAlretPanel);
 		return;
 	}
-	Player::SetLucci(Player::GetLucci() - 5000);
+	Player::SetLucci(Player::GetLucci() - ITEM_PRICE);
 }
 

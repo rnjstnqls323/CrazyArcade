@@ -19,7 +19,7 @@ public:
 		preType = this->type;
 		this->type = type;
 	}
-
+	void Reset() { type = PassTile; preType = PassTile; }
 	BlockCategory GetCategory() { return category; }
 	void SetCategory(BlockCategory category) { this->category = category; }
 

@@ -16,8 +16,6 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
-	if (Input::Get()->IsKeyDown(VK_F1))
-		UIManager::Get()->AddShowPanel(PanelType::WinPanel);
 	StopAudio();
 	UIManager::Get()->Update(player);
 
@@ -79,6 +77,13 @@ void PlayScene::End()
 	EventManager::Get()->RemoveEvent("ChangeStage", eventKey);
 }
 
+void PlayScene::GUIRender()
+{
+	ImGui::Text("Tile Index: (%f, %f)", playerIndex.x, playerIndex.y);
+	ImGui::Text("TileType: %d", (int)map->GetTileType(playerIndex));
+	ImGui::Text("PreTileType: %d", (int)map->GetPreTileType(playerIndex));
+}
+
 void PlayScene::StopAudio()
 {
 	if (UIManager::Get()->GetFrontPanelType() != PanelType::PlayPanel)
@@ -96,6 +101,7 @@ void PlayScene::StopAudio()
 void PlayScene::CheckCollision()
 {
 	playerIndex = map->CheckCollision(player);
+	//playerIndex = map->GetTileIndex(player); -> 타일 테스트용
 	if (player->IsDieOrTrap()) return;
 	if (map->GetTileType(playerIndex) == WaterTile && !player->GetIsTrap())
 	{

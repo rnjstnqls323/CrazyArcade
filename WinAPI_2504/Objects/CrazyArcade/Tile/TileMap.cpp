@@ -125,6 +125,15 @@ Index2 TileMap::GetTileIndex(RectCollider* collider)
 	return colliderIndex;
 }
 
+void TileMap::TileReset()
+{
+	for (int y = 0; y < ROW; y++)
+		for (int x = 0; x < COL; x++)
+		{
+			tiles[y][x]->Reset();
+		}
+}
+
 void TileMap::PushCollider(Vector2 overlap, Tile& tile, RectCollider* collider)
 {
 	Vector2 pos = collider->GetLocalPosition();
@@ -174,6 +183,7 @@ void TileMap::Load()
 		CreateTiles();
 		isCreate = true;
 	}
+	TileReset();
 
 	for (int y = 0;y < ROW;y++)
 		for (int x = 0;x < COL;x++)

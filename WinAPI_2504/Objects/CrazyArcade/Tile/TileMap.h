@@ -43,6 +43,7 @@ public:
 	Index2 GetTileIndex(RectCollider* collider);
 	
 private:
+	void TileReset();
 	void PushCollider(Vector2 overlap, Tile& tile, RectCollider* collider);
 
 

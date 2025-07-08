@@ -13,6 +13,6 @@ Stage2Scene::~Stage2Scene()
 }
 void Stage2Scene::CreatePlayerMap()
 {
-	map = new TileMap("TestStage1.map");
-	player = new Player();
+	map = new TileMap("Stage2.map");
+	player = new Player();  
 }

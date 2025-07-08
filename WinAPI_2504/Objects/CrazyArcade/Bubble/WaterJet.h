@@ -16,6 +16,8 @@ public:
 	void SetIndex(Index2 index) { this->index = index; }
 	void SetIsRender(bool isRender) { this->isRender = isRender; }
 
+	bool IsPlay() { return animation->IsPlay(0); }
+
 	Index2 GetIndex() { return index; }
 	bool IsRender() { return isRender; }
 	void SetJetTag(int tag) { this->tag = tag; }

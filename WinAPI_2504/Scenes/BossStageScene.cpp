@@ -25,6 +25,6 @@ void BossStageScene::End()
 }
 void BossStageScene::CreatePlayerMap()
 {
-	map = new TileMap("Stage1.map");
+	map = new TileMap("Stage3.map");
 	player = new Player();
 }
