@@ -43,6 +43,7 @@ void InventoryPanel::Render()
 	}
 }
 
+
 void InventoryPanel::CreateShowSetItem()
 {
 	Vector2 startPos = {600,280};

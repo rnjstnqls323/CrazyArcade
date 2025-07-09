@@ -72,9 +72,11 @@ void MapEditScene::End()
 
 }
 
+//블록 선택 후 타일 고르면 바뀌게 해주는 코드
+//Monster EndNode때문에 블록에 태그 붙여주는 작업도 하고있다. End먼저 깔고 몬스터 올려야됨
 void MapEditScene::EditBgTiles()
 {
-	if (Input::Get()->IsKeyDown(VK_LBUTTON) == false && Input::Get()->IsKeyPress(VK_RBUTTON)==false)
+	if (!Input::Get()->IsKeyDown(VK_LBUTTON)&& !Input::Get()->IsKeyPress(VK_RBUTTON))
 		return;
 	
 	for (EditTile* tile : tiles)
@@ -84,19 +86,19 @@ void MapEditScene::EditBgTiles()
 			tile->GetImage()->GetMaterial()->SetBaseMap(selectTexture);
 			
 			wstring file = selectTexture->GetFile();
+			EditTileType type = EditTileType::NormalTile;
 
 			if (file.find(L"Monster") != wstring::npos)
 			{
-				tile->SetEditTileType(EditTileType::MonsterTilePos);
+				type = EditTileType::MonsterTilePos;
 				tile->SetTileTag(tag++);
 			}
 			else if (file.find(L"EndNode") != wstring::npos)
 			{
-				tile->SetEditTileType(EditTileType::EndNodeTilePos);
+				type = EditTileType::EndNodeTilePos;
 				tile->SetTileTag(tag);
 			}
-			else
-				tile->SetEditTileType(EditTileType:: NormalTile);
+			tile->SetEditTileType(type);
 		}
 	}
 }
@@ -129,6 +131,7 @@ void MapEditScene::RenderSampleButtons()
 		ImGui::TreePop();
 	}
 	ImGui::NewLine();
+
 	if (ImGui::TreeNode("Stage Buttons"))
 	{
 		int count = 0;
@@ -247,6 +250,7 @@ void MapEditScene::Save(string file)
 	delete writer;
 }
 
+//세이브 파일에 있는 타일 정보들 로딩해주는 함수
 void MapEditScene::Load(string file)
 {
 	BinaryReader* reader = new BinaryReader(file);
@@ -261,7 +265,6 @@ void MapEditScene::Load(string file)
 
 	CreateBackGround();
 	backGround->GetMaterial()->SetBaseMap(filePath);
-
 	CreateEditTiles();
 
 	for (EditTile* tile : tiles)
@@ -271,13 +274,12 @@ void MapEditScene::Load(string file)
 		int tileTag = reader->Int();
 
 		tile->GetImage()->GetMaterial()->SetBaseMap(filePath); 
-
 		tile->SetEditTileType((EditTileType)type);
-
 		tile->SetTileTag(tileTag);
 	}
 }
 
+//맵 파일 저장하는 함수
 void MapEditScene::SaveDialog()
 {
 	string key = "Save";
@@ -301,9 +303,9 @@ void MapEditScene::SaveDialog()
 
 		DIALOG->Close();
 	}
-
 }
 
+//맵 파일 로드하는 함수
 void MapEditScene::LoadDialog()
 {
 	string key = "Load";
