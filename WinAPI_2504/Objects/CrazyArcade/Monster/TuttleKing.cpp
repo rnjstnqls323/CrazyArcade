@@ -28,6 +28,8 @@ void TuttleKing::Update()
 	animationTransform->UpdateWorld();
 	healthPointBar->Update();
 
+	if (kingStatus != KingAngry && kingStatus != KingAttack && Audio::Get()->IsPlaySound("bg_BossAttack"))
+		Audio::Get()->Stop("bg_BossAttack");
 }
 
 void TuttleKing::Render()
@@ -80,6 +82,7 @@ void TuttleKing::Reset()
 	hitDir = Vector2{ 0,0 };
 	timer = 0.0f;
 	isCollision = false; //여기수정해야됨
+	isDie = false;
 }
 
 void TuttleKing::Move()
@@ -158,8 +161,11 @@ void TuttleKing::StatusUpdate()
 		}
 		break;
 	case KingDie:
-		if (!animation->IsPlay(KingAngry))
-			//씬 넘어가는거 작성하자
+		if (!animation->IsPlay(KingDie) && !isDie)
+		{
+			UIManager::Get()->AddShowPanel(PanelType::WinPanel);
+			isDie = true;
+		}
 		break;
 	case KingTrap:
 		TrapDeadTime();
@@ -187,6 +193,7 @@ void TuttleKing::AttackTime()
 		timer = 0.0f;
 		Audio::Get()->Stop("bg_BossAttack");
 	}
+	
 }
 
 void TuttleKing::TrapDeadTime()

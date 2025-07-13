@@ -16,6 +16,8 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
+	if (Input::Get()->IsKeyDown(VK_F1))
+		ChangeStage();
 	StopAudio();
 	UIManager::Get()->Update(player);
 

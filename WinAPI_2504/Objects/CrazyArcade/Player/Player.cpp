@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 CharacterName Player::character = CharacterName::Bazzi;
-int Player::lucci = 0;
+int Player::lucci = 50000;
 
 Player::Player():RectCollider(Vector2(35, 30))
 {

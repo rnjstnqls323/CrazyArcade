@@ -56,6 +56,7 @@ private:
 	double trapTimer = 0.0f;
 	bool isAttack = false;
 	bool isTrap = false;
+	bool isDie = false;
 
 	KingStatus kingStatus = KingTrap;
 	vector<Vector2> path;
