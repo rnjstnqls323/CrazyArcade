@@ -12,6 +12,7 @@ private:
 	const float TRAP_TIME = 5.0f;
 	const float MOVE_TIME = 10.0f;
 	const int DAMAGE = 10;
+	const int MAX_HEALTHPOINT = 50;
 	const int ATTACK_SPEED = 110;
 public:
 	TuttleKing();
@@ -49,7 +50,7 @@ private:
 private:
 
 	int damageTag = -1;
-	int healthPoint = 50;
+	int healthPoint = MAX_HEALTHPOINT;
 	double timer = 0.0f;
 	double attackTimer = 0.0f;
 	double moveTimer = 0.0f;

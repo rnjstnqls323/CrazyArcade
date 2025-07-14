@@ -38,4 +38,3 @@ void HealthPointBar::Render()
 	backBar->Render();
 	frontBar->Render();
 }
-

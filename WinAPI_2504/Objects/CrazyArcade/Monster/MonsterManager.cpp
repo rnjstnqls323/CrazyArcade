@@ -186,7 +186,7 @@ void MonsterManager::CheckMonsterDie()
 		Audio::Get()->Play("ef_Win");
 		UIManager::Get()->AddShowPanel(PanelType::WinPanel);
 	}
-	else if (isKing && monsters[MonsterType::TuttleKing][0]->GetMonsterStatus() == KingDie)
+	else if (isKing && monsters[MonsterType::TuttleKing][0]->GetMonsterStatus() == MonsterDie)
 	{
 		EventManager::Get()->ExcuteEvent("EndStage", nullptr);
 		Audio::Get()->Play("ef_Win");

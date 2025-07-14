@@ -8,7 +8,6 @@ public:
 
 	void Update();
 	void Render();
-
 	void SetLength(int num){ length = (float)num / maxHealthPoint; }
 	
 private:

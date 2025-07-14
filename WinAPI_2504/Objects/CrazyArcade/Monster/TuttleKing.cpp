@@ -83,6 +83,8 @@ void TuttleKing::Reset()
 	timer = 0.0f;
 	isCollision = false; //여기수정해야됨
 	isDie = false;
+	healthPoint = MAX_HEALTHPOINT;
+	healthPointBar->SetLength(healthPoint);
 }
 
 void TuttleKing::Move()
@@ -163,7 +165,7 @@ void TuttleKing::StatusUpdate()
 	case KingDie:
 		if (!animation->IsPlay(KingDie) && !isDie)
 		{
-			UIManager::Get()->AddShowPanel(PanelType::WinPanel);
+			curStatus = MonsterDie;
 			isDie = true;
 		}
 		break;
